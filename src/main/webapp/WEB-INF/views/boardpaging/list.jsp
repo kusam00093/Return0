@@ -58,7 +58,11 @@
 	      <td>제목</td>
 	      <td>작성자</td>	      
 	      <td>작성일</td>	   
+<<<<<<< HEAD
 	      <td>조회수asasasas</td>	   
+=======
+	      <td>조회수</td>	   
+>>>>>>> 3bf8be5b982e227876710b51a147c13c40c414c8
 	    </tr>
 	    <tr>
 	      <td colspan="5">
