@@ -9,7 +9,7 @@ oracle 페이징 방법
 3. 12c : offset .. fetch 문법 : 가장속도가 빠름
 
 DELETE FROM BOARD 
- WHERE BNO IN ( 998, 996, 902, 899 , 898 )asd
+ WHERE BNO IN ( 998, 996, 902, 899 , 898 )a
 COMMIT; 
 
 -- 데이터를 1000개 추가한다
