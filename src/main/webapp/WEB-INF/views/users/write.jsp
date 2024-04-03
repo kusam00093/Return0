@@ -47,6 +47,11 @@
 	   <td><input type="password" name="passwd" /></td>
 	 </tr>
 	 <tr>
+	   <td>비밀번호 확인</td>
+	   <td><input type="password" name="passwd" /></td>
+	 </tr>
+	 
+	 <tr>
 	   <td>이름</td>
 	   <td><input type="text" name="username" /></td>
 	 </tr>
