@@ -1,14 +1,14 @@
-package com.board.config;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.board.interceptor.LoginCheckInterceptor;
-
-@Configuration
-public class WebMvcConfig  implements   WebMvcConfigurer   {
+//package com.board.config;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+//
+//import com.board.interceptor.LoginCheckInterceptor;
+//
+//@Configuration
+//public class WebMvcConfig  implements   WebMvcConfigurer   {
 
 	// 중요  폴더 위치  : WebMvcConfig.java
 	//   main() 함수가 있는 클래스(Board5Application.java)의
@@ -19,18 +19,18 @@ public class WebMvcConfig  implements   WebMvcConfigurer   {
 	
 	// 각종 설정정보를 저장하는 곳
 	
-	@Autowired
-	private  LoginCheckInterceptor   loginCheckInterceptor;
+//	@Autowired
+//	private  LoginCheckInterceptor   loginCheckInterceptor;
+//	
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//
+//    	System.out.println("okokok");
+//        registry.addInterceptor( loginCheckInterceptor )
+//                .addPathPatterns("/**")      // http://localhost:9090/
+//                .addPathPatterns("/**/*")    
+//                .excludePathPatterns("/log*","/css/**", "/img/**", "/js/**");
+//        
+//    }
 	
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-
-    	System.out.println("okokok");
-        registry.addInterceptor( loginCheckInterceptor )
-                .addPathPatterns("/**")      // http://localhost:9090/
-                .addPathPatterns("/**/*")    
-                .excludePathPatterns("/log*","/css/**", "/img/**", "/js/**");
-        
-    }
-	
-}
+//}

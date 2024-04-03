@@ -14,26 +14,16 @@
 <body>
   <main>
 	<h2>Home</h2>
-	<div><a href="/Menus/WriteForm">새 메뉴 추가</a></div>
-	<div><a href="/Menus/WriteForm2">새 메뉴 추가2</a></div>
-	<div><a href="/Menus/List">메뉴 목록</a></div>	
+	<div><a href="/Company/MyPage">기업마이페이지</a></div>
+	<div><a href="/Company/List">채용목록</a></div>
+	<div><a href="/User">마이페이지</a></div>	
+	<div><a href="/Board">커뮤니티</a></div>	
+	<div><a href="/Login">로그인</a></div>	
+	<div>검색창</div>	
+	
 	<div>&nbsp;</div>
 	
-	<div><a href="/Users/List">사용자 목록</a></div>
-	<div><a href="/Users/WriteForm">사용자 추가</a></div>
-	<div>&nbsp;</div>
-		
-	<div><a href="/Board/List?menu_id=MENU01">게시물 목록</a></div>
-	<div><a href="/Board/WriteForm?menu_id=MENU01">게시물 등록</a></div>
-	<div>&nbsp;</div>
-		
-	<div><a href="/BoardPaging/List?nowpage=1&menu_id=MENU01">게시물 목록(페이징)</a></div>
-	<div><a href="/BoardPaging/WriteForm?nowpage=1&menu_id=MENU01">게시물 등록(페이징)</a></div>
-	<div>&nbsp;</div>	
-	<div>
-	   ${ sessionScope.login.username } 님 환영합니다<br>
-      당신의 가입일은 ${ login.indate } 입니다<br>
-      <a href="/logout">로그아웃</a>
+
 	</div>	
   </main>	
 </body>

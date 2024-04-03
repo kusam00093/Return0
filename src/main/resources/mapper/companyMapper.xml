@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.board.mapper.CompanyMapper">
+
+<update id="getUpdate">
+
+  UPDATE POSTING
+  SET    POSTING_CAREER = #{posting_career}
+         POSTING_GRADE  = #{posting_grade}
+         POSTING_HOPE_DEPARTMENT = #{posting_hope_department}
+         POSTING_CONTENT =#{posting_content}
+         POSTING_TITLE =#{posting_title}
+         POSTING_COM_PROFILE =#{posting_com_profile}  	
+  WHERE  PNO = #{pno}
+
+
+</update>
