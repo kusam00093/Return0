@@ -3,13 +3,13 @@
          일정한 갯수만큼 조회하는 방법
          대량의 데이터를 10개 씩 가져온다  
 
-oracle 페이징 방법      
+oracle 페이징 방법        
 1. 10g : rownum
-2. 11g : ROW_NUMBER() 
+2. 11g : ROW_NUMBER() ddd
 3. 12c : offset .. fetch 문법 : 가장속도가 빠름
 
 DELETE FROM BOARD 
- WHERE BNO IN ( 998, 996, 902, 899 , 898 )
+ WHERE BNO IN ( 998, 996, 902, 899 , 898 )asd
 COMMIT; 
 
 -- 데이터를 1000개 추가한다
