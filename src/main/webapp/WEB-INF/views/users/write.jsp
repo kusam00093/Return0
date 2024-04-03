@@ -35,7 +35,11 @@
 </head>
 <body>
   <main>
+<<<<<<< HEAD
 	<h2>회원가입</h2>
+=======
+	<h2>사용자 등록</h2>
+>>>>>>> 3bf8be5b982e227876710b51a147c13c40c414c8
 	<form action="/Users/Write" method="POST">
 	<table>
 	 <tr>
@@ -47,6 +51,7 @@
 	   <td><input type="password" name="passwd" /></td>
 	 </tr>
 	 <tr>
+<<<<<<< HEAD
 	   <td>비밀번호 확인</td>
 	   <td><input type="password" name="passwd" /></td>
 	 </tr>
@@ -56,6 +61,8 @@
 	 </tr>
 	 
 	 <tr>
+=======
+>>>>>>> 3bf8be5b982e227876710b51a147c13c40c414c8
 	   <td>이름</td>
 	   <td><input type="text" name="username" /></td>
 	 </tr>
