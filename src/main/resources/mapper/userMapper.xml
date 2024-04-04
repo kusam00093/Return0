@@ -1,8 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.board.user.mapper.UserMapper">  
-		 
-
+<resultMap id="getUserMap" type="java.util.HashMap">
+	 <result property="com_name"    column="com_name"   />
+	 <result property="resume_rno"    column="resume_rno"   />
+	 <result property="posting_title"  column="posting_title" />
+	 <result property="posting_career"     column="posting_career"   />
+	 <result property="posting_startdate"       column="posting_startdate"     />
+	 
+	</resultMap>
+		
+ <select id ="getInfo">
+ 	SELECT
+		     USER_ID,
+		    USER_NAME,
+		    USER_PASSWD,
+		    USER_EMAIL,
+		    USER_PHONE,
+		    USER_SOCIAL_NUM,
+		    INDATE,
+		    USER_ADDRESS,
+		    USER_ZIPCODE
+	FROM    USERS
+	where USER_ID = #{ user_id }
+ 
+ 
+ </select>
+ <select id ="getSupport"  resultMap="getUserMap">
+ 
+	  SELECT
+	    c.com_name com_name,
+	    RE.resume_rno resume_rno,
+	     p.posting_title posting_title,
+	    p.posting_career posting_career,
+	    p.posting_startdate posting_startdate
+	    
+	FROM
+	    users u
+	JOIN
+	    RESUME RE ON u.user_id = re.user_id
+	JOIN
+	    applicant_recode ar ON re.resume_rno = ar.resume_rno
+	JOIN
+	    posting p ON ar.posting_pno = p.posting_pno
+	JOIN
+	    company c ON p.com_id = c.com_id
+	WHERE
+	    u.user_id = #{ user_id }
+ </select>
 	
 </mapper>
 
