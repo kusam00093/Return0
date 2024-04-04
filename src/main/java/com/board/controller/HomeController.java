@@ -16,7 +16,11 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 	
-
+	
+	@RequestMapping("/")
+	public  String   home() {		
+		return "home";
+	}
 
 	
 }

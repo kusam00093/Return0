@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>회원가입</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -87,10 +87,6 @@
         width: calc(70% - 5px);
     }
 </style>
-
-
-
-
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	function daumPost(){
@@ -108,48 +104,48 @@
 	    }).open();
 	}
 </script>
-
 </head>
 <body>
-<main>
+  <main>
     <h2>회원가입</h2>
-    <form id="signupForm" action="/Users/Write" method="POST" onsubmit="return validateForm()">
-            
- 
- 
+    <form action="/Company/Write" method="POST">
         <table>
-       <tr>
-        <td><input type="text" id="userId" name="USER_ID" placeholder="아이디를 입력하세요" required />
-            <button type="button" onclick="checkDuplicate()" style="background-color: #3f98f7; color: white; border: none; cursor: pointer; padding: 10px; border-radius: 5px;">중복 확인</button>
-            <span id="userIdMessage"></span>
-            <tr>
-                <td><input type="password" name="USER_PASSWD" placeholder="비밀번호를 입력하세요" oninput="checkPw()" />
-                <br><span class ="pwCheck"></span></td>
-            </tr>
-            <tr>
-                <td><input type="password" name="passwd" placeholder="비밀번호를 다시 입력하세요" oninput="checkPW()"/>
-                <br><span class="pwRe"></span></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="USER_NAME" placeholder="이름을 입력하세요" /></td>
-            </tr>
             <tr>
                 <td>
-                    <input type="text" name="USER_SOCIAL_NUM" placeholder="주민등록번호를 입력하세요" /> -
-                    <input type="password" name="USER_SOCIAL_NUM" />
+                    <input type="text" name="COM_ID" placeholder="아이디를 입력하세요" />
+                    <input type="button" value="중복 확인" onclick="doubleCheck()">
+                    <span id="doubleCheckMsg"></span>
                 </td>
             </tr>
             <tr>
-                <td><input type="text" id="USER_PHONE" placeholder="전화번호를 입력하세요"  /></td>
+                <td><input type="password" name="COM_PASSWD" placeholder="비밀번호를 입력하세요" /></td>
             </tr>
             <tr>
-                <td><input type="text" name="USER_EMAIL" placeholder="이메일을 입력하세요" /></td>
+                <td><input type="password" name="passwd" placeholder="비밀번호를 다시 입력하세요" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="COM_NAME" placeholder="회사명을 입력하세요" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="COM_CEO" placeholder="대표자명을 입력하세요" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="COM_TYPE" placeholder="기업형태를 입력하세요" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="COM_NUM" placeholder="사업자등록번호를 입력하세요" /></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="COM_PHONE" placeholder="인사담당자 전화번호를 입력하세요"  /></td>
+            </tr>
+            <tr>
+                <td><input type="text" name="COM_EMAIL" placeholder="이메일을 입력하세요" /></td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" id="USER_ADDRESS1" placeholder="우편번호" readonly="readonly"/>
+                    <input type="text" id="COM_ADDRESS1" placeholder="우편번호" readonly="readonly"/>
                     <input type="button"  onclick="daumPost()" value="우편번호 찾기" />
-                    <br><input type="text" id="USER_ADDRESS2" placeholder="상세주소"></br>
+                    <br><input type="text" id="COM_ADDRESS2" placeholder="상세주소"></br>
                 </td>
             </tr>
             <tr>
@@ -162,18 +158,18 @@
                 </td>
             </tr>
         </table>
-        
     </form>
 </main>
-<script>
-    const goListEl = document.getElementById('goList');
-    goListEl.addEventListener('click', function(e) {
-        location.href = '/';
-    });
-</script>
-
-
-
+      
+  
+  <script>
+  	const  goListEl  = document.getElementById('goList');
+  	goListEl.addEventListener('click', function(e) {
+  		location.href = '/';
+  	})
+  
+  </script>
+  
 </body>
 </html>
 

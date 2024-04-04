@@ -100,16 +100,16 @@
 </head>
 <body>
   <main>
-	<h2>개인회원 로그인</h2>
+	<h2>기업회원 로그인</h2>
 	<form action="/login" method="POST">
 	<table>
 	 <tr>
 	   <td>아이디</td>
-	   <td><input type="text" name="USER_ID"  /></td>
+	   <td><input type="text" name="userid"  /></td>
 	 </tr>
 	 <tr>
 	   <td>비밀번호</td>
-	   <td><input type="password" name="USER_PASSWD" /></td>
+	   <td><input type="password" name="passwd"  /></td>
 	 </tr>	
 	 <tr>
 	   <td colspan="2">
@@ -128,8 +128,8 @@
   	goListEl.addEventListener('click', function(e) {
   		location.href = '/';
   	})
-  	</script>
   
+  </script>
   
 </body>
 </html>
