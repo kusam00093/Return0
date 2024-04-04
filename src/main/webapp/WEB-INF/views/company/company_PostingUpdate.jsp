@@ -35,9 +35,17 @@
 	    <tr>
 	    <td><input type ="submit" value="수정"></td>
 	    </tr>
-	    
 	  </table>
-	  
 	</form>
+	   <input type ="submit" value="삭제" id="goDelete">
+	    
+	  
+		<script>
+	  const goDeleteEl = document.getElementById('goDelete');
+	  goDeleteEl.addEventListener('click',function(e){
+		  location.href = '/Company/Posting/Delete';
+	  })
+	</script>
+	
 </body>
 </html>

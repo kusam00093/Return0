@@ -43,10 +43,16 @@
 	    </tr>
     	     
     	<input type="submit" value="수정하기">     
-
-	    
-	    
 	  </table>
 	</form>
+    	<input type="submit" value="삭제하기" id="goDelete">     
+
+   	<script>
+	  const goDeleteEl = document.getElementById('goDelete');
+	  goDeleteEl.addEventListener('click',function(e){
+		  location.href = '/Company/View/Delete';
+	  })
+	</script>
+	    
 </body>
 </html>

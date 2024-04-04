@@ -47,13 +47,18 @@
 	   	<c:if test="${ sessionScope.user_id != null||user_id != ''}">
 	<div><input type="submit" value="지원하기"></div>
 	</c:if>
-	   	<c:if test="${ sessionScope.com_id != null||com_id != ''}">
-	<div><input type="submit" value="수정하기"></div>
-	</c:if>
-	    
 	  </table>
 	</form>     
-
+	   	<c:if test="${ sessionScope.com_id != null||com_id != ''}">
+	<div><input type="submit" value="수정하기" id ="goUpdate"></div>
+	</c:if>
+	    
+	<script>
+	  const goUpdateEl = document.getElementById('goUpdate');
+	  goUpdateEl.addEventListener('click',function(e){
+		  location.href = '/Company/Posting/UpdateForm?Pno=';
+	  })
+	</script>
 
 </body>
 </html>
