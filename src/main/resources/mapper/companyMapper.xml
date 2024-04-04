@@ -1,17 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "com.board.mapper.CompanyMapper">
+<mapper namespace = "com.board.company.mapper.CompanyMapper">
 
-<update id="getUpdate">
+	<insert id="insertPosting">
+	INSERT INTO POSTING(
+			POSTING_PNO
+			,POSTING_CAREER
+			,POSTING_GRADE
+			,POSTING_HOPE_DEPARTMENT
+			,POSTING_CONTENT
+			,POSTING_TITLE
+			,POSTING_COM_PROFILE
+			)
+	VALUES (
+			#{posting_pno}
+			,#{posting_career}
+			,#{posting_grade}
+			,#{posting_hope_department}
+			,#{posting_content}
+			,#{posting_title}
+			,#{posting_com_profile}
+	)		
+	</insert>
+	
+	<insert id="insertComuser">
+	INSERT INTO COMPANY(
+			COM_ID
+			,COM_PASSWD
+			,COM_TYPE
+			,COM_NUM
+			,COM_NAME
+			,COM_ADDRESS
+			,COM_CEO
+			,COM_PHONE
+			,COM_EMAIL
+	)
+	
+	
+	VALUES (
+			 #{com_id}
+			 ,#{com_passwd}
+			 ,#{com_type}
+			 ,#{com_num}
+			 ,#{com_name}
+			 ,#{com_address}
+			 ,#{com_ceo}
+			 ,#{com_phone}
+			 ,#{com_email}
+	)
+	
+	</insert>
 
-  UPDATE POSTING
-  SET    POSTING_CAREER = #{posting_career}
-         POSTING_GRADE  = #{posting_grade}
-         POSTING_HOPE_DEPARTMENT = #{posting_hope_department}
-         POSTING_CONTENT =#{posting_content}
-         POSTING_TITLE =#{posting_title}
-         POSTING_COM_PROFILE =#{posting_com_profile}  	
-  WHERE  PNO = #{pno}
-
-
-</update>
+	<update id="getUpdate">
+	
+	  UPDATE POSTING
+	  SET    POSTING_CAREER           = #{posting_career}
+	         ,POSTING_GRADE           = #{posting_grade}
+	         ,POSTING_HOPE_DEPARTMENT = #{posting_hope_department}
+	         ,POSTING_CONTENT         = #{posting_content}
+	         ,POSTING_TITLE           = #{posting_title}
+	         ,POSTING_COM_PROFILE     = #{posting_com_profile}  	
+	   WHERE POSTING_PNO = 1111      
+	
+	
+	
+	</update>
+	
+	<update id="updateCompany">
+	 UPDATE COMPANY 
+	 SET	
+	 		COM_ID = #{com_id},
+			COM_PASSWD= #{com_passwd},
+			COM_TYPE= #{com_type},
+			COM_NUM= #{com_num},
+			COM_NAME= #{com_name},
+			COM_ADDRESS= #{com_address},
+			COM_CEO= #{com_ceo},
+			COM_PHONE= #{com_phone},
+			COM_EMAIL= #{com_email}
+	 WHERE  COM_ID = 222			
+	 		
+	
+	
+	</update>
+	
+	<select id="getCompany">
+	 SELECT 
+			COM_ID,
+			COM_PASSWD,
+			COM_TYPE,
+			COM_NUM,
+			COM_NAME,
+			COM_ADDRESS,
+			COM_CEO,
+			COM_PHONE,
+			COM_EMAIL
+	FROM    COMPANY
+	WHERE   COM_ID = 222		
+	
+	</select>
+	
+	<select id="getPosting">
+	 SELECT 
+	       POSTING_PNO,
+	       POSTING_CAREER,
+	       POSTING_GRADE,
+	       POSTING_HOPE_DEPARTMENT,
+	       POSTING_CONTENT,
+	       POSTING_TITLE,
+	       POSTING_COM_PROFILE
+	  FROM POSTING     
+	  where posting_pno = 0
+	       
+	
+	
+	</select>
+</mapper>

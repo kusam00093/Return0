@@ -1,16 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="icon" type="image/png" href="/img/favicon.png" />
-<link rel="stylesheet"  href="/css/common.css" />
+    <link href="/css/start.css" rel="stylesheet" />
+    <link href="/css/test.css" rel="stylesheet" />
+
 <style>
    
 </style>
 </head>
+ <%@include file="/WEB-INF/include/Header.jsp" %>
 <body>
   <main>
 	<h2>Home</h2>
@@ -22,11 +26,17 @@
 	<div>검색창</div>	
 	
 	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
 	
 
 	</div>	
   </main>	
 </body>
+ <%@include file="/WEB-INF/include/Footer.jsp" %>
 </html>
 
 

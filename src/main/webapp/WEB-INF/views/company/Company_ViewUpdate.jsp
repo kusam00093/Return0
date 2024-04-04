@@ -1,37 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>      
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업 회원 정보 수정</title>
+<title>기업 회원정보 수정하기</title>
 </head>
 <body>
-	<form action="/Company/PostingUpdate" method="post">
+
+	<form action="/Company/View/Update" method="post">
+
 	  <table id="table" >
 	    <tr>
-	    
-	      <td>제목</td>
-	      <td>내용</td>
-	      <td>필요경력</td>
-	      <td>필요학력</td>
-	      <td>희망부서</td>
-	      <td>프로필</td>
-	    </tr>
-	   
-	    
-
+		  		    
+	      <td>기업아이디</td>
+	      <td>기업이름</td>
+	      <td>기업비밀번호</td>
+	      <td>기업형태</td>
+	      <td>사업자등록번호</td>
+	    </tr>  
 	    <tr>
-	      <td></td>
-	      <td> <input type="text" name ="posting_title"> </td>
-	      <td><textarea name="posting_content"></textarea></td>
-	      <td><input type="text" name ="posting_career"></td>
-	      <td><input type="text" name ="posting_grade"></td>
-	      <td><input type="text" name ="posting_hope_department"></td>
-	      <td><input type="text" name ="posting_com_profile"></td>
+	      <td> <input type="text" name ="com_id"> </td>
+	      <td> <input type="text" name ="com_name"> </td>
+	      <td> <input type="text" name ="com_passwd"> </td>
+	      <td> <input type="text" name ="com_type"> </td>
+	      <td> <input type="text" name ="com_num"> </td>
+	    </tr>
+	    <tr>  
+	      <td>회사주소</td>
+	      <td>대표자이름</td>
+	      <td>대표자 전화번호</td>
+	      <td>이메일</td>
+
+	    <tr>  
+	      <td> <input type="text" name ="com_address"> </td>
+	      <td> <input type="text" name ="com_ceo"> </td>
+	      <td> <input type="text" name ="com_phone"> </td>
+	      <td> <input type="text" name ="com_email"> </td>
+
     	      
 	    </tr>
+    	     
+    	<input type="submit" value="수정하기">     
 
+	    
 	    
 	  </table>
 	</form>
