@@ -2,46 +2,42 @@
 //
 //import org.springframework.stereotype.Component;
 //import org.springframework.web.servlet.HandlerInterceptor;
+//import org.springframework.web.servlet.ModelAndView;
 //
 //import jakarta.servlet.http.HttpServletRequest;
 //import jakarta.servlet.http.HttpServletResponse;
-//import jakarta.servlet.http.HttpSession;
 //
 //@Component
 //public class LoginCheckInterceptor implements  HandlerInterceptor {
 //
-//	@Override
-//	public boolean preHandle(
-//			HttpServletRequest request,	HttpServletResponse response, 
-//			Object handler)	throws Exception {
-//		
-//		// 1. 세션에서 회원정보를 검색
-//		HttpSession  session    =  request.getSession(); 
-//		Object       obj        =  session.getAttribute("login");
-//		
-//		// 요청한 주소정보 확인
-//		String       requestUrl =  request.getRequestURL().toString();
-//		
-//		// /login 페이지는 체크에서 제외한다( 제외 설정 )
-//		//  Interface 설정하는 곳에서 해당경를 제외할때 if() 필요없다
-//		//if( requestUrl.contains("/login")  ) {
-//		//	return true;  // 로그인 체크를 중단
-//	    //}
-//				
-//		//---------------------------
-//		// 로그인되어 있지 않다면 /loginForm 으로 이동
-//		/* 로그인 체크기능을 중지하려면 이부분 주석으로 표시 */		
-//		/*
-//		if( obj == null  ) {
-//			response.sendRedirect("/loginForm");
-//			return false;
-//		}
-//		*/
-//				
-//		
-//		return HandlerInterceptor.super.preHandle(request, response, handler);
-//	}
-//	
+//	 // preHandle: 컨트롤러가 호출되기 전에 실행됩니다.
+//    @Override
+//    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+//            throws Exception {
+//        // 세션에 로그인 정보가 있는지 확인합니다.
+//        Object userId = request.getSession().getAttribute("USER_ID");
+//        if (userId == null) {
+//            // 로그인이 되어있지 않으면 로그인 페이지로 이동합니다.
+//            response.sendRedirect(request.getContextPath() + "/login");
+//            return false; // 요청을 처리하지 않고 중단합니다.
+//        }
+//        // 로그인이 되어있으면 요청을 처리합니다.
+//        return true;
+//    }
+//
+//    // postHandle: 컨트롤러가 실행된 후, 뷰가 렌더링되기 전에 실행됩니다.
+//    @Override
+//    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+//            ModelAndView modelAndView) throws Exception {
+//        // 아무런 작업을 수행하지 않습니다.
+//    }
+//
+//    // afterCompletion: 뷰 렌더링이 완료된 후에 실행됩니다.
+//    @Override
+//    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+//            throws Exception {
+//        // 아무런 작업을 수행하지 않습니다.
+//    }
 //}
 //
 //

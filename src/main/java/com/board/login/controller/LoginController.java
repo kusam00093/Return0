@@ -1,6 +1,7 @@
 package com.board.login.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -8,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
+
 public class LoginController {
 	@RequestMapping("/Loginform")
 	public ModelAndView login() {
@@ -29,6 +31,8 @@ public class LoginController {
 		mv.setViewName("/company/login");
 		return mv;
 	}
+	
+
 }
 
 	

@@ -105,11 +105,11 @@
 	<table>
 	 <tr>
 	   <td>아이디</td>
-	   <td><input type="text" name="USER_ID"  /></td>
+	   <td><input type="text" name="user_id"  /></td>
 	 </tr>
 	 <tr>
 	   <td>비밀번호</td>
-	   <td><input type="password" name="USER_PASSWD" /></td>
+	   <td><input type="password" name="user_passwd" /></td>
 	 </tr>	
 	 <tr>
 	   <td colspan="2">

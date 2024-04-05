@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.login.mapper.LoginMapper">  
+
+	<select  id  = "getUserList"		
+	    resultType = "com.board.login.domain.UserVo">
+	    
+	    
+
+	    
+		SELECT      USER_ID,
+		            USER_NAME,
+					USER_PASSWD,
+					USER_EMAIL,
+					USER_PHONE,
+					USER_SOCIAL_NUM,
+					TO_CHAR( INDATE, 'YYYY-MM-DD')  INDATE,
+					USER_ADDRESS,
+					USER_ZIPCODE
+		FROM        USERS
+		ORDER BY    USER_ID ASC			
+	</select>
+	
+	
+	<insert  id = "insertUser">
+		
+	   INSERT  INTO   USERS (
+	                USER_ID,
+		            USER_NAME,
+					USER_PASSWD,
+					USER_EMAIL,
+					USER_PHONE,
+					USER_SOCIAL_NUM,
+					USER_ADDRESS,
+					USER_ZIPCODE
+	    )
+	    VALUES (
+	         #{ user_id    },
+	         #{ user_name    },
+	         #{ user_passwd  },
+	         #{ user_email     },
+	         #{ user_phone },
+	         #{ user_social_num},
+	         #{ user_address },
+	         #{ user_zipcode}
+	         
+	    )
+		
+	</insert>
+	
+	<insert  id = "insertCom">
+		
+	   INSERT  INTO   USERS (
+	                COM_ID,
+		            COM_PASSWD,
+					COM_TYPE,
+					COM_NUM,
+					COM_NAME,
+					COM_ADDRESS,
+					COM_ZIPCODE,
+					COM_CEO,
+					COM_PHONE,
+					COM_EMAIL,
+					
+	    )
+	    VALUES (
+	         #{ com_id    },
+	         #{ com_passwd    },
+	         #{ com_type  },
+	         #{ com_num     },
+	         #{ com_name },
+	         #{ com_address},
+	         #{ com_zipcode},
+	         #{ com_ceo},
+	         #{ com_phone},
+	         #{ com_email}
+	         
+	    )
+		
+	</insert>
+
+	
+	<!-- 로그인 
+	  arg0 : userid
+	  arg1 : passwd
+	-->
+	<select  id = "login">
+	
+	  SELECT   
+	        USER_ID,
+		    USER_NAME,
+			USER_PASSWD,
+			USER_EMAIL,
+		    USER_PHONE,
+			USER_SOCIAL_NUM,
+			INDATE,
+			USER_ADDRESS,
+			USER_ZIPCODE    
+	   FROM  
+	       USERS
+	   WHERE
+	       USER_ID = #{ arg0 }  
+	    AND
+	       PASS_WD = #{ arg1 }       
+	
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
