@@ -62,7 +62,7 @@
 		}
 		
 		.content .tab {
-		  background-color: #f2f2f2;
+		  background-color: #f7faf9;
 		  border: none;
 		  padding: 10px 20px;
 		  cursor: pointer;
@@ -96,7 +96,32 @@
 		}
 		td{
 		font-weight: normal;
+		
 	}
+		.f-col{
+			background-color: #f7faf9;
+		}
+		main h4{
+		margin: 20px 0}
+		main button{
+			background-color : inherit;
+			border:none; box-shadow:none; border-radius:0; padding:0; 
+			
+		}
+		main button.bookmark{
+			
+			background: url("/img/bookmark-check.svg");
+			background-size: cover;
+			display: inline-block;
+			width : 30px;
+			height: 30px;
+			margin-top: 2px
+		}
+		main button.bookmark:hover {
+			background: url("/img/bookmark-check-fill.svg");
+			background-size: cover;
+		}
+		
     </style>
   </head>
   <body>
@@ -144,6 +169,7 @@
         </div>
         <div class="tab-content">
           <div class="tab-panel">
+          	<h4>회원님의 지원하신 기업입니다.</h4>
           	<ul class="job-list">
 		        <li>
 		          <table>
@@ -195,21 +221,26 @@
 		        <li>
 		          <table>
 		            <thead>
-		              <tr>
+		              <tr class ="f-col">
 		                <th>기업명</th>
-		                <th>공고</th>
+		                <th>매칭스택</th>
 		                <th>분야</th>
 		                <th>마감</th>
-		                
+		                <th>북마크></th>
+		                <th>지원</th>
 		              </tr>
 		            </thead>
 		            <tbody>
+		            <c:forEach var="item" items="${ rec }" varStatus="loop">	
 		              <tr>
-		                <td>기업명 1</td>
-		                <td>공고 1</td>	     
-		                <td>분야 1</td>		  
-		                <td>2024-04-04</td>
+		                <td>${item.com_name }</td>
+		                <td>${item.matching_stack_count }</td>	     
+		                <td>${item.posting_hope_department }</td>		  
+		                <td>${item.posting_startdate }</td>
+		                <td><button id="bookmark-${item.ub_ubno}"  ub_ubno="${loop.index }" posting_num="${ item.posting_pno}"></button></td>
+		                <td><button type="button" class="btn btn-warning">지원하기</button></td>
 		              </tr>
+		            </c:forEach>
 		            </tbody>
 		          </table>
 		        </li>
@@ -305,6 +336,9 @@
   
   <script>
   document.addEventListener('DOMContentLoaded', function() {
+	    //로드시 북마크 부터 표시 
+	    
+	  
 	    const tabs = document.querySelectorAll('.tab');
 	    const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -319,7 +353,38 @@
 	            tabPanels[index].classList.add('active');
 	        });
 	    });
+	    
+
 	});
+  function displayBookmarks() {
+	    // 북마크를 가져오는 fetch 요청
+	    fetch(`/bookmarks/${userId}`)
+	        .then(response => {
+	            // 응답을 확인하고 정상적으로 처리되지 않은 경우 오류 처리
+	            if (!response.ok) {
+	                throw new Error('Failed to fetch bookmarks');
+	            }
+	            // JSON 형식으로 파싱하여 반환
+	            return response.json();
+	        })
+	        .then(bookmarks => {
+	            // bookmarks가 배열인지 확인하고 forEach로 반복하여 처리
+	            if (Array.isArray(bookmarks)) {
+	                bookmarks.forEach(bookmark => {
+	                    const postingNum = bookmark.posting_pno;
+	                    // postingNum을 이용하여 해당 공고를 화면에 표시
+	                    const bookmarkButton = document.getElementById(`bookmark-${postingNum}`);
+	                    if (bookmarkButton) {
+	                        // 북마크 표시
+	                        bookmarkButton.classList.add('bookmarked');
+	                    }
+	                });
+	            } else {
+	                throw new Error('Invalid data format');
+	            }
+	        })
+	        .catch(error => console.error('Error fetching bookmarks:', error));
+	}
   </script> 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>

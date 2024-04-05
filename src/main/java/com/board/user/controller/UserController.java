@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.menus.domain.MenuVo;
+import com.board.user.domain.RserviceVo;
 import com.board.user.domain.SupportVo;
 import com.board.user.domain.UserVo;
 import com.board.user.mapper.UserMapper;
@@ -37,15 +38,20 @@ public class UserController {
 					// 유저정보 가지고오기
 					UserVo userVo = userMapper.getInfo(userid);
 					
-					
-					List<HashMap<String, Object>>  map = userMapper.getSupport(userVo);
 					//유저가 지원한 공고 정보 가져오기
-					log.info("map : {}", map);
+					List<HashMap<String, Object>>  map = userMapper.getSupport(userVo);
+					
+					RserviceVo rserviceVo = new RserviceVo();
+					// 유저와 공고의 매칭 서비스
+					List<HashMap<String, Object>> rec  = userMapper.getRecommend(userVo);
+					
+					log.info("map : {}", rec);
 					
 					ModelAndView    mv    = new ModelAndView();	
 					if(userVo !=null) {
 						mv.addObject("userVo", userVo);
 						mv.addObject("map", map);
+						mv.addObject("rec", rec);
 					}else {
 						System.out.println("아이뒤없음");
 						
@@ -54,6 +60,8 @@ public class UserController {
 					mv.setViewName("users/view");
 					return  mv;
 				}
+				
+				
 				
 }
 

@@ -44,6 +44,7 @@ footer {
   position: relative;
   width: 100%;
   height: 200px;
+  background-color: #f8f8f8;
 }
 footer .inner {
   height: 100%;
@@ -97,7 +98,7 @@ footer .support li:not(.first):before {
   background: rgba(0, 0, 0, 0.2);
 }
 .info_contents {
-  height: 300px;
+  
 }
 dd,
 dt {
@@ -111,5 +112,5 @@ dt {
 
 main {
   width: 100%;
-  height: 500px;
+  height: 650px;
 }
