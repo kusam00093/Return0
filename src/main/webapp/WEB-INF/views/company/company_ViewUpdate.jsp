@@ -5,7 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <%@include file="/WEB-INF/include/Header.jsp" %>
 <title>기업 회원정보 수정하기</title>
+<link rel="icon" type="image/png" href="/img/favicon.png" />
+<link href="/css/start.css" rel="stylesheet" />
+<link href="/css/test.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -45,7 +49,15 @@
     	<input type="submit" value="수정하기">     
 	  </table>
 	</form>
-    	<input type="submit" value="삭제하기" id="goDelete">     
+    	<input type="submit" value="삭제하기" id="goDelete">
+    	
+    		<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+    	     
 
    	<script>
 	  const goDeleteEl = document.getElementById('goDelete');
@@ -55,4 +67,5 @@
 	</script>
 	    
 </body>
+<%@include file="/WEB-INF/include/Footer.jsp" %>
 </html>

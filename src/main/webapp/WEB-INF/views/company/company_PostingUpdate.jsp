@@ -5,7 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <%@include file="/WEB-INF/include/Header.jsp" %>
 <title>기업 모집공고 정보 수정</title>
+<link rel="icon" type="image/png" href="/img/favicon.png" />
+<link href="/css/start.css" rel="stylesheet" />
+<link href="/css/test.css" rel="stylesheet" />
 </head>
 <body>
 	<form action="/Company/Posting/Update" method="post">
@@ -39,7 +43,12 @@
 	</form>
 	   <input type ="submit" value="삭제" id="goDelete">
 	    
-	  
+	  	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
 		<script>
 	  const goDeleteEl = document.getElementById('goDelete');
 	  goDeleteEl.addEventListener('click',function(e){
@@ -48,4 +57,5 @@
 	</script>
 	
 </body>
+<%@include file="/WEB-INF/include/Footer.jsp" %>
 </html>

@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <%@include file="/WEB-INF/include/Header.jsp" %>
 <title>기업 회원가입 폼</title>
+<link rel="icon" type="image/png" href="/img/favicon.png" />
+<link href="/css/start.css" rel="stylesheet" />
+<link href="/css/test.css" rel="stylesheet" />
 </head>
 <body>
  	<form action="/Company/Comuser/Write" method="post">
@@ -49,5 +53,13 @@
 	  </table>
 	  
 	</form>
+		<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	
 </body>
+<%@include file="/WEB-INF/include/Footer.jsp" %>
 </html>

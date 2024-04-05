@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <link href="/css/start.css" rel="stylesheet" />
-    <link href="/css/test.css" rel="stylesheet" />
+<link href="/css/start.css" rel="stylesheet" />
+<link href="/css/test.css" rel="stylesheet" />
 
 <style>
    

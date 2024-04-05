@@ -4,7 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <%@include file="/WEB-INF/include/Header.jsp" %>
 <title>기업 마이페이지-북마크</title>
+<link rel="icon" type="image/png" href="/img/favicon.png" />
+<link href="/css/start.css" rel="stylesheet" />
+<link href="/css/test.css" rel="stylesheet" />
 </head>
 <body>
 	  <h2>북마크 목록</h2>
@@ -25,8 +29,18 @@
 	      </td>	      	      
 	    </tr>
 	    </c:forEach>
+	    
+	    
+	    
+	    
 	  </table>
-	
+		<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
 	
 </body>
+<%@include file="/WEB-INF/include/Footer.jsp" %>
 </html>

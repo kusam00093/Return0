@@ -122,12 +122,11 @@ public class CompanyController {
 	}
 	@RequestMapping("/PostingView")
 	public ModelAndView posting(CompanyVo companyVo, PostingVo postingVo) {
-		System.out.println("=-================================================");
 		HashMap<String, Object> map = companyMapper.getPostingMap(companyVo,postingVo);
-		log.info(map.toString());
-		System.out.println("=-================================================");
+		List<PostingVo> postingList = companyMapper.getPostingList(postingVo);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("map",map);
+		mv.addObject("postingList",postingList);
 		mv.setViewName("company/company_PostingView");
 		return mv;
 	}

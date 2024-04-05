@@ -60,7 +60,7 @@
 	         ,POSTING_CONTENT         = #{posting_content}
 	         ,POSTING_TITLE           = #{posting_title}
 	         ,POSTING_COM_PROFILE     = #{posting_com_profile}  	
-	   WHERE POSTING_PNO = 111111      
+	   WHERE POSTING_PNO = 1     
 	
 	
 	
@@ -78,20 +78,20 @@
 			COM_CEO= #{com_ceo},
 			COM_PHONE= #{com_phone},
 			COM_EMAIL= #{com_email}
-	 WHERE  COM_ID = 1111			
+	 WHERE  COM_ID = 1		
 	 		
 	
 	
 	</update>
 	
 	<select id="getPostingList">
-	 SELECT 
+	 SELECT ROWNUM AS ROW_NUMBER,
 	 		POSTING_TITLE
 	 		,POSTING_COM_PROFILE
 	 		,POSTING_ENDDATE
 	 		,POSTING_HOPE_DEPARTMENT
 	 FROM   POSTING
-	 ORDER BY POSTING_TITLE
+	
 			
 	
 	</select>
@@ -109,7 +109,7 @@
 			COM_PHONE,
 			COM_EMAIL
 	FROM    COMPANY
-	WHERE   COM_ID = 1111		
+	WHERE   COM_ID = 1		
 	
 	</select>
 	
@@ -123,18 +123,26 @@
 	       POSTING_TITLE,
 	       POSTING_STARTDATE
 	  FROM POSTING     
-	  WHERE POSTING_PNO = 111111
+	  WHERE POSTING_PNO = 1
 	       
 	
 	
 	</select>
 	<resultMap type="java.util.HashMap" id="getPostingMap1">
-	<result property="com_name"       column="com_name"/>
-	<result property="com_type"   column="com_type"/>
-	<result property="com_address"     column="com_address"/>
-	<result property="com_ceo"   column="com_ceo"/>
-	<result property="com_phone"    column="com_phone"/>
-	<result property="com_email"   column="com_email"/>
+	<result property="com_name"           column="com_name"/>
+	<result property="com_type"           column="com_type"/>
+	<result property="com_address"        column="com_address"/>
+	<result property="com_ceo"            column="com_ceo"/>
+	<result property="com_phone"          column="com_phone"/>
+	<result property="com_email"          column="com_email"/>
+	<result property="posting_career"     column="posting_career"/>
+	<result property="posting_grade"      column="posting_grade"/>
+	<result property="posting_content"    column="posting_content"/>
+	<result property="posting_hope_department"       column="posting_hope_department"/>
+	<result property="posting_title"       column="posting_title"/>
+	<result property="posting_startdate"       column="posting_startdate"/>
+	<result property="posting_enddate"       column="posting_enddate"/>
+	
 
 	</resultMap>
 	
@@ -145,21 +153,29 @@
 	       COM_ADDRESS,
 	       COM_CEO,
 	       COM_PHONE,
-	       COM_EMAIL
+	       COM_EMAIL,
+	       POSTING_CAREER,
+	       POSTING_GRADE,
+	       POSTING_CONTENT,
+	       POSTING_HOPE_DEPARTMENT,
+	       POSTING_TITLE,
+	       POSTING_STARTDATE,
+	       POSTING_ENDDATE
 	 
-  FROM COMPANY 
-  where   COM_ID = 11111
+  FROM COMPANY C JOIN POSTING P
+  ON   C.COM_ID = P.COM_ID 
+  WHERE C.COM_ID = 1
 	
 	</select>
 	
 	<delete id="postingDelete">
 		DELETE FROM POSTING
-		WHERE POSTING_PNO = 111111
+		WHERE POSTING_PNO = 1
 	</delete>
 	
 	<delete id="deleteCompany">
 		DELETE FROM COMPANY
-		WHERE COM_ID = 1234	
+		WHERE COM_ID = 1
 	
 	</delete>
 </mapper>

@@ -13,6 +13,7 @@ public class PostingVo {
 
 		private String com_id;
 		private int    posting_pno;
+		private int    row_number;
 		private String posting_career;
 		private String posting_grade;
 		private String posting_hope_department;
