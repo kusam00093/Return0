@@ -56,11 +56,11 @@
 	 </tr>
 	 <tr>
 	   <td>경력기간-시작</td>
-	   <td><input type="text" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/></td>
+	   <td><input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/></td>
 	 </tr>
 	 <tr>
 	   <td>경력기간-종료</td>
-	   <td><input type="text" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+	   <td><input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
 	 </tr>
 	 
 	 <tr>

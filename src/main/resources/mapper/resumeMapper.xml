@@ -168,7 +168,7 @@
                 RESUME_RNO  = #{resume_rno},
 								RESUME_GRADE_UNIVERSE = #{resume_grade_universe},
 								RESUME_GRADE_STATE = #{resume_grade_state},
-								RESUME_GRADE_CONTENT = #{resume_grade_content},
+								RESUME_GRADE_CONTENT = #{resume_grade_content}
 							
        WHERE    RESUME_RNO   = #{ resume_rno }   
   </update>
@@ -176,7 +176,7 @@
       UPDATE   RESUME_LICENSE
        SET     
                 RESUME_RNO  = #{resume_rno},
-								RESUME_LICENSE_CONTENT = #{resume_license_content},
+								RESUME_LICENSE_CONTENT = #{resume_license_content}
        WHERE    RESUME_RNO   = #{ resume_rno   }   
   </update>
 	
