@@ -222,7 +222,7 @@
 	 
   FROM COMPANY C JOIN POSTING P
   ON   C.COM_ID = P.COM_ID 
-  WHERE C.COM_ID = 1
+  WHERE P.POSTING_PNO = '24'
 	
 	</select>
 	

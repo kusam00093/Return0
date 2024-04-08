@@ -174,12 +174,12 @@ public class CompanyController {
 		return mv;
 	}*/
 	
-	
+
 	
 	@RequestMapping("/Posting/UpdateForm")
 	public ModelAndView postingUpdateForm(PostingVo postingVo,int nowpage, String user_id, String com_id) {
-		PostingVo vo = companyMapper.getPosting(postingVo);
 		
+		PostingVo vo = companyMapper.getPosting(postingVo);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("nowpage",nowpage);
 		mv.addObject("com_id",com_id);

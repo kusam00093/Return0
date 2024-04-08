@@ -158,7 +158,8 @@
 	       	<p>${ vo.com_email }</p>
 	       	<p>${ vo.com_phone }</p>
 	       	<p>${ vo.com_ceo }</p>
-	       	<a href="/Company/Comuser/View?nowpage=${nowpage }">기업회원정보보기</a>
+	       	<a href="/Company/Comuser/View?nowpage=${nowpage}">기업회원정보보기</a>
+	       	<a href="/Company/Posting/UpdateForm?nowpage=${nowpage}">모집공고 수정하기</a>
         </div>
       </div>
       <div class="right">
