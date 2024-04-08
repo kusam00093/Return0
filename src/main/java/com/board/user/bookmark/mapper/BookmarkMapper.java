@@ -13,6 +13,16 @@ public interface BookmarkMapper {
 
 	List<BookmarkVo> getUserBookmarks(String userId);
 
+	Integer CheckUBNO(BookmarkVo request);
+
+	void CreateBookMark(BookmarkVo request);
+
+	
+
+	void AddBoolean(BookmarkVo request);
+
+	void minusBoolean(BookmarkVo request);
+
 
 	
 

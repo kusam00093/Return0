@@ -17,5 +17,5 @@ public class RserviceVo {
     private String posting_startdate;
     private String com_name;
     private int  ub_ubno;
-	
+	private int ub_boolean;
 }
