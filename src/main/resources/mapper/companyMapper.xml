@@ -85,8 +85,8 @@
 	</update>
 	
 	<select id="getPostingList">
-	 SELECT ROWNUM AS ROW_NUMBER,
-	 		POSTING_TITLE
+	 SELECT ROWNUM AS ROW_NUMBER
+	 		,POSTING_TITLE
 	 		,POSTING_COM_PROFILE
 	 		,POSTING_ENDDATE
 	 		,POSTING_HOPE_DEPARTMENT
@@ -111,6 +111,35 @@
 	FROM    COMPANY
 	WHERE   COM_ID = 1		
 	
+	</select>
+	<select id="getUserList">
+	SELECT  
+			ROWNUM AS ROW_NUMBER
+			,USER_ID
+			,USER_PASSWD
+			,USER_NAME
+			,USER_EMAIL
+			,USER_ADDRESS
+			,USER_PHONE
+			,USER_SOCIAL_NUM
+			INDATE
+	FROM    USERS		
+	</select>
+	
+	<select id="getUserStackList">
+	
+	SELECT  
+			ROWNUM  AS ROW_NUMBER
+			,U.USER_ID
+			,U.USER_PASSWD
+			,U.USER_NAME
+			,U.USER_EMAIL
+			,U.USER_ADDRESS
+			,U.USER_PHONE
+			,U.USER_SOCIAL_NUM
+            ,S.USER_STACK_NAME
+	FROM    USERS U JOIN USER_STACK S
+    ON      U.USER_ID = S.USER_ID
 	</select>
 	
 	<select id="getPosting">

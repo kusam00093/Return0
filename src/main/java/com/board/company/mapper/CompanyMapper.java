@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.board.company.domain.CompanyVo;
 import com.board.company.domain.PostingVo;
+import com.board.company.domain.UserVo;
 
 @Mapper
 public interface CompanyMapper {
@@ -31,6 +32,10 @@ public interface CompanyMapper {
 
 
 	HashMap<String, Object> getPostingMap(CompanyVo companyVo, PostingVo postingVo);
+
+	List<UserVo> getUserList(UserVo userVo);
+
+	List<UserVo> getUserStackList(UserVo userVo);
 
 	//HashMap<String, Object> getPostingList(PostingVo postingVo);
 

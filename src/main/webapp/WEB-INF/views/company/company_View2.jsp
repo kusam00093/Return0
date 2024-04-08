@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>      
-
-
+<%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +11,9 @@
     <title>Hello, world!</title>
     <link href="/css/start.css" rel="stylesheet" />
     <link href="/css/test.css" rel="stylesheet" />
-  <style>
+    
+    
+    <style>
        .main {
         display: flex;
         justify-content: center;
@@ -98,17 +98,26 @@
       font-weight: normal;
    }
     </style>
-
-</head>
-<body>
-<div><a href="/Company/MyPage/People">내 회사 지원자 보기</a></div>
-<div><a href="/Company/MyPage/Recommand">내 회사와 맞는 인재</a></div>
-<div><a href="/Company/MyPage/Book">내가 북마크한 이력서</a></div>
-<div><a href="/Company/PostingView">공고상세보기</a></div>
-<div><a href="/Company/Posting/WriteForm">공고등록</a></div>
-<div><a href="/Company/Comuser/WriteForm">기업 회원등록</a></div>
-<div><a href="/Company/View">기업 회원 상세 보기</a></div>
-
+  </head>
+  <body>
+  
+    <div id="wrap">
+      <header>
+        <div class="inner">
+          <div id="gnb">
+            <h1 id="logo">
+              <a href="#"><img src="/img/logo02.png" /></a>
+            </h1>
+            <ul id="navbar">
+              <li><a href="#">채용</a></li>
+              <li><a href="#">이력서</a></li>
+              <li><a href="#">마이페이지</a></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <!------------------------------------  header---------------------------------------------- -->
+      <!-- 여기가 사용할 공간  -->
        <main>
     <section class="content inner">
        
@@ -118,13 +127,15 @@
            <div class ="profile_pic">
                 <a href ="#"><img src ="/img/defaultProfile.png"></a>
              </div>
-             <p>강재영</p>
-             <p>wodud6967@naver.com</p>
-             <p>010-4808-6967</p>
-             <p>지원 횟수 : 2</p>
-             <a>채용공고보러가기</a>
-             <a>이력서수정하기</a>
-             <a>개인정보수정하기</a>
+             <p>${ vo.com_id }</p>
+             <p>${ vo.com_passwd }</p>
+             <p>${ vo.com_num }</p>
+             <p>${ vo.com_name }</p>
+             <p>${ vo.com_address }</p>
+             <p>${ vo.com_ceo }</p>
+             <p>${ vo.com_phone }</p>
+             <p>${ vo.com_email }</p>
+             <a href="/Company/ViewUpdateForm">기업회원정수정하기</a>
         </div>
       </div>
       <div class="right">
@@ -223,8 +234,10 @@
       </div>
     </section>
   </main>
-
-	
-</body>
+  </div>
+  <div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
 <%@include file="/WEB-INF/include/Footer.jsp" %>
-</html>
+  </body>
+  </html>

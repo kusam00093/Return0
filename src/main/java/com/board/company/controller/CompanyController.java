@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.board.company.domain.CompanyVo;
 import com.board.company.domain.PostingVo;
+import com.board.company.domain.UserVo;
 import com.board.company.mapper.CompanyMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,6 @@ public class CompanyController {
 	
 		List<PostingVo> postingList = companyMapper.getPostingList(postingVo);
 		
-		System.out.println(postingList);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("postingList", postingList);
 		mv.setViewName("company/list");
@@ -66,12 +66,15 @@ public class CompanyController {
 	}
 	//========================================================
 	@RequestMapping("/View")
-	public ModelAndView companyView(CompanyVo companyVo) {
+	public ModelAndView companyView(CompanyVo companyVo, UserVo userVo) {
 		
 		CompanyVo vo = companyMapper.getCompany(companyVo);
-		
+		List<UserVo> userList = companyMapper.getUserList(userVo);
+		List<UserVo> userstackList = companyMapper.getUserStackList(userVo);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("vo", vo);
+		mv.addObject("userList",userList);
+		mv.addObject("userstackList",userstackList);
 		mv.setViewName("company/company_View");
 		return mv;
 	}
