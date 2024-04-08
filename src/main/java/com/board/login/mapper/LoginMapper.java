@@ -1,6 +1,8 @@
 package com.board.login.mapper;
 
 import java.util.HashMap;
+
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,6 +18,11 @@ public interface LoginMapper {
 	void insertUser(UserVo userVo);
 
 	HashMap<String, Object> getUser(UserVo userVo);
+
+UserVo login(String user_id, String user_passwd);
+	
+		
+	
 
 	
 

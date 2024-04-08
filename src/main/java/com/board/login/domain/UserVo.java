@@ -1,6 +1,7 @@
 package com.board.login.domain;
 
 import lombok.AllArgsConstructor;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,6 +1,10 @@
 package com.board.login.domain;
 
 import lombok.AllArgsConstructor;
+
+
+
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
@@ -14,7 +18,7 @@ public class CompanyVo {
 		private String com_passwd;
 		private String com_email;
 		private String com_address;
-		private String com_zipcode;
+	    private String com_zipcode;
 		private String com_phone;
 		private String com_num;
 		private String com_ceo;

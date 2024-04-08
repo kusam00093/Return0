@@ -13,7 +13,7 @@
 //	    public void addInterceptors(InterceptorRegistry registry) {
 //	        registry.addInterceptor(new LoginCheckInterceptor())
 ////	                .addPathPatterns("/**")
-//	                .excludePathPatterns("/Login", "/", "/Loginhome/Loginform"  ); // 홈페이지 URL을 예외로 처리합니다.
+//	                .excludePathPatterns("/Login", "/" ); // 홈페이지 URL을 예외로 처리합니다.
 //	    }
 //	}
 ////	

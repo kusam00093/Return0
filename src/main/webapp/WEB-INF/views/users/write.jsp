@@ -11,7 +11,7 @@
         font-family: Arial, sans-serif;
         background-color: #f7f7f7;
         margin: 0;
-        padding: 20px 0; /* 윗부분에 padding 추가 */
+        padding: 40px; 
         display: flex;
         justify-content: center;
         align-items: center;
@@ -20,15 +20,15 @@
 
     main {
         background-color: #fff;
-        padding: 40px;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        width: 400px;
+        padding: 60px; 
+        border-radius: 20px; 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
+        width: 500px; 
     }
 
     h2 {
         text-align: center;
-        margin-bottom: 40px 0;
+        margin-bottom: 40px; 
         color: #3f98f7;
     }
 
@@ -42,7 +42,7 @@
     }
 
     table td {
-        padding: 10px;
+        padding: 15px; 
         text-align: left;
     }
 
@@ -51,12 +51,12 @@
     input[type="submit"],
     input[type="button"] {
         width: calc(100% - 30px);
-        padding: 10px;
-        margin-bottom: 20px;
+        padding: 15px; 
+        margin-bottom: 30px; 
         border: 1px solid #ddd;
-        border-radius: 5px;
+        border-radius: 8px; 
         box-sizing: border-box;
-        font-size: 16px;
+        font-size: 18px; 
     }
 
     input[type="submit"],
@@ -74,17 +74,17 @@
     }
 
     .half-input {
-        width: calc(50% - 5px);
-        margin-right: 5px;
+        width: calc(50% - 10px); 
+        margin-right: 10px; 
     }
 
     #USER_SOCIAL_NUM1 {
-        width: calc(30% - 5px);
-        margin-right: 5px;
+        width: calc(30% - 10px); 
+        margin-right: 10px; 
     }
 
     #USER_SOCIAL_NUM2 {
-        width: calc(70% - 5px);
+        width: calc(70% - 10px); 
     }
 </style>
 
@@ -179,8 +179,7 @@
                 </td>
             </tr>
             <tr>
-                <td><input type="text"  value="${ now }" readonly /></td>
-            </tr>
+        <td><input type="text" id="joinDate" readonly /></td> 
             <tr>
                 <td colspan="2">
                     <input type="submit" value="회원가입" />
@@ -191,6 +190,19 @@
         
     </form>
 </main>
+<script>
+
+function getCurrentDate() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
+// 가입일을 표시하는 부분
+document.getElementById('joinDate').value = getCurrentDate();
+</script>
 <script>
     const goListEl = document.getElementById('goList');
     goListEl.addEventListener('click', function(e) {
