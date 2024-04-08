@@ -91,17 +91,20 @@
 </head>
 <body>
 	<main>
+  <input type="hidden" name="nowpage" value="${nowpage}">
+  <input type="hidden" name="com_id" value="${com_id}">
+  <input type="hidden" name="nowpage" value="${user_id}">
  <%@include file="/WEB-INF/include/Header.jsp" %>
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
-	
+	<input type="hidden" name="nowpage" value="${nowpage}">
    <h2>채용 목록</h2>
    <div>&nbsp;</div>
    <div>&nbsp;</div>
    <div>&nbsp;</div>
    <div>&nbsp;</div>
-   
+   <div><input type="button" value="공고 등록하기" id="goPosting"></div>
 	<div class="sub_title">
       <div class="td1">번호</div>
       <div class="td2">제목</div>
@@ -111,7 +114,7 @@
    <c:forEach  var="co" items="${postingList}">
 	<div class="content1">
       <div class="td1">${co.row_number}</div>
-      <div class="td2"><a href="/Company/PostingView">${co.posting_title}</a></div>
+      <div class="td2"><a href="/Company/PostingView?nowpage=${nowpage}">${co.posting_title}</a></div>
       <div class="td3">${co.posting_hope_department}</div>
       <div class="td4">${co.posting_enddate}</div>
       <div class="td5"><input type="submit" value = "즉시지원"></div>
@@ -122,7 +125,15 @@
 <div>&nbsp;</div>
 <%@include file="/WEB-INF/include/Footer.jsp" %>
 	</main>
+    <script>
+     const  goPostingEl  = document.getElementById('goPosting');
+     goPostingEl.addEventListener('click', function(e) {
+        location.href = '/Company/Posting/WriteForm?nowpage=${nowpage}&com_id= 33';
+     });
+     
+
    
+  </script> 
 
 
 </body>

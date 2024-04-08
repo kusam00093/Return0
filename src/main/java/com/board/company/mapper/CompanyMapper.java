@@ -37,6 +37,10 @@ public interface CompanyMapper {
 
 	List<UserVo> getUserStackList(UserVo userVo);
 
+	int count(UserVo userVo);
+
+	List<UserVo> getUserPagingList(int offset, int pageSize);
+
 	//HashMap<String, Object> getPostingList(PostingVo postingVo);
 
 

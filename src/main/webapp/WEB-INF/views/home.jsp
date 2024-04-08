@@ -17,9 +17,12 @@
  <%@include file="/WEB-INF/include/Header.jsp" %>
 <body>
   <main>
+  <input type="hidden" name="nowpage" value="${nowpage}">
+  <input type="hidden" name="com_id" value="${com_id}">
+  <input type="hidden" name="nowpage" value="${user_id}">
 	<h2>Home</h2>
-	<div><a href="/Company/MyPage">기업마이페이지</a></div>
-	<div><a href="/Company/List">채용목록</a></div>
+	<div><a href="/Company/MyPage?nowpage=1">기업마이페이지</a></div>
+	<div><a href="/Company/List?nowpage=1">채용목록</a></div>
 	<div><a href="/User">마이페이지</a></div>	
 	<div><a href="/Board">커뮤니티</a></div>	
 	<div><a href="/Login">로그인</a></div>	
