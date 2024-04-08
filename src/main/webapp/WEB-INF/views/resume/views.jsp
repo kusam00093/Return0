@@ -10,23 +10,36 @@
 <style>
    input:not(input[type=submit]) { width:100%; }
    input[type=submit] { width : 100px; }
+   
    #goList  { width : 80px; }
+   
+   tr {
+   	 border: 1px solid black;
+   }
    
    td { 
       padding:10px;
-      width: 700px;
+      width: 1000px;
       text-align: center;
+     border: 1px solid black;
    }
+   
    td:nth-of-type(1) {
-      width : 200px;
+      width : 250px;
    }
    
    td:not([colspan]):first-child {
-      background: black;
-      color : white;
+      background: white;
+      color : black;
       font-weight: bold;
    }
-
+   
+ 
+		.licenseList {
+			display: flex;
+		}
+	
+			
 </style>
 </head>
 <body>
@@ -43,24 +56,35 @@
 	 </tr>
 	 <tr>
 	   <td>사진</td>
-	  <td><input type="text" name="resume_career_company" value="${mapResume.resume_profile}" /></td>
+	   <td><input type="text" name="resume_profile"  value="${mapResume.resume_profile}"/></td>
 	 </tr>
-	 <tr>
-	   <td>경력사항-회사</td>
-	   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" /></td>
+	 <tr class="experience-details">
+	   <td rowspan="4">경력사항</br>
+	                   1. 회사이름</br>
+	                   2. 회사부서</br> 
+	                   3. 회사입사</br>
+	                   4. 회사퇴사</br>
+	  </td>
 	 </tr>
-	 <tr>
-	   <td>경력사항-부서</td>
-	   <td><input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/></td>
-	 </tr>
-	 <tr>
-	   <td>경력기간-시작</td>
-	   <td><input type="text" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/></td>
-	 </tr>
-	 <tr>
-	   <td>경력기간-종료</td>
-	   <td><input type="text" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
-	 </tr>
+	 
+		 <tr>
+		   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" />
+		   <input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/>
+		   <input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
+		   <input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+		 </tr>
+		 <tr>
+		   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" />
+		   <input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/>
+		   <input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
+		   <input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+		 </tr>
+		 <tr >
+		   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" />
+		   <input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/>
+		   <input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
+		   <input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+		 </tr>
 	 
 	 <tr>
 	   <td>최종학력</td>
@@ -76,7 +100,21 @@
 	 </tr>
 	 <tr>
 	   <td>기술목록</td>
-	   <td><input type="text" name="resume_license_content"  value="${mapResumeLicense.resume_license_content}"/></td>
+	   <td class = "licenseList">
+	   	  
+	   			<input type="checkbox" name="resume_license_content"  value="Java"/>Java
+	   			<input type="checkbox" name="resume_license_content"  value="HTML"/>HTML
+	   			<input type="checkbox" name="resume_license_content"  value="JavaScript"/>JavaScript
+	   			<input type="checkbox" name="resume_license_content"  value="VueJS"/>VueJS
+	   			<input type="checkbox" name="resume_license_content"  value="CSS"/>CSS
+	   			<input type="checkbox" name="resume_license_content"  value="Node.js"/>Node.js
+	   			<input type="checkbox" name="resume_license_content"  value="React"/>React
+	   			<input type="checkbox" name="resume_license_content"  value="ReactJS"/>ReactJS
+	   			<input type="checkbox" name="resume_license_content"  value="Typescript"/>Typescript
+	   			<input type="checkbox" name="resume_license_content"  value="Zustand"/>Zustand
+	   			<input type="checkbox" name="resume_license_content"  value="AWS"/>AWS
+	   		
+	   </td>
 	 </tr>
 	 <tr>
 	   <td>자기소개서</td>
@@ -90,7 +128,7 @@
 	 
 	 <tr>
 	   <td colspan="2">
-	    <input type="submit" value="추가" />
+	   
 	    <input type="button" value="목록" id="goList" />
 	   </td>
 	 </tr>

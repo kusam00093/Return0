@@ -1,12 +1,12 @@
-package com.board.user.domain;
+package com.board.resume.userVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserVo {
 	private String user_id;
 	private String user_name;

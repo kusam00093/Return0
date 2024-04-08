@@ -40,7 +40,8 @@
            padding: 80px;
 					margin: 10px
       }
-      .content .left .person_date > a{
+      .content .left .person_date > a,
+      .content .left .person_date > button {
          display: inline-block;
          border: 1px solid #3f98f7;
          border-radius: 5px; 
@@ -113,15 +114,17 @@
       <div class="left">
         <h2>이력서 리스트</h2>
         <div class ="person_date">
-           <div class ="profile_pic">
-               
-           </div>
-            <a href="/Resume/WriteForm?user_id=wodud6967">이력서 등록</a>   
+           
+<!--             <a href="/Resume/WriteForm?user_id=wodud6967">이력서 등록</a>  -->
+            
+            
+             <button onclick="resumeWrite()">이력서 등록</button>
+ 
         </div>
       </div>
       <div class="right">
-        <div class="tabs">
-          <table>
+       
+      <table>
 	    <tr>
 	      <td>이력서 번호</td>
 	      <td>이력서 내용</td>
@@ -138,12 +141,13 @@
 <%-- 	      <td>${ resumeVo.menu_seq   }</td>	       --%>
 	      <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>	      
 	      <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967">수정</a></td>
+<!-- 	      <td><button onclick="resumeUpdate()">수정</button></td> -->
 	    </tr>
 	    </c:forEach>
-	    
 	   
-	  </table>
-        
+	   
+	  	</table>
+     </div>   
     </section>
   
 
@@ -158,26 +162,20 @@
       <%@include file="/WEB-INF/include/footer.jsp" %>
     
   
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-       const tabs = document.querySelectorAll('.tab');
-       const tabPanels = document.querySelectorAll('.tab-panel');
-
-       tabs.forEach((tab, index) => {
-           tab.addEventListener('click', () => {
-               // Remove 'active' class from all tabs and tab panels
-               tabs.forEach(tab => tab.classList.remove('active'));
-               tabPanels.forEach(panel => panel.classList.remove('active'));
-
-               // Add 'active' class to the clicked tab and corresponding tab panel
-               tab.classList.add('active');
-               tabPanels[index].classList.add('active');
-           });
-       });
-   });
-  </script> 
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
   
+  
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      function resumeWrite(){
+        window.open("/Resume/WriteForm?user_id=wodud6967", "write", "width=1200, height=800");
+      }
+    </script>
+    <script type="text/javascript">
+      function resumeUpdate(){
+        window.open("/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967", "update", "width=1200, height=800");
+      }
+    </script>
   </body>
+
 </html>

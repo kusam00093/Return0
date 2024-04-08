@@ -13,7 +13,7 @@ import com.board.resume.domain.ResumeGradeVo;
 import com.board.resume.domain.ResumeLicenseVo;
 import com.board.resume.domain.ResumeVo;
 import com.board.resume.mapper.ResumeMapper;
-import com.board.user.domain.UserVo;
+import com.board.resume.userVo.UserVo;
 
 import lombok.extern.slf4j.Slf4j;
 
