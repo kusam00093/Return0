@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor	
-public class CompanyVo {
+public class LoginCompanyVo {
 
 
 		private String com_id;   
