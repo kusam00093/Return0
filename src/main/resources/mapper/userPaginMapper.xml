@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.user.mapper.UserPagingMapper">  
+<resultMap id="getUserPaging" type="com.board.user.domain.RserviceVo">
+    <result property="posting_pno"    column="posting_pno"   />
+    <result property="matching_stack_count"    column="matching_stack_count"   />
+    <result property="posting_title"  column="posting_title" />
+    <result property="posting_hope_department"     column="posting_hope_department"   />
+    <result property="posting_startdate"       column="posting_startdate"     />
+    <result property="com_name"       column="com_name"     />
+    <result property="ub_ubno"       column="ub_ubno"     />
+    <result property="ub_boolean"       column="ub_boolean"     />
+    
+</resultMap>
+	<select id ="count">
+		  SELECT COUNT(*)
+			FROM (
+			    SELECT
+			        PS.POSTING_PNO
+			    FROM
+			        POSTING_STACK PS
+			    JOIN
+			        USER_STACK US ON PS.POSTING_STACK = US.USER_STACK_NAME
+			    JOIN
+			        POSTING P ON PS.POSTING_PNO = P.POSTING_PNO
+			    JOIN
+			        COMPANY C ON P.COM_ID = C.COM_ID
+			    LEFT JOIN
+			        USER_BOOKMARK UB ON P.POSTING_PNO = UB.POSTING_PNO AND UB.USER_ID = #{user_id}
+			    WHERE
+			        US.USER_ID = #{user_id}
+			    GROUP BY
+			        PS.POSTING_PNO
+			)
+	</select>
+    
+    <select id = "getUserPagingList" resultMap ="getUserPaging">
+    		SELECT *
+FROM (
+    SELECT
+        ps.posting_pno,
+        COUNT(*) AS matching_stack_count,
+        p.posting_title,
+        p.posting_hope_department,
+        p.posting_startdate,
+        c.com_name,
+        ub.ub_ubno,
+        ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS row_num
+    FROM
+        posting_stack ps
+    JOIN
+        user_stack us ON ps.posting_stack = us.user_stack_name
+    JOIN
+        posting p ON ps.posting_pno = p.posting_pno
+    JOIN
+        company c ON p.com_id = c.com_id
+    LEFT JOIN
+        user_bookmark ub ON p.posting_pno = ub.posting_pno AND ub.user_id = #{ arg0 }
+    WHERE
+        us.user_id = #{ arg0 }
+    GROUP BY
+        ps.posting_pno, p.posting_title, c.com_name, p.posting_hope_department, p.posting_startdate, ub.ub_ubno
+) sorted_data
+ORDER BY sorted_data.matching_stack_count DESC, sorted_data.posting_pno ASC
+OFFSET#{ arg1 } ROWS FETCH FIRST #{ arg2 } ROWS ONLY
+    </select>
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

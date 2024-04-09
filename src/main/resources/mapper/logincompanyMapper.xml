@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.login.mapper.LoginCompanyMapper">  
+
+		
+			<select  id  = "getCompanyList"		
+	    resultType = "com.board.login.domain.LoginCompanyVo">
+	    
+	    
+
+	    
+		SELECT      COM_ID,
+		            COM_PASSWD,
+					COM_TYPE,
+					COM_NUM,
+					COM_NAME,
+					COM_ADDRESS,
+					COM_ZIPCODE
+					COM_CEO,
+					COM_PHONE,
+					COM_EMAIL
+		FROM        COMPANY
+		ORDER BY    COMPANY_ID ASC			
+	
+	</select>
+	<insert  id = "insertCom">
+	   INSERT  INTO  COMPANY (
+	                COM_ID,
+		            COM_PASSWD,
+					COM_TYPE,
+					COM_NUM,
+					COM_NAME,
+					COM_ADDRESS,
+					COM_ZIPCODE,
+					COM_CEO,
+					COM_PHONE,
+					COM_EMAIL
+					
+	    )
+	    VALUES (
+	         #{ com_id    },
+	         #{ com_passwd    },
+	         #{ com_type  },
+	         #{ com_num     },
+	         #{ com_name },
+	         #{ com_address},
+	         #{ com_zipcode},
+	         #{ com_ceo},
+	         #{ com_phone},
+	         #{ com_email}
+	         
+	    )
+		
+	</insert>
+	<select  id = "login">
+	
+	  SELECT   
+	        		COM_ID,
+		            COM_PASSWD,
+					COM_TYPE,
+					COM_NUM,
+					COM_NAME,
+					COM_ADDRESS,
+					COM_ZIPCODE,
+					COM_CEO,
+					COM_PHONE,
+					COM_EMAIL
+	   FROM  
+	       COMPANY
+	   WHERE
+	       COM_ID = #{ arg0 }  
+	    AND
+	       COM_PASSWD = #{ arg1 }       
+	
+	</select>
+	
+	
+	</mapper>

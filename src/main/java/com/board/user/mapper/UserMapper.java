@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.board.domain.BoardVo;
 import com.board.user.bookmark.domain.BookmarkVo;
 import com.board.user.domain.RserviceVo;
 import com.board.user.domain.SupportVo;
