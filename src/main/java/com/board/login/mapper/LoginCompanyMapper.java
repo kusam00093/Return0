@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 
 
+
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -14,10 +15,10 @@ import com.board.login.domain.LoginCompanyVo;
 @Mapper
 public interface LoginCompanyMapper {
 
-	static void insertCom(LoginCompanyVo companyVo) {
-		// TODO Auto-generated method stub
-		
-	}
+void insertCompany(LoginCompanyVo companyVo); 
+	
+	
+	
 
 	HashMap<String, Object> getCompany(LoginCompanyVo companyVo);
 	

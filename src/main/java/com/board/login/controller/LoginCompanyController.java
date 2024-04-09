@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpSession;
 	public class LoginCompanyController {
 
 	
+		@Autowired
+		private LoginCompanyMapper companyMapper;
 
 		@RequestMapping("/writeform")
 		public ModelAndView writeform() {
@@ -32,8 +34,7 @@ import jakarta.servlet.http.HttpSession;
 			mv.setViewName("/login/comlogin");
 			return mv;
 		}
-		@Autowired
-		private LoginCompanyMapper logincompanyMapper;
+
 
 		
 		
@@ -45,7 +46,7 @@ import jakarta.servlet.http.HttpSession;
 				String     com_id    =  request.getParameter("com_id");
 				String     com_passwd    =  request.getParameter("com_passwd");
 				
-				LoginCompanyVo     companyVo    =  logincompanyMapper.login( com_id, com_passwd  ); 
+				LoginCompanyVo     companyVo    =  companyMapper.login( com_id, com_passwd  ); 
 			
 				
 				String     loc       =  "";
@@ -81,10 +82,10 @@ import jakarta.servlet.http.HttpSession;
 			mv.setViewName("/login/comwrite");
 			return mv;
 		}
-		@RequestMapping("/comWrite")
+		@RequestMapping("/comwrite")
 		public ModelAndView write(LoginCompanyVo companyVo) {
 			// 저장
-			LoginCompanyMapper.insertCom(companyVo);
+			companyMapper.insertCompany(companyVo);
 
 			// 데이터를 가지고 이동한다
 			ModelAndView mv = new ModelAndView();

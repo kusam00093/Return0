@@ -73,10 +73,7 @@
         background-color: #1e7fd7;
     }
 
-    #doubleCheckMsg {
-        margin-left: 10px; 
-        color: #ff0000; 
-    }
+
 
     .half-input {
         width: calc(50% - 10px); 
@@ -130,24 +127,26 @@
 <body>
   <main>
     <h2>회원가입</h2>
-    <form id="signupForm" action="/comWrite" method="POST" onsubmit="return validateForm()">
+    <form id="signup" action="/comwrite" method="POST" onsubmit="return validateForm()">
         <table>
             <tr>
             
                 <td>
-                    <input type="text" name="com_id" placeholder="아이디를 입력하세요" />
-                    <input type="button" value="중복 확인" onclick="doubleCheck()">
-                    <span id="doubleCheckMsg"></span>
+                    <input type="text" name="com_id" id=comid placeholder="아이디를 입력하세요" />
+                  <button type="button" onclick="checkDuplicate()" style="background-color: #3f98f7; color: white; border: none; 
+            cursor: pointer; padding: 10px; border-radius: 5px;">중복 확인</button>
+                    <span id="comIdMessage"></span>
                 </td>
             </tr>
             <tr>
-                <td><input type="password" name="com_passwd" placeholder="비밀번호를 입력하세요" /></td>
+                <td><input type="password" name="com_passwd" id=pw1 placeholder="비밀번호를 입력하세요" oninput="pwCheck()"/></td>
             </tr>
             <tr>
-                <td><input type="password" name="passwd" placeholder="비밀번호를 다시 입력하세요" /></td>
-            </tr>
+                <td><input type="password" name="passwd" id=pw2 placeholder="비밀번호를 다시 입력하세요" oninput="pwCheck()"/></td>
+            	</tr> <td><span id="pwConfirm">  </span></td>
+         
             <tr>
-                <td><input type="text" name="com_name" placeholder="회사명을 입력하세요" /></td>
+                <td><input type="text" name="com_name"  placeholder="회사명을 입력하세요" /></td>
             </tr>
             <tr>
                 <td><input type="text" name="com_ceo" placeholder="대표자명을 입력하세요" /></td>
@@ -159,7 +158,7 @@
                 <td><input type="text" name="com_num" placeholder="사업자등록번호를 입력하세요" /></td>
             </tr>
             <tr>
-                <td><input type="text" id="com_phone" placeholder="인사담당자 전화번호를 입력하세요"  /></td>
+                <td><input type="text" name="com_phone" placeholder="인사담당자 전화번호를 입력하세요"  /></td>
             </tr>
             <tr>
                 <td><input type="text" name="com_email" placeholder="이메일을 입력하세요" /></td>
@@ -183,8 +182,37 @@
         </table>
     </form>
 </main>
-      
-  
+    <script>
+  function pwCheck() {
+            var pw1 = document.getElementById("pw1").value;
+            var pw2 = document.getElementById("pw2").value;
+            var pwConfirm = document.getElementById("pwConfirm");
+
+            if (pw1 != pw2) {
+                pwConfirm.innerHTML = "비밀번호가 일치하지 않습니다.";
+            } else {
+                pwConfirm.innerHTML = "비밀번호가 일치합니다.";
+            }
+        }
+    </script>
+    <script>
+       document.getElementById("checkDuplicateBtn").addEventListener("click", function() {
+                var userId = document.getElementById("comid").value;
+                var userIdMessage = document.getElementById("comIdMessage");
+
+                // 여기에 중복 확인하는 AJAX 요청 코드를 추가합니다.
+                // 이 코드는 실제로 서버에 요청을 보내 아이디 중복 여부를 확인하는 기능을 수행해야 합니다.
+
+                // 임시로 아이디가 중복되었다고 가정합니다.
+                var isDuplicate = true;
+
+                if (isDuplicate) {
+                    userIdMessage.innerHTML = "이미 사용 중인 아이디입니다.";
+                } else {
+                    userIdMessage.innerHTML = "사용 가능한 아이디입니다.";
+                }
+            });
+  </script>
   <script>
   	const  goListEl  = document.getElementById('goList');
   	goListEl.addEventListener('click', function(e) {

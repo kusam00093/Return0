@@ -146,22 +146,26 @@
         <table>
        <tr>
         <td><input type="text" id="userid" name="user_id" placeholder="아이디를 입력하세요" required />
-            <button type="button" onclick="checkDuplicate()" style="background-color: #3f98f7; color: white; border: none; cursor: pointer; padding: 10px; border-radius: 5px;">중복 확인</button>
-            <span id="userIdMessage"></span>
+                        <button type="button" id="checkDuplicateBtn" style="background-color: #3f98f7; color: white; border: none; 
+                        cursor: pointer; padding: 10px; border-radius: 5px;">중복 확인</button>
+                        <span id="userIdMessage"></span>
+                    </td>
             <tr>
-                <td><input type="password" name="user_passwd" placeholder="비밀번호를 입력하세요" oninput="checkPw()" />
-                <br><span class ="pwCheck"></span></td>
+                <td><input type="password" name="user_passwd" id=pw1 placeholder="비밀번호를 입력하세요" oninput="pwCheck()" />
+           
             </tr>
             <tr>
-                <td><input type="password" name="passwd" placeholder="비밀번호를 다시 입력하세요" oninput="checkPW()"/>
-                <br><span class="pwRe"></span></td>
-            </tr>
+                <td><input type="password" name="passwd"  id= pw2  placeholder="비밀번호를 다시 입력하세요" oninput="pwCheck()"/>
+          		</td></tr><td><span id="pwConfirm">  </span></td>
+                
+               
+           
             <tr>
                 <td><input type="text" name="user_name" placeholder="이름을 입력하세요" /></td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="user_social_num" placeholder="주민등록번호를 입력하세요" /> -
+                    <input type="text" name="user_social_num" id= socialnum placeholder="주민등록번호를 입력하세요"  oninput="encryptAndDisplay(this)"/> 
                  
                 </td>
             </tr>
@@ -191,18 +195,19 @@
     </form>
 </main>
 <script>
+  function pwCheck() {
+            var pw1 = document.getElementById("pw1").value;
+            var pw2 = document.getElementById("pw2").value;
+            var pwConfirm = document.getElementById("pwConfirm");
 
-function getCurrentDate() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
+            if (pw1 != pw2) {
+                pwConfirm.innerHTML = "비밀번호가 일치하지 않습니다.";
+            } else {
+                pwConfirm.innerHTML = "비밀번호가 일치합니다.";
+            }};
+            </script>
+           
 
-// 가입일을 표시하는 부분
-document.getElementById('joinDate').value = getCurrentDate();
-</script>
 <script>
     const goListEl = document.getElementById('goList');
     goListEl.addEventListener('click', function(e) {
@@ -212,46 +217,14 @@ document.getElementById('joinDate').value = getCurrentDate();
     }
    
 </script>
-<script>
-    function validateForm() {
-        var password = document.getElementById('user_passwd').value;
-        var confirmPassword = document.getElementById('passwd').value;
-
-        // 비밀번호가 일치하는지 확인
-        if (password != confirmPassword) {
-            alert("비밀번호가 일치하지 않습니다.");
-            return false;
+ <script>
+        function encryptAndDisplay(input) {
+     
+            const encryptedPart = input.value.slice(6).replace(/./g, '*');
+           
+            input.value = input.value.slice(0, 6) + encryptedPart;
         }
-
-        // 비밀번호 유효성 검사
-        var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
-        if (!passwordRegex.test(password)) {
-            alert("비밀번호는 최소 8자 이상이어야 하고, 숫자, 영문 대문자, 영문 소문자, 특수문자 중 최소한 3종류 이상을 포함해야 합니다.");
-            return false;
-        }
-
-        return true;
-    }
-
-    function checkPW() {
-        var password = document.getElementById('user_passwd').value;
-        var confirmPassword = document.getElementById('passwd').value;
-
-        if (password != confirmPassword) {
-            document.querySelector('.pwRe').innerText = "비밀번호가 일치하지 않습니다.";
-        } else {
-            document.querySelector('.pwRe').innerText = "";
-        }
-    }
-    function handleSignUpResponse(response) {
-        if (response.success) {
-            alert("회원가입이 완료되었습니다.");
-            window.location.href = "home.jsp"; // 홈 페이지로 이동
-        } else {
-            alert("회원가입 중 오류가 발생했습니다.");
-        }
-    }
-</script>
+    </script>
 
 
 

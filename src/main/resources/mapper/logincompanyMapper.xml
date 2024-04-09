@@ -23,7 +23,7 @@
 		ORDER BY    COMPANY_ID ASC			
 	
 	</select>
-	<insert  id = "insertCom">
+	<insert  id = "insertCompany">
 	   INSERT  INTO  COMPANY (
 	                COM_ID,
 		            COM_PASSWD,
