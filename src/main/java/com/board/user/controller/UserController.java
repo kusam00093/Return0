@@ -1,5 +1,6 @@
 package com.board.user.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -8,15 +9,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import com.board.user.domain.Pagination;
+import com.board.user.domain.PagingResponse;
 import com.board.user.domain.RserviceVo;
-import com.board.user.domain.SupportVo;
+import com.board.user.domain.SearchVo;
 import com.board.user.domain.UserVo;
 import com.board.user.mapper.UserMapper;
+import com.board.user.mapper.UserPagingMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -26,12 +29,15 @@ public class UserController {
    @Autowired
    private UserMapper userMapper;
    
+   @Autowired
+   private UserPagingMapper userPagingMapper;
+   
    
 
-   // http://localhost:9090
-         
+
+            
             @RequestMapping("/User/View")
-            public ModelAndView view(HttpServletRequest request) throws JsonProcessingException {
+            public ModelAndView view(HttpServletRequest request, int nowpage) throws JsonProcessingException {
                String userid = request.getParameter("user_id");
                System.out.println("---------------------");
                System.out.println(userid);
@@ -48,7 +54,30 @@ public class UserController {
                // 유저가 체크한 북마크 목록가져오기
                List<HashMap<String, Object>> book = userMapper.getBookList(userVo);
                //ObjectMapper objectMapper = new ObjectMapper();
-               log.info("map : {}", rec);
+               
+               int count = userPagingMapper.count(userVo);
+               PagingResponse<UserVo> response = null;
+               if(count < 1) {
+            	   response =  new PagingResponse<>(Collections.emptyList(), null);
+               }
+               
+              SearchVo   searchVo   =  new SearchVo(); //레코드 3개 페이지사이즈 5
+              searchVo.setPage(nowpage);
+              searchVo.setPageSize(5); // 페이지사이즈 5
+              Pagination pagination = new Pagination(count, searchVo);
+              searchVo.setPagination(pagination);
+              
+              //userid
+              int         offset    =  searchVo.getOffset();
+              int         recordSize  =  searchVo.getRecordSize();
+              
+              List<UserVo> list = userPagingMapper.getUserPagingList(userid, offset, recordSize);
+              response =  new PagingResponse<>(list, pagination);
+              
+              System.out.println( response );
+              System.out.println( response );
+              System.out.println( response );
+              System.out.println( response );
                
                ModelAndView    mv    = new ModelAndView();   
                if(userVo !=null) {
@@ -56,6 +85,12 @@ public class UserController {
                   mv.addObject("map", map);
                   mv.addObject("rec", rec);
                   mv.addObject("book", book);
+                  
+                  mv.addObject("userid",    userid );
+                  mv.addObject("searchVo",   searchVo );
+                  mv.addObject("nowpage",    nowpage );
+                  mv.addObject("response",   response );  // list.jsp 
+          		  
                // book 리스트를 JSON 문자열로 변환
                  // String bookJson = objectMapper.writeValueAsString(book);
 

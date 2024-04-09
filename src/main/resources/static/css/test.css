@@ -28,16 +28,30 @@ header .headerWrapper {
   height: 100px;
   object-fit: cover;
 }
-#gnb #navbar {
+#gnb .navbar {
   display: flex;
   margin-left: 30px;
 }
-#gnb #navbar li {
+#gnb .navbar li {
   padding: 0 4px;
   line-height: 100px;
 }
-#gnb #navbar li a {
+#gnb .navbar li a {
   font-size: 1.2rem;
+}
+.login-link{
+	position: absolute;
+	top: 0;
+	right: 20px;
+}
+.login-link a:nth-child(2):before{
+	content: "";
+  position: absolute;
+  top: 2px;
+  left: -4px;
+  width: 1px;
+  height: 18px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 footer {

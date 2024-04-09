@@ -106,7 +106,7 @@
   </head>
   <body>
   
-    
+    <%@include file="/WEB-INF/include/Header.jsp"%>
        
     <section class="content inner">
        
@@ -153,7 +153,7 @@
 
 
 
-
+<%@include file="/WEB-INF/include/Footer.jsp"%>
 
 
 
