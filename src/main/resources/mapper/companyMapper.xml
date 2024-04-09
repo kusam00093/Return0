@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.board.company.mapper.CompanyMapper">
+
+	<insert id="insertPosting">
+	INSERT INTO POSTING(
+			COM_ID
+			,POSTING_PNO
+			,POSTING_CAREER
+			,POSTING_GRADE
+			,POSTING_HOPE_DEPARTMENT
+			,POSTING_CONTENT
+			,POSTING_TITLE
+			,POSTING_ENDDATE
+			,POSTING_COM_PROFILE
+			)
+	VALUES (
+			#{com_id}
+			,(select nvl(max(posting_pno),0)+1 from posting)
+			,#{posting_career}
+			,#{posting_grade}
+			,#{posting_hope_department}
+			,#{posting_content}
+			,#{posting_title}
+			,#{posting_enddate}
+			,#{posting_com_profile}
+	)		
+	</insert>
+	
+	<insert id="insertComuser">
+	INSERT INTO COMPANY(
+			COM_ID
+			,COM_PASSWD
+			,COM_TYPE
+			,COM_NUM
+			,COM_NAME
+			,COM_ADDRESS
+			,COM_CEO
+			,COM_PHONE
+			,COM_EMAIL
+	)
+	
+	
+	VALUES (
+			 #{com_id}
+			 ,#{com_passwd}
+			 ,#{com_type}
+			 ,#{com_num}
+			 ,#{com_name}
+			 ,#{com_address}
+			 ,#{com_ceo}
+			 ,#{com_phone}
+			 ,#{com_email}
+	)
+	
+	</insert>
+
+	<update id="getUpdate">
+	
+	  UPDATE POSTING
+	  SET    POSTING_CAREER           = #{posting_career}
+	         ,POSTING_GRADE           = #{posting_grade}
+	         ,POSTING_HOPE_DEPARTMENT = #{posting_hope_department}
+	         ,POSTING_CONTENT         = #{posting_content}
+	         ,POSTING_TITLE           = #{posting_title}
+	         ,POSTING_COM_PROFILE     = #{posting_com_profile}  	
+	   WHERE POSTING_PNO = 1     
+	
+	
+	
+	</update>
+	
+	<update id="updateCompany">
+	 UPDATE COMPANY 
+	 SET	
+	 		COM_ID = #{com_id},
+			COM_PASSWD= #{com_passwd},
+			COM_TYPE= #{com_type},
+			COM_NUM= #{com_num},
+			COM_NAME= #{com_name},
+			COM_ADDRESS= #{com_address},
+			COM_CEO= #{com_ceo},
+			COM_PHONE= #{com_phone},
+			COM_EMAIL= #{com_email}
+	 WHERE  COM_ID = '01'		
+	 		
+	
+	
+	</update>
+	
+	<select id="getPostingList">
+	 SELECT ROWNUM AS ROW_NUMBER
+	 		,POSTING_TITLE
+	 		,POSTING_COM_PROFILE
+	 		,POSTING_ENDDATE
+	 		,POSTING_HOPE_DEPARTMENT
+	 FROM   POSTING
+	
+			
+	
+	</select>
+	
+	    <select   id="getUserPagingList"                 
+              resultType="com.board.company.domain.UserVo" >
+    	SELECT  
+		
+			USER_ID
+			,USER_PASSWD
+			,USER_NAME
+			,USER_EMAIL
+			,USER_ADDRESS
+			,USER_PHONE
+			,USER_SOCIAL_NUM
+    	 FROM  
+           USERS
+
+         ORDER BY  USER_PHONE DESC 
+	    OFFSET #{arg0} ROWS FETCH NEXT #{arg1} ROWS ONLY 
+         
+    </select>
+	    <select id="count" 
+        parameterType="com.board.company.domain.UserVo" 
+        resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM USERS
+		  
+	</select>
+	
+	<select id="getCompany">
+	 SELECT 
+			COM_ID,
+			COM_PASSWD,
+			COM_TYPE,
+			COM_NUM,
+			COM_NAME,
+			COM_ADDRESS,
+			COM_CEO,
+			COM_PHONE,
+			COM_EMAIL
+	FROM    COMPANY
+	WHERE   COM_ID ='01'		
+	
+	</select>
+	<select id="getUserList">
+	SELECT  
+			ROWNUM AS ROW_NUMBER
+			,USER_ID
+			,USER_PASSWD
+			,USER_NAME
+			,USER_EMAIL
+			,USER_ADDRESS
+			,USER_PHONE
+			,USER_SOCIAL_NUM
+			INDATE
+	FROM    USERS		
+	</select>
+	
+	<select id="getUserStackList">
+	
+	SELECT  
+			ROWNUM  AS ROW_NUMBER
+			,U.USER_ID
+			,U.USER_PASSWD
+			,U.USER_NAME
+			,U.USER_EMAIL
+			,U.USER_ADDRESS
+			,U.USER_PHONE
+			,U.USER_SOCIAL_NUM
+            ,S.USER_STACK_NAME
+	FROM    USERS U JOIN USER_STACK S
+    ON      U.USER_ID = S.USER_ID
+	</select>
+	
+	<select id="getPosting">
+	 SELECT 
+	       POSTING_PNO,
+	       POSTING_CAREER,
+	       POSTING_GRADE,
+	       POSTING_HOPE_DEPARTMENT,
+	       POSTING_CONTENT,
+	       POSTING_TITLE,
+	       POSTING_STARTDATE
+	  FROM POSTING     
+	  WHERE POSTING_PNO = 1
+	       
+	
+	
+	</select>
+	<resultMap type="java.util.HashMap" id="getPostingMap1">
+	<result property="com_name"                      column="com_name"/>
+	<result property="com_type"                      column="com_type"/>
+	<result property="com_address"                   column="com_address"/>
+	<result property="com_ceo"                       column="com_ceo"/>
+	<result property="com_phone"                     column="com_phone"/>
+	<result property="com_email"                     column="com_email"/>
+	<result property="posting_career"                column="posting_career"/>
+	<result property="posting_grade"                 column="posting_grade"/>
+	<result property="posting_content"               column="posting_content"/>
+	<result property="posting_hope_department"       column="posting_hope_department"/>
+	<result property="posting_title"                 column="posting_title"/>
+	<result property="posting_startdate"             column="posting_startdate"/>
+	<result property="posting_enddate"               column="posting_enddate"/>
+	
+
+	</resultMap>
+	
+	<select id="getPostingMap" resultMap="getPostingMap1">
+	
+	SELECT COM_NAME,
+	       COM_TYPE,
+	       COM_ADDRESS,
+	       COM_CEO,
+	       COM_PHONE,
+	       COM_EMAIL,
+	       POSTING_CAREER,
+	       POSTING_GRADE,
+	       POSTING_CONTENT,
+	       POSTING_HOPE_DEPARTMENT,
+	       POSTING_TITLE,
+	       POSTING_STARTDATE,
+	       POSTING_ENDDATE
+	 
+  FROM COMPANY C JOIN POSTING P
+  ON   C.COM_ID = P.COM_ID 
+  WHERE P.POSTING_PNO = '24'
+	
+	</select>
+	
+	<delete id="postingDelete">
+		DELETE FROM POSTING
+		WHERE POSTING_PNO = 1
+	</delete>
+	
+	<delete id="deleteCompany">
+		DELETE FROM COMPANY
+		WHERE COM_ID =' 02'
+	
+	</delete>
+</mapper>
