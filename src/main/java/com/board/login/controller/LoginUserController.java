@@ -1,6 +1,7 @@
 package com.board.login.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,9 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class LoginUserController {
 
-	@Autowired
-	private LoginUserMapper loginMapper; 
-	
+
 	@Autowired
 	private LoginUserMapper userMapper;
 	
@@ -34,7 +33,7 @@ public class LoginUserController {
 		String     user_id    =  request.getParameter("user_id");
 		String     user_passwd    =  request.getParameter("user_passwd");
 		
-		LoginUserVo     userVo    =  loginMapper.login( user_id, user_passwd  ); 
+		LoginUserVo     userVo    =  userMapper.login( user_id, user_passwd  ); 
 	
 		
 		String     loc       =  "";
@@ -73,7 +72,7 @@ public class LoginUserController {
 	
 	// 개인 회원가입을 한다
 	// /Users/Write
-	@RequestMapping("/Write")
+	@RequestMapping("/userwrite")
 	public ModelAndView write(LoginUserVo userVo) {
 		// 저장
 		userMapper.insertUser(userVo);

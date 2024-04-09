@@ -139,7 +139,7 @@
 <body>
 <main>
     <h2>회원가입</h2>
-    <form id="signupForm" action="/Users/Write" method="POST" onsubmit="return validateForm()">
+    <form id="signupForm" action="/userwrite" method="POST" onsubmit="return validateForm()">
             
  
  

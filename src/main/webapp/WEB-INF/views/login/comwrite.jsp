@@ -130,7 +130,7 @@
 <body>
   <main>
     <h2>회원가입</h2>
-    <form id="signupForm" action="/Company/Write" method="POST" onsubmit="return validateForm()">
+    <form id="signupForm" action="/comWrite" method="POST" onsubmit="return validateForm()">
         <table>
             <tr>
             

@@ -22,10 +22,10 @@
               <li><a href="#">이력서</a></li>
               <li><a href="#">마이페이지</a></li>
                 <div><a href="/Loginform">로그인</a></div>   
-   <div><a href="/Writeform">회원가입</a></div>
+   <div><a href="/writeform">회원가입</a></div>
       <div>&nbsp;</div>
       <div>
-	   ${ sessionScope.login.user_name } 님 환영합니다<br>
+	   ${ sessionScope.login.com_name } 님 환영합니다<br>
       당신의 가입일은 ${ login.indate } 입니다<br>
       <a href="/logout">로그아웃</a>
 	</div>	

@@ -101,7 +101,7 @@
 <body>
   <main>
 	<h2>기업회원 로그인</h2>
-	<form action="/login" method="POST">
+	<form action="/comlogin" method="POST">
 	<table>
 	 <tr>
 	   <td>아이디</td>
