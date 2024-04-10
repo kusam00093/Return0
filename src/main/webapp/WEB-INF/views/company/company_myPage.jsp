@@ -348,7 +348,7 @@
 	});
   function displayBookmarks() {
 	    // 북마크를 가져오는 fetch 요청
-	    fetch(`/bookmarks/${userId}`)
+	    fetch(`/Bookmarks/${userId}`)
 	        .then(response => {
 	            // 응답을 확인하고 정상적으로 처리되지 않은 경우 오류 처리
 	            if (!response.ok) {

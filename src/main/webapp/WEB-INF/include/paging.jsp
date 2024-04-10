@@ -6,24 +6,27 @@
   <c:set  var="startnum"           value="${ searchVo.pagination.startPage         }" /> 
   <c:set  var="endnum"             value="${ searchVo.pagination.endPage           }" /> 
   <c:set  var="totalpagecount"     value="${ searchVo.pagination.totalPageCount  }" /> 
+  <c:set  var = "prevPage"         value ="${searchVo.pagination.prevPage} "/>
+  <c:set  var = "nextPage"         value ="${searchVo.pagination.nextPage} "/>
 
   
    <ul class="pagination">
 	    
-	       <li class ="page-item"><a class ="page-link" href="/User/View?user_id=${ userid }&nowpage=1">처음</a> </li>
-	       <li class ="page-item"><a class ="page-link" href="/User/View?user_id=${ userid }&nowpage=${ startnum - 1 }">이전</a> </li>
-	   
+	       <li class ="page-item"><a class ="page-link" href="/User/View?nowpage=1">처음</a> </li>
+	       <li class ="page-item"><a class ="page-link" href="/User/View?nowpage=${ prevPage }">이전</a> </li>
+	   		
 			  
 			 <!--  <li class="page-item"><a class="page-link" href="#">1</a></li>
 			    <li class="page-item active"><a class="page-link" href="#">2</a></li>
 			  <li class="page-item"><a class="page-link" href="#">3</a></li> -->
 			   <c:forEach  var="pagenum"  begin="${startnum}"  end="${endnum}"  step="1">
-		        <li class="page-item"><a class="page-link" href="/User/View?user_id=${ userid }&nowpage=${ pagenum }">
-		        ${ pagenum }</li>
-		        </a>     
+		        <li class="page-item"><a class="page-link" href="/User/View?nowpage=${ pagenum }">
+		        ${ pagenum } </a>  </li>
+		          
 		     </c:forEach>
-			  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
+		   <li class ="page-item"><a class ="page-link" href="/User/View?nowpage=${ nextPage}">다음</a> </li>
+	       <li class ="page-item"><a class ="page-link" href="/User/View?nowpage=${ totalpagecount }">마지막</a> </li>
+	</ul>
  
   
   

@@ -13,6 +13,8 @@ public class Pagination {
 	    private int limitStart;           // LIMIT 시작 위치
 	    private boolean existPrevPage;    // 이전 페이지 존재 여부
 	    private boolean existNextPage;    // 다음 페이지 존재 여부
+	    private int prevPage; //이전페이지
+	    private int nextPage;//다음페이지
 	    
 	    //전체 데이터수랑 가져오고 페이지 초기값 가져오기
 	    public Pagination(int totalRecordCount, SearchVo params) {
@@ -35,7 +37,7 @@ public class Pagination {
 
 	        // 첫 페이지 번호 계산 현제페이지 -1 나누기 화면하단에 출력할 페이지사이즈 (나는 5) 곱하기 
 	        startPage = ((params.getPage() - 1) / params.getPageSize()) * params.getPageSize() + 1;
-
+                                       
 	        // 끝 페이지 번호 계산
 	        endPage = startPage + params.getPageSize() - 1;
 
@@ -48,9 +50,24 @@ public class Pagination {
 	        limitStart = (params.getPage() - 1) * params.getRecordSize();
 
 	        // 이전 페이지 존재 여부 확인
-	        existPrevPage = startPage != 1;
+	        existPrevPage = params.getPage() > 1;
+	        if (existPrevPage) {
+	            prevPage = params.getPage() - 1;
+	            
+	        } else {
+	        	prevPage  =1;
+	        }
 
-	        // 다음 페이지 존재 여부 확인
-	        existNextPage = (endPage * params.getRecordSize()) < totalRecordCount;
+	        
+	     // 다음 페이지 존재 여부 확인
+	        existNextPage = params.getPage() < totalPageCount;
+
+	        
+	        if (existNextPage) { // 다음 페이지가 존재하는 경우
+	            nextPage = params.getPage() + 1; // 현재 페이지 번호에 1을 더한 값을 다음 페이지 번호로 설정
+	        }else {
+	        	nextPage =totalPageCount;
+	        }
+	        
 	    }
 }

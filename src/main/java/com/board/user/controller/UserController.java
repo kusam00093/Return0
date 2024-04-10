@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.board.login.domain.LoginUserVo;
 import com.board.user.domain.Pagination;
 import com.board.user.domain.PagingResponse;
 import com.board.user.domain.RserviceVo;
@@ -20,6 +20,7 @@ import com.board.user.mapper.UserPagingMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -38,7 +39,11 @@ public class UserController {
             
             @RequestMapping("/User/View")
             public ModelAndView view(HttpServletRequest request, int nowpage) throws JsonProcessingException {
-               String userid = request.getParameter("user_id");
+               HttpSession session = request.getSession();
+               LoginUserVo loginUserVo  = (LoginUserVo)session.getAttribute("userLogin");
+               String userid = loginUserVo.getUser_id();
+              //밑에는 url로 가지고 오는거
+              // String userid = request.getParameter("user_id");
                System.out.println("---------------------");
                System.out.println(userid);
                // 유저정보 가지고오기
@@ -61,9 +66,9 @@ public class UserController {
             	   response =  new PagingResponse<>(Collections.emptyList(), null);
                }
                
-              SearchVo   searchVo   =  new SearchVo(); //레코드 3개 페이지사이즈 5
+              SearchVo   searchVo   =  new SearchVo(); //레코드 5개 페이지사이즈 3
               searchVo.setPage(nowpage);
-              searchVo.setPageSize(5); // 페이지사이즈 5
+              searchVo.setPageSize(3); // 페이지사이즈 3
               Pagination pagination = new Pagination(count, searchVo);
               searchVo.setPagination(pagination);
               

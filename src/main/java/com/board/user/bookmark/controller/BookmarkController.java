@@ -34,13 +34,13 @@ public class BookmarkController {
 	@Autowired
 	private UserMapper userMapper;
 	
-	@PostMapping("/bookmarks/add")
+	@PostMapping("/Bookmarks/add")
 	public String addBookmark() {
     	
     	return " ";
     }
 
-    @PostMapping("/bookmarks/add/{user_id}/{posting_pno}")
+    @PostMapping("/Bookmarks/add/{user_id}/{posting_pno}")
     public ResponseEntity<String> addBookmark(@RequestBody BookmarkVo request) throws JsonProcessingException {
         // 클라이언트에서 전달된 요청 본문의 데이터를 자동으로 BookmarkRequest 객체로 변환하여 받음
         // 이후 해당 데이터를 서비스로 전달하여 북마크 추가 작업을 수행
@@ -73,13 +73,13 @@ public class BookmarkController {
         // 북마크 추가가 성공했음을 클라이언트에게 응답
        
     }
-    @RequestMapping("/bookmarks/")
+    @RequestMapping("/Bookmarks/")
     public String bookmarks() {
     	
     	return " ";
     }
     
-    @RequestMapping("/bookmarks/{userId}")
+    @RequestMapping("/Bookmarks/{userId}")
     public ResponseEntity<List<BookmarkVo>> getUserBookmarks(@PathVariable String userId) {
         List<BookmarkVo> bookmarks = bookmarkMapper.getUserBookmarks(userId);
         

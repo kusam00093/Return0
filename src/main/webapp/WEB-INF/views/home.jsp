@@ -91,12 +91,12 @@ margin-bottom: 150px;
 
 <body>
 	<%@include file="/WEB-INF/include/Header.jsp"%>
-
+    
+    
 	<main>
 		<section class="img-container"></section>
 		<div class = "main-wrap inner">
-
-
+	
 
 		<%-- 	<input type="hidden" name="nowpage" value="${nowpage}"> <input
 				type="hidden" name="com_id" value="${com_id}"> <input
@@ -172,8 +172,13 @@ margin-bottom: 150px;
 		  </div>
 		</div>
 	</main>
+	<%@include file="/WEB-INF/include/Footer.jsp"%>
+	<script>
+	  
+	</script>
+	
 </body>
-<%@include file="/WEB-INF/include/Footer.jsp"%>
+
 </html>
 
 

@@ -51,7 +51,7 @@ import jakarta.servlet.http.HttpSession;
 				String     loc       =  "";
 				if(  companyVo != null  ) { // 아이디와 암호가 일치하면
 					HttpSession  session =  request.getSession();
-					session.setAttribute("login", companyVo );
+					session.setAttribute("companyLogin", companyVo );
 					session.setMaxInactiveInterval(30 * 60); // 30분 동안 유지
 				    loc    =  "redirect:/";  
 				} else {  // 아이디 비번 틀림

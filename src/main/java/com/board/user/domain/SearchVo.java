@@ -19,8 +19,8 @@ public class SearchVo {
 
 	    public SearchVo() {
 	        this.page = 1;
-	        this.recordSize = 3;
-	        this.pageSize = 5;
+	        this.recordSize = 5;
+	        this.pageSize = 3;
 	    }
 
 	    public int getOffset() {
