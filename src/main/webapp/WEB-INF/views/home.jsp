@@ -96,36 +96,46 @@ margin-bottom: 150px;
 	<main>
 		<section class="img-container"></section>
 		<div class = "main-wrap inner">
-	
+		<div class = "recruitTitContainer">
+			<div class ="recruitTitBox">
+				<div class ="container">
+					<div class ="box_top">
+						<p class="recruitTit">"직무 전체"</p>
+						<button class="btn_filter">직무를 선택해주세요(clickon)</button>
+						<div class ="filter-box"></div>
+					</div>
+					<div class ="box_bottom">
+					  <div class ="btn_boxes">
+						<div class ="btn_box dev_wrap-local">
+							<button class ="btn_filter btn_filter_box">
+								<span>지역</span>
+								<!--여기 arrow  -->
+								<!-- 여기버튼 div  -->
+							</button>
+						</div>
+						<div class ="btn_box dev_wrap-career">
+							<button class ="btn_filter btn_filter_box">
+								<span>경력</span>
+								<!--여기 arrow  -->
+								<!-- 여기버튼 div  -->
+							</button>
+						</div>
+						<div class ="btn_box dev_wrap-edu-level">
+							<button class ="btn_filter btn_filter_box">
+								<span>학력</span>
+								<!--여기 arrow  -->
+								<!-- 여기버튼 div  -->
+							</button>
+						</div>
+					  </div><!-- btn_boxes -->
+					  <form id="searchForm"><!-- onsubmit ="retrun false" -->
+					  	<div class ="search-box" ></div>
+					  </form>
+					</div>
+				</div>
+			</div>
+		</div>
 
-		<%-- 	<input type="hidden" name="nowpage" value="${nowpage}"> <input
-				type="hidden" name="com_id" value="${com_id}"> <input
-				type="hidden" name="nowpage" value="${user_id}">
-			<h2>Home</h2>
-			<div>
-				<a href="/Company/MyPage?nowpage=1">기업마이페이지</a>
-			</div>
-			<div>
-				<a href="/Company/List?nowpage=1">채용목록</a>
-			</div>
-			<div>
-				<a href="/User">마이페이지</a>
-			</div>
-			<div>
-				<a href="/Board">커뮤니티</a>
-			</div>
-			<div>
-				<a href="/Login">로그인</a>
-			</div>
-			<div>검색창</div>
-
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
-			<div>&nbsp;</div>
-		</div> --%>
 		<div class ="Announce inner">
 		  <div class ="top-title">
 		  	<h2>추천 공채</h2>
