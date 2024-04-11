@@ -135,12 +135,12 @@
 
        <c:forEach  var="resumeVo"  items="${ resumeList }" >
        <tr>
-         <td>${ resumeVo.resume_rno    }</td>
-         <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=wodud6967">${ resumeVo.resume_content_self  }</a></td>
+         <td>${ resumeVo.rownum     }</td>
+         <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
         
 <%--          <td>${ resumeVo.menu_seq   }</td>          --%>
-         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>         
-         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967">수정</a></td>
+         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">삭제</a></td>         
+         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">수정</a></td>
 <!--          <td><button onclick="resumeUpdate()">수정</button></td> -->
        </tr>
        </c:forEach>
@@ -168,12 +168,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <script type="text/javascript">
       function resumeWrite(){
-        window.open("/Resume/WriteForm?user_id=wodud6967", "write", "width=1200, height=800");
+        window.open("/Resume/WriteForm?user_id=wodud6967", "write", "width=1400, height=800");
       }
     </script>
     <script type="text/javascript">
       function resumeUpdate(){
-        window.open("/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967", "update", "width=1200, height=800");
+        window.open("/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967", "update", "width=1400, height=800");
       }
     </script>
   </body>

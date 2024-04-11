@@ -6,7 +6,10 @@
     <result property="resume_rno"    column="resume_rno"   />
     <result property="posting_title"  column="posting_title" />
     <result property="posting_career"     column="posting_career"   />
+    <result property="applicant_recode_result"     column="applicant_recode_result"   />
+    <result property="applicat_recode_id"     column="applicat_recode_id"   />
     <result property="posting_startdate"       column="posting_startdate"     />
+    <result property="posting_lastdate"       column="posting_lastdate"     />
     
 </resultMap>
 <resultMap id="getUserRec" type="com.board.user.domain.RserviceVo">
@@ -55,10 +58,12 @@
      SELECT
        c.com_name com_name,
        RE.resume_rno resume_rno,
-        p.posting_title posting_title,
+       p.posting_title posting_title,
        p.posting_career posting_career,
-       p.posting_startdate posting_startdate
-       
+       ar.applicant_recode_result applicant_recode_result,
+       ar.applicant_recode_id applicat_recode_id,
+       to_char(posting_startdate, 'YYYY/MM/DD') posting_startdate,
+       TO_CHAR(posting_startdate + INTERVAL '4' DAY, 'YYYY-MM-DD') AS posting_lastdate
    FROM
        users u
    JOIN
@@ -71,7 +76,20 @@
        company c ON p.com_id = c.com_id
    WHERE
        u.user_id = #{ user_id }
+     
  </select>
+ 
+ <select id="totalSupport">
+ SELECT COUNT(*)
+	FROM users u
+	JOIN RESUME RE ON u.user_id = re.user_id
+	JOIN applicant_recode ar ON re.resume_rno = ar.resume_rno
+	JOIN posting p ON ar.posting_pno = p.posting_pno
+	JOIN company c ON p.com_id = c.com_id
+	WHERE u.user_id = #{user_id}
+ </select>
+
+ 
  
  <select id="getRecommend" resultMap ="getUserRec">
      SELECT

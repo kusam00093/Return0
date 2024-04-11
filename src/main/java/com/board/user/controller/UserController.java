@@ -1,5 +1,8 @@
 package com.board.user.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +36,8 @@ public class UserController {
    @Autowired
    private UserPagingMapper userPagingMapper;
    
-   
+   LocalDate currentDate =LocalDate.now();
+   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
 
             
@@ -49,9 +53,17 @@ public class UserController {
                // 유저정보 가지고오기
                UserVo userVo = userMapper.getInfo(userid);
                
-               //유저가 지원한 공고 정보 가져오기
-               List<HashMap<String, Object>>  map = userMapper.getSupport(userVo);
                
+            
+
+               //유저가 지원한 공고 정보 가져오기
+             
+               List<HashMap<String, Object>>  map = userMapper.getSupport(userVo);
+               int totalSup = userMapper.totalSupport(userVo);
+           
+              
+               
+               map = userMapper.getSupport(userVo);
                RserviceVo rserviceVo = new RserviceVo();
                // 유저와 공고의 매칭 서비스
                List<HashMap<String, Object>> rec  = userMapper.getRecommend(userVo);
@@ -88,6 +100,7 @@ public class UserController {
                if(userVo !=null) {
                   mv.addObject("userVo", userVo);
                   mv.addObject("map", map);
+                  mv.addObject("totalSup", totalSup);
                   mv.addObject("rec", rec);
                   mv.addObject("book", book);
                   

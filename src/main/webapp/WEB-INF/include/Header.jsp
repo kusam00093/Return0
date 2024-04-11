@@ -48,7 +48,9 @@
 			        </c:when>
 			        
 			        <c:otherwise>
-			            <a href="/Loginform">로그인</a>
+			            <a class="dfd" href="/Loginform">로그인</a>
+			             <span class="separator">|</span>
+			            <a href = "#">회원아비</a>
 			        </c:otherwise>
 			    </c:choose>
 		  </div>

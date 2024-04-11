@@ -26,6 +26,10 @@ public interface UserMapper {
 
    List<HashMap<String, Object>> getCtlBookList(BookmarkVo request);
 
+int totalSupport(UserVo userVo);
+
+  
+
    
 
 

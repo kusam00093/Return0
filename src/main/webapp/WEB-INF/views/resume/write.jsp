@@ -73,19 +73,23 @@
       <td><input type="text" name="resume_profile"  value="1번째 사진"/></td>
     </tr>
     <tr class="experience-details">
-      <td rowspan="4" class="first-td">경력사항</br>
+      	<td rowspan="4" class="first-td">경력사항</br>
                       1. 회사이름</br>
                       2. 회사부서</br> 
                       3. 회사입사</br>
                       4. 회사퇴사</br>
-     </td>
+     	</td>
     </tr>
     
        <tr>
-         <td><input type="text" name="resume_career_company" value="1번째 회사" />
-         <input type="text" name="resume_career_department"  value="1번째 부서"/>
-         <input type="date" name="resume_career_startdate"  value="1999-12-30"/>
-         <input type="date" name="resume_career_enddate" value="2113-12-30" /></td>
+       
+         <td>
+	         <input type="text" name="resume_career_company" value="1번째 회사" />
+	         <input type="text" name="resume_career_department"  value="1번째 부서"/>
+	         <input type="date" name="resume_career_startdate"  value="1999-12-30"/>
+	         <input type="date" name="resume_career_enddate" value="2113-12-30" />
+	     </td>
+	     
        </tr>
        <tr>
          <td><input type="text" name="resume_career_company" value="2번째 회사" />

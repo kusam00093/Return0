@@ -58,7 +58,9 @@ main {
 .content .left .profile_pic {
 	width: 50%
 }
-
+.content .left .person_date a{
+width: 150px
+}
 .content .right {
 	flex: 3;
 	padding: 20px;
@@ -161,7 +163,7 @@ main button.bookmarkOn {
 					<p>${ userVo.user_name }</p>
 					<p>${ userVo.user_email}</p>
 					<p>${ userVo.user_phone}</p>
-					<p>지원 횟수 : 2</p>
+					<p>지원 횟수 :${totalSup} </p>
 					<a href ="/Company/List?nowpage=1">채용공고보러가기</a>
 					<a href=" /Resume/List?user_id=${ userVo.user_id }">이력서수정하기</a> 
 					<a>개인정보수정하기</a>
@@ -182,7 +184,7 @@ main button.bookmarkOn {
 									<thead>
 										<tr>
 											<th>기업명</th>
-											<th>공고</th>
+						
 											<th>제목</th>
 											<th>분야</th>
 											<th>이력서</th>
@@ -196,26 +198,24 @@ main button.bookmarkOn {
 										<c:forEach var="item" items="${map }">
 											<tr>
 												<td>${item.com_name }</td>
-												<td>${item.posting_pno }</td>
+												
 												<td>${item.posting_title }</td>
 												<td>${item.posting_career }</td>
 												<td><a href="#">이력서 보기</a></td>
 												<td>${item.posting_startdate }</td>
 												<td><button type="button" class="btn btn-warning">수정</button></td>
-												<td><button type="button" class="btn btn-info">대기</button></td>
+												<td>
+											    	 <c:choose>
+										                <c:when test="${item.applicant_recode_result == 1}">
+										                    <button type="button" class="btn btn-info">대기</button>
+										                </c:when>
+										                <c:when test="${item.applicant_recode_result == 0}">
+										                    <button type="button" class="btn btn-danger">불합격</button> 
+										                </c:when>
+										            </c:choose>
+												</td>
 											</tr>
-										</c:forEach>
-										<tr>
-											<td>기업명 1</td>
-											<td>공고 1</td>
-											<td>제목 1</td>
-											<td>분야 1</td>
-											<td><a href="#">이력서 보기</a></td>
-											<td>2024-04-04</td>
-											<td><button type="button" class="btn btn-warning">수정</button></td>
-											<td><button type="button" class="btn btn-info">대기</button></td>
-										</tr>
-										<!-- 나머지 행들도 유사하게 추가 -->
+										</c:forEach>							
 									</tbody>
 								</table>
 							</li>
