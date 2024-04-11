@@ -89,13 +89,16 @@
 	<select id="getResumeList"  
       resultType="com.board.resume.domain.ResumeVo">
   	 SELECT 
-  	  RESUME_RNO
+  	 		 USER_ID
+  	        ,RESUME_RNO
 			,RESUME_PROFILE
 			,RESUME_CONTENT_SELF
 			,RESUME_CONTENT_MOTIVATION
+			,ROWNUM
   	 FROM
   	  RESUME
-  	 ORDER BY RESUME_RNO ASC
+  	  where USER_ID =  #{user_id}
+  	 ORDER BY ROWNUM ASC
   </select>
   <select id="getResume"
   				resultMap="getResumeMap">

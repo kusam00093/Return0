@@ -13,4 +13,5 @@ public class ResumeVo {
 	private String resume_profile;
 	private String resume_content_self;
 	private String resume_content_motivation;
-}
+	private int rownum;
+ }

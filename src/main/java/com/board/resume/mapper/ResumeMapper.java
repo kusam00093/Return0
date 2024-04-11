@@ -15,7 +15,7 @@ import com.board.resume.domain.ResumeVo;
 public interface ResumeMapper {
 
 	
-	List<ResumeVo> getResumeList();
+	List<ResumeVo> getResumeList(ResumeVo resumevo);
 
 	void deleteResume(ResumeVo resumeVo);
 

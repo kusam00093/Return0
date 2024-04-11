@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.board.login.domain.LoginUserVo;
 import com.board.resume.domain.ResumeCareerVo;
 import com.board.resume.domain.ResumeGradeVo;
 import com.board.resume.domain.ResumeLicenseVo;
@@ -15,6 +16,8 @@ import com.board.resume.domain.ResumeVo;
 import com.board.resume.mapper.ResumeMapper;
 import com.board.resume.userVo.UserVo;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,9 +29,13 @@ public class ResumeController {
 	private  ResumeMapper  resumeMapper; 
 	
 	@RequestMapping("/List")
-		public  ModelAndView  list(ResumeVo  resumevo) {
+		public  ModelAndView  list(HttpServletRequest request) {
+		   HttpSession session = request.getSession();
+		   LoginUserVo loginUserVo = (LoginUserVo)session.getAttribute("userLogin");
+		   ResumeVo resumevo = new ResumeVo();
+		   resumevo.setUser_id(loginUserVo.getUser_id());
 			// 사용자 목록 조회
-	        List<ResumeVo>  resumeList = resumeMapper.getResumeList();
+	        List<ResumeVo>  resumeList = resumeMapper.getResumeList(resumevo);
 			
 			ModelAndView  mv       = new ModelAndView();
 			mv.addObject( "resumeList",  resumeList  );
@@ -66,9 +73,15 @@ public class ResumeController {
 	 public  ModelAndView  delete( ResumeVo  resumeVo ) {		
 			// 저장
 		   resumeMapper.deleteResume( resumeVo );		
-			
+		   String user_id = resumeVo.getUser_id();
+		   System.out.println("user_id" + user_id);
+		   System.out.println("user_id" + user_id);
+		   System.out.println("user_id" + user_id);
+		   System.out.println("user_id" + user_id);
+		   System.out.println("user_id" + user_id);
 			// 데이터를 가지고 이동한다
 			ModelAndView   mv   =  new  ModelAndView();
+			mv.addObject("user_id",user_id);
 			mv.setViewName("redirect:/Resume/List");
 			return   mv;
 		}
