@@ -35,6 +35,8 @@
 </head>
 <body>
   <main>
+<<<<<<< HEAD
+	<h2>회원가입</h2>
 	<h2>사용자 등록</h2>
 	<form action="/Users/Write" method="POST">
 	<table>
@@ -46,6 +48,15 @@
 	   <td>비밀번호</td>
 	   <td><input type="password" name="passwd" /></td>
 	 </tr>
+	 <tr>
+	   <td>비밀번호 확인</td>
+	   <td><input type="password" name="passwd" /></td>
+	 </tr>
+	 <tr>
+	   <td>비밀번호 확인</td>
+	   <td><input type="password" name="passwd" /></td>
+	 </tr>
+	 
 	 <tr>
 	   <td>이름</td>
 	   <td><input type="text" name="username" /></td>
