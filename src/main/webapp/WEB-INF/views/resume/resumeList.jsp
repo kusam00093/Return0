@@ -38,7 +38,7 @@
            flex-direction: column;
            align-items: center;
            padding: 80px;
-					margin: 10px
+               margin: 10px
       }
       .content .left .person_date > a,
       .content .left .person_date > button {
@@ -106,7 +106,8 @@
   </head>
   <body>
   
-    <%@include file="/WEB-INF/include/Header.jsp"%>
+   <%@include file="/WEB-INF/include/Header.jsp" %>
+    
        
     <section class="content inner">
        
@@ -124,28 +125,28 @@
       <div class="right">
        
       <table>
-	    <tr>
-	      <td>이력서 번호</td>
-	      <td>이력서 내용</td>
-<!-- 	      <td>이력서 등록일</td> -->
-	      <td>삭제</td>
-	      <td>수정</td>
-	    </tr>
+       <tr>
+         <td>이력서 번호</td>
+         <td>이력서 내용</td>
+<!--          <td>이력서 등록일</td> -->
+         <td>삭제</td>
+         <td>수정</td>
+       </tr>
 
-	    <c:forEach  var="resumeVo"  items="${ resumeList }" >
-	    <tr>
-	      <td>${ resumeVo.rownum    }</td>
-	      <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
-	     
-<%-- 	      <td>${ resumeVo.menu_seq   }</td>	       --%>
-	      <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">삭제</a></td>	      
-	      <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">수정</a></td>
-<!-- 	      <td><button onclick="resumeUpdate()">수정</button></td> -->
-	    </tr>
-	    </c:forEach>
-	   
-	   
-	  	</table>
+       <c:forEach  var="resumeVo"  items="${ resumeList }" >
+       <tr>
+         <td>${ resumeVo.resume_rno    }</td>
+         <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=wodud6967">${ resumeVo.resume_content_self  }</a></td>
+        
+<%--          <td>${ resumeVo.menu_seq   }</td>          --%>
+         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>         
+         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967">수정</a></td>
+<!--          <td><button onclick="resumeUpdate()">수정</button></td> -->
+       </tr>
+       </c:forEach>
+      
+      
+        </table>
      </div>   
     </section>
   
@@ -153,11 +154,12 @@
 
 
 
-<%@include file="/WEB-INF/include/Footer.jsp"%>
+
 
 
 
 <!--------------------------------------------footer---------------------------------------------------  -->
+      <%@include file="/WEB-INF/include/Footer.jsp" %>
     
   
   

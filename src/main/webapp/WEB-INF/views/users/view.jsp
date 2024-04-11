@@ -162,7 +162,9 @@ main button.bookmarkOn {
 					<p>${ userVo.user_email}</p>
 					<p>${ userVo.user_phone}</p>
 					<p>지원 횟수 : 2</p>
-					<a>채용공고보러가기</a> <a href=" /Resume/List?user_id=${ userVo.user_id }">이력서수정하기</a> <a>개인정보수정하기</a>
+					<a href ="/Company/List?nowpage=1">채용공고보러가기</a>
+					<a href=" /Resume/List?user_id=${ userVo.user_id }">이력서수정하기</a> 
+					<a>개인정보수정하기</a>
 				</div>
 			</div>
 			<div class="right">

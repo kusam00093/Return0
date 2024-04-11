@@ -44,7 +44,7 @@
 			        </c:when>
 		
 			        <c:when test="${sessionScope.companyLogin != null}">
-			            <a href="/companylogout">기업 로그아웃</a>
+			            <a href="/logout">로그아웃</a>
 			        </c:when>
 			        
 			        <c:otherwise>
