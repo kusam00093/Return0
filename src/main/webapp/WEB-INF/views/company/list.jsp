@@ -114,7 +114,7 @@
    <c:forEach  var="co" items="${postingList}">
 	<div class="content1">
       <div class="td1">${co.row_number}</div>
-      <div class="td2"><a href="/Company/PostingView?nowpage=${nowpage}">${co.posting_title}</a></div>
+      <div class="td2"><a href="/Company/PostingView?nowpage=${nowpage}&posting_pno=${co.posting_pno}">${co.posting_title}</a></div>
       <div class="td3">${co.posting_hope_department}</div>
       <div class="td4">${co.posting_enddate}</div>
       <div class="td5"><input type="submit" value = "즉시지원"></div>

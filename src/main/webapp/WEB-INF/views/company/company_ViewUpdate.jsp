@@ -203,7 +203,7 @@
      const  goUpdateEl  = document.getElementById('goUpdate');
      goUpdateEl.addEventListener('click', function(e) {
     	alert('회원 정보가 수정되었습니다'); 
-        location.href = '/Company/View/Delete?nowpage=${nowpage}';
+        location.href = '/Company/View/Update?nowpage=${nowpage}&com_id=${com_id}';
      });
      
 

@@ -157,7 +157,7 @@
 	       	<p>${ vo.com_phone }</p>
 	       	<p>${ vo.com_ceo }</p>
 	       	<a href="/Company/Comuser/View?nowpage=${nowpage}&com_id=${vo.com_id}">기업회원정보보기</a>
-	       	<a href="/Company/Posting/UpdateForm?nowpage=${nowpage}">모집공고 수정하기</a>
+	       	<a href="/Company/MyPosting?nowpage=${nowpage}&com_id=${com_id}">내가 작성한 모집공고</a>
         </div>
       </div>
       <div class="right">
@@ -165,6 +165,7 @@
           <button class="tab" onclick="openTab0">지원현황</button>
           <button class="tab" onclick="openTab1">추천서비스</button>
           <button class="tab" onclick="openTab2">북마크</button>
+
         </div>
         <div class="tab-content">
           <div class="tab-panel">

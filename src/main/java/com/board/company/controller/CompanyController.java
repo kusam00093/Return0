@@ -111,8 +111,16 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/View/Update")
-	public ModelAndView companyViewUpdate(CompanyVo companyVo,int nowpage, String user_id) {
-		System.out.println(companyVo);
+	public ModelAndView companyViewUpdate(CompanyVo companyVo,int nowpage, String user_id, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("companyLogin"));
+		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
+		String com_id = logincompanyVo.getCom_id();
+		companyVo.setCom_id(com_id);
+		
+		
+		
 		companyMapper.updateCompany(companyVo);
 		
 		ModelAndView mv = new ModelAndView();
@@ -124,7 +132,14 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/View/Delete")
-	public ModelAndView companyViewDelete(CompanyVo companyVo,int nowpage, String user_id) {
+	public String companyViewDelete(CompanyVo companyVo,int nowpage, String user_id, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("companyLogin"));
+		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
+		String com_id = logincompanyVo.getCom_id();
+		companyVo.setCom_id(com_id);
+		
 		companyMapper.deleteCompany(companyVo);
 		
 		ModelAndView mv = new ModelAndView();
@@ -132,8 +147,20 @@ public class CompanyController {
 		mv.addObject("nowpage",nowpage);
 		mv.addObject("com_id",companyVo.getCom_id());		
 		
-		mv.setViewName("redirect:/?nowpage="+nowpage);
-		return mv;
+		mv.setViewName("redirect:/");
+		
+		String loc = "";
+		if(companyVo.getCom_id()== companyVo.getCom_id()) {
+			session.invalidate();
+			loc = "/";
+		}else {
+			
+			loc = "/";
+		}
+		
+		
+		
+		return "redirect:"+loc;
 	}
 	//=======================================================================
 	@RequestMapping("/Posting/WriteForm")
@@ -160,12 +187,21 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/PostingView")
-	public ModelAndView posting( CompanyVo companyVo, PostingVo postingVo, int nowpage, String user_id) {
-		HashMap<String, Object> map = companyMapper.getPostingMap(companyVo,postingVo);
+	public ModelAndView posting( CompanyVo companyVo, PostingVo postingVo, int nowpage, String user_id,int posting_pno) {
+		
+		
+//		PostingVo vo = companyMapper.getPostingPno(postingVo);
+//		int posting_pno = vo.getPosting_pno();
+		HashMap<String, Object> map = companyMapper.getPostingMap(companyVo,postingVo,posting_pno);
 		List<PostingVo> postingList = companyMapper.getPostingList(postingVo);
+		System.out.println("==========-----------========");
+		System.out.println(postingVo.getPosting_pno());
+		
+		
+		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("map",map);
 		mv.addObject("nowpage",nowpage);
+		mv.addObject("map",map);
 		mv.addObject("com_id",companyVo.getCom_id());
 		mv.addObject("user_id",user_id);
 		mv.addObject("postingList",postingList);
@@ -212,6 +248,26 @@ public class CompanyController {
 		return mv;
 	}
 	
+	@RequestMapping("/MyPosting")
+	public ModelAndView myPosting(PostingVo postingVo, int nowpage,HttpServletRequest request,CompanyVo companyVo) {
+		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("companyLogin"));
+		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
+		String com_id = logincompanyVo.getCom_id();
+		companyVo.setCom_id(com_id);
+		
+		CompanyVo vo = companyMapper.getCompany(companyVo);
+		
+		ModelAndView mv = new ModelAndView();
+		List<PostingVo> postingList = companyMapper.getMyPostingList(postingVo);
+		mv.addObject("postingList",postingList);
+		mv.addObject("vo",vo);
+		mv.addObject("nowpage",nowpage);
+		mv.setViewName("company/company_myPosting");
+		return mv;
+		
+	}
 	//=======================================================================
 	
 	@RequestMapping("/Comuser/View")

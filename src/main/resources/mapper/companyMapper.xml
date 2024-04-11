@@ -90,11 +90,25 @@
 	
 	<select id="getPostingList">
 	 SELECT ROWNUM AS ROW_NUMBER
+	 		,POSTING_PNO
 	 		,POSTING_TITLE
 	 		,POSTING_COM_PROFILE
 	 		,POSTING_ENDDATE
 	 		,POSTING_HOPE_DEPARTMENT
 	 FROM   POSTING
+	
+			
+	
+	</select>
+	<select id="getMyPostingList">
+	 SELECT ROWNUM AS ROW_NUMBER
+	 		,POSTING_PNO
+	 		,POSTING_TITLE
+	 		,POSTING_COM_PROFILE
+	 		,POSTING_ENDDATE
+	 		,POSTING_HOPE_DEPARTMENT
+	 FROM   POSTING
+	 WHERE  COM_ID=#{com_id}
 	
 			
 	
@@ -181,12 +195,13 @@
 	       POSTING_TITLE,
 	       POSTING_STARTDATE
 	  FROM POSTING     
-	  WHERE POSTING_PNO = 1
+	  WHERE POSTING_PNO = #{posting_pno}
 	       
 	
 	
 	</select>
 	<resultMap type="java.util.HashMap" id="getPostingMap1">
+	<result property="posting_pno"                      column="posting_pno"/>
 	<result property="com_name"                      column="com_name"/>
 	<result property="com_type"                      column="com_type"/>
 	<result property="com_address"                   column="com_address"/>
@@ -212,6 +227,7 @@
 	       COM_CEO,
 	       COM_PHONE,
 	       COM_EMAIL,
+	       POSTING_PNO,
 	       POSTING_CAREER,
 	       POSTING_GRADE,
 	       POSTING_CONTENT,
@@ -222,9 +238,11 @@
 	 
   FROM COMPANY C JOIN POSTING P
   ON   C.COM_ID = P.COM_ID 
-  WHERE P.POSTING_PNO = '24'
+  WHERE P.POSTING_PNO = #{param3}
 	
 	</select>
+	
+
 	
 	<delete id="postingDelete">
 		DELETE FROM POSTING
@@ -233,7 +251,7 @@
 	
 	<delete id="deleteCompany">
 		DELETE FROM COMPANY
-		WHERE COM_ID =' 02'
+		WHERE COM_ID =#{com_id}
 	
 	</delete>
 </mapper>
