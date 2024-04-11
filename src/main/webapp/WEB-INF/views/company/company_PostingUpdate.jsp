@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업 회원가입</title>
+<title>기업 공고 수정하기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {
@@ -91,7 +91,7 @@
     <input type="hidden" name="nowpage" value="${nowpage}">
   <input type="hidden" name="com_id" value="${com_id}">
   <input type="hidden" name="nowpage" value="${user_id}">
-    <h2>공고 등록</h2>
+    <h2>공고 수정</h2>
     <form action="/Company/Posting/Write?nowpage=${nowpage}" method="POST">
         <table>
             <tr>

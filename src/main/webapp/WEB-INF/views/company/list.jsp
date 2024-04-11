@@ -8,7 +8,7 @@
  <link rel="icon" type="image/png" href="/img/favicon.png" />
 <link href="/css/start.css" rel="stylesheet" />
 <link href="/css/test.css" rel="stylesheet" />
-<title>기업 회원 상세보기</title>
+<title>기업 공고 목록</title>
 
 <style>
 	main{

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.login.mapper.LoginUserMapper">  
+
+	<select  id  = "getUserList"		
+	    resultType = "com.board.login.domain.LoginUserVo">
+	    
+	    
+
+	    
+		SELECT      USER_ID,
+		            USER_NAME,
+					USER_PASSWD,
+					USER_EMAIL,
+					USER_PHONE,
+					USER_SOCIAL_NUM,
+					TO_CHAR( INDATE, 'YYYY-MM-DD')  INDATE,
+					USER_ADDRESS,
+					USER_ZIPCODE
+		FROM        USERS
+		ORDER BY    USER_ID ASC			
+	</select>
+	
+	
+	<insert  id = "insertUser">
+		
+	   INSERT  INTO   USERS (
+	                USER_ID,
+		            USER_NAME,
+					USER_PASSWD,
+					USER_EMAIL,
+					USER_PHONE,
+					USER_SOCIAL_NUM,
+					USER_ADDRESS,
+					USER_ZIPCODE
+	    )
+	    VALUES (
+	         #{ user_id    },
+	         #{ user_name    },
+	         #{ user_passwd  },
+	         #{ user_email     },
+	         #{ user_phone },
+	         #{ user_social_num},
+	         #{ user_address },
+	         #{ user_zipcode}
+	         
+	    )
+		
+	</insert>
+	
+	
+
+	
+	<!-- 로그인 
+	  arg0 : userid
+	  arg1 : passwd
+	-->
+	<select  id = "login">
+	
+	  SELECT   
+	        USER_ID,
+		    USER_NAME,
+			USER_PASSWD,
+			USER_EMAIL,
+		    USER_PHONE,
+			USER_SOCIAL_NUM,
+			INDATE,
+			USER_ADDRESS,
+			USER_ZIPCODE    
+	   FROM  
+	       USERS
+	   WHERE
+	       USER_ID = #{ arg0 }  
+	    AND
+	       USER_PASSWD = #{ arg1 }       
+	
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+

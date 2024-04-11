@@ -73,7 +73,7 @@
 	<update id="updateCompany">
 	 UPDATE COMPANY 
 	 SET	
-	 		COM_ID = #{com_id},
+	 	
 			COM_PASSWD= #{com_passwd},
 			COM_TYPE= #{com_type},
 			COM_NUM= #{com_num},
@@ -82,7 +82,7 @@
 			COM_CEO= #{com_ceo},
 			COM_PHONE= #{com_phone},
 			COM_EMAIL= #{com_email}
-	 WHERE  COM_ID = '01'		
+	 WHERE  COM_ID = #{com_id}	
 	 		
 	
 	
@@ -138,7 +138,7 @@
 			COM_PHONE,
 			COM_EMAIL
 	FROM    COMPANY
-	WHERE   COM_ID ='01'		
+	WHERE   COM_ID =#{com_id}		
 	
 	</select>
 	<select id="getUserList">
@@ -187,19 +187,19 @@
 	
 	</select>
 	<resultMap type="java.util.HashMap" id="getPostingMap1">
-	<result property="com_name"           column="com_name"/>
-	<result property="com_type"           column="com_type"/>
-	<result property="com_address"        column="com_address"/>
-	<result property="com_ceo"            column="com_ceo"/>
-	<result property="com_phone"          column="com_phone"/>
-	<result property="com_email"          column="com_email"/>
-	<result property="posting_career"     column="posting_career"/>
-	<result property="posting_grade"      column="posting_grade"/>
-	<result property="posting_content"    column="posting_content"/>
+	<result property="com_name"                      column="com_name"/>
+	<result property="com_type"                      column="com_type"/>
+	<result property="com_address"                   column="com_address"/>
+	<result property="com_ceo"                       column="com_ceo"/>
+	<result property="com_phone"                     column="com_phone"/>
+	<result property="com_email"                     column="com_email"/>
+	<result property="posting_career"                column="posting_career"/>
+	<result property="posting_grade"                 column="posting_grade"/>
+	<result property="posting_content"               column="posting_content"/>
 	<result property="posting_hope_department"       column="posting_hope_department"/>
-	<result property="posting_title"       column="posting_title"/>
-	<result property="posting_startdate"       column="posting_startdate"/>
-	<result property="posting_enddate"       column="posting_enddate"/>
+	<result property="posting_title"                 column="posting_title"/>
+	<result property="posting_startdate"             column="posting_startdate"/>
+	<result property="posting_enddate"               column="posting_enddate"/>
 	
 
 	</resultMap>

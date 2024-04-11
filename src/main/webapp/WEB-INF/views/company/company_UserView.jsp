@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업 회원가입</title>
+<title>기업 회원 상세보기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {
@@ -137,10 +137,9 @@
 </head>
 <body>
   <main>
-  <input type="hidden" name="nowpage" value="${nowpage}">
-  <input type="hidden" name="com_id" value="${com_id}">
-  <input type="hidden" name="nowpage" value="${user_id}">
-    <h2>기업정보 상세보기</h2>
+
+
+    <h2>기업회원정보 상세보기</h2>
 
         <table>
 

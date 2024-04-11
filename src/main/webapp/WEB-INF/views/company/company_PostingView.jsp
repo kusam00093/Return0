@@ -230,7 +230,7 @@
 
     </form>
     <c:if test="${sessionScope.com_id != null || com_id != ''}">
-        <button id="goUpdate" onclick="goToUpdate()">지원하기</button>
+        <a href="/Resume/List"><button id="goUpdate" onclick="goToUpdate()">지원하기</a></button>
     </c:if>
     
 

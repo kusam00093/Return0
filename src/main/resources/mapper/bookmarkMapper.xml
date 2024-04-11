@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.user.bookmark.mapper.BookmarkMapper">  
+		
+ <select id ="CreateBookMark">
+ 	
+ INSERT INTO USER_BOOKMARK (
+    POSTING_PNO,
+    USER_ID,
+    UB_UBNO,
+    UB_BOOLEAN
+) VALUES (
+    #{posting_pno},
+    #{user_id},
+    NVL((SELECT MAX(UB_UBNO) FROM USER_BOOKMARK), 0) + 1,
+    1
+)
+</select>
+
+<select id ="AddBoolean">
+UPDATE USER_BOOKMARK
+SET
+    UB_BOOLEAN = 1
+WHERE
+        POSTING_PNO = #{posting_pno}
+    AND USER_ID = #{user_id}
+
+</select>
+<select id = "minusBoolean">
+UPDATE USER_BOOKMARK
+SET
+    UB_BOOLEAN = 0
+WHERE
+        POSTING_PNO = #{posting_pno}
+    AND USER_ID = #{user_id}
+</select>
+<select id = "CheckUBNO">
+	SELECT UB_BOOLEAN
+    FROM USER_BOOKMARK
+    WHERE USER_ID = #{user_id}
+    AND POSTING_PNO = #{posting_pno}
+</select>
+ 
+ 
+ <select id ="getUserBookmarks">
+   SELECT
+    posting_pno,
+    user_id,
+    ub_ubno,
+    ub_boolean
+	FROM
+	    user_bookmark
+	where user_id = #{user_id}
+	AND ub_boolean = 1
+	
+ </select>
+ 
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.company.domain.CompanyVo;
-import com.board.company.domain.Pagination;
-import com.board.company.domain.PagingResponse;
+
 import com.board.company.domain.PostingVo;
-import com.board.company.domain.SearchVo;
+
 import com.board.company.domain.UserVo;
 import com.board.company.mapper.CompanyMapper;
+import com.board.login.domain.LoginCompanyVo;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
@@ -73,8 +75,16 @@ public class CompanyController {
 //	}
 	//========================================================
 	@RequestMapping("/MyPage")
-	public ModelAndView companyView(int nowpage,CompanyVo companyVo, UserVo userVo) {
-      
+	public ModelAndView companyView(int nowpage,CompanyVo companyVo, UserVo userVo, HttpServletRequest request) {
+        
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("companyLogin"));
+		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
+		String com_id = logincompanyVo.getCom_id();
+		companyVo.setCom_id(com_id);
+		
+		
+		//CompanyVo companyVo = companyMapper.getCompany(com_id);
 		CompanyVo vo = companyMapper.getCompany(companyVo);
 		List<UserVo> userList = companyMapper.getUserList(userVo);
 		List<UserVo> userstackList = companyMapper.getUserStackList(userVo);
@@ -89,7 +99,8 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/View/UpdateForm")
-	public ModelAndView companyViewUpdateForm(CompanyVo companyVo, int nowpage, String user_id) {
+	public ModelAndView companyViewUpdateForm(CompanyVo companyVo, int nowpage, String user_id, HttpServletRequest request) {
+
 		
 		companyMapper.getCompany(companyVo);
 		ModelAndView mv = new ModelAndView();
@@ -162,19 +173,6 @@ public class CompanyController {
 		return mv;
 	}
 	
-	/*
-	@RequestMapping("/View")
-	public ModelAndView view(BoardVo boardVo) {
-		HashMap<String, Object> map = boardMapper.getBoard(boardVo);
-		//String menu_id = boardVo.getMenu_id();
-		ModelAndView mv = new ModelAndView(); 
-		//mv.addObject("bo",menu_id);
-		mv.addObject("bo",map);
-		mv.setViewName("/board/view");
-		return mv;
-	}*/
-	
-
 	
 	@RequestMapping("/Posting/UpdateForm")
 	public ModelAndView postingUpdateForm(PostingVo postingVo,int nowpage, String user_id, String com_id) {
@@ -254,7 +252,14 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/Comuser/ViewUpdateForm")
-	public ModelAndView comuserView(CompanyVo companyVo,  int nowpage, String user_id) {
+	public ModelAndView comuserView(HttpServletRequest request,CompanyVo companyVo,  int nowpage, String user_id) {
+		
+		HttpSession session = request.getSession();
+		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
+		String com_id = logincompanyVo.getCom_id();
+		companyVo.setCom_id(com_id);
+		
+		
 		
 		CompanyVo vo = companyMapper.getCompany(companyVo);
 		ModelAndView mv = new ModelAndView();
@@ -271,30 +276,22 @@ public class CompanyController {
 	
 	@RequestMapping("/ViewPaging")
 	public ModelAndView viewList(int nowpage, UserVo userVo, PostingVo postingVo, CompanyVo companyVo ){
-		int count = companyMapper.count(userVo);
-		PagingResponse<UserVo> response = null;
-	   if (count < 1) {
-        	response =  new PagingResponse<>(Collections.emptyList(), null);
-        }
+		
+	
 	   
-	   SearchVo searchVo = new SearchVo();
-	   searchVo.setPage(nowpage);
-	   searchVo.setPageSize(5);
+	
 	   
-	   Pagination pagination = new Pagination(count,searchVo);
-	   searchVo.setPagination(pagination);
+	
 	   
-	   int offset = searchVo.getOffset();
-	   int pageSize = searchVo.getPageSize();
+	  
 	   
-	   List<UserVo> list = companyMapper.getUserPagingList(offset,pageSize);
-	   response = new PagingResponse<>(list,pagination);
+	 
+	  
 	  CompanyVo vo = companyMapper.getCompany(companyVo);
 	  List<UserVo> userList = companyMapper.getUserList(userVo);
 	  List<UserVo> userstackList = companyMapper.getUserStackList(userVo);
 	   ModelAndView mv = new ModelAndView();
-	   mv.addObject("response",response);
-	   mv.addObject("searchVo",searchVo);
+	
 	   mv.addObject("nowpage",nowpage);
 	   mv.addObject("com_id",companyVo.getCom_id());
 	   mv.addObject("user_id",userVo.getUser_id());

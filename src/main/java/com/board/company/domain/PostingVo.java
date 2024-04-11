@@ -1,6 +1,5 @@
 package com.board.company.domain;
 
-import com.board.domain.BoardVo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

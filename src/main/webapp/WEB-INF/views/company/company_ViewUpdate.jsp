@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업 회원가입</title>
+<title>기업 회원 정보 수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     body {
@@ -126,12 +126,11 @@
             }
         }).open();
     }
-
 </script>
 </head>
 <body>
   <main>
-    <h2>회원가입</h2>
+    <h2>기업회원 정보 수정하기</h2>
     <form action="/Company/View/Update" method="POST">
 
   <input type="hidden" name="user_id" value="${user_id}">
@@ -141,9 +140,7 @@
  		        <td>기업아이디</td>
             
                 <td>
-                    <input type="text" name="com_id" placeholder="아이디를 입력하세요" value="${co.com_id}" />
-                    <input type="button" value="중복 확인" onclick="doubleCheck()">
-                    <span id="doubleCheckMsg"></span>
+                ${co.com_id} 
                 </td>
             </tr>
             <tr>
@@ -177,7 +174,7 @@
             <tr>
             	<td>회사우편번호</td>
                 <td>
-               <input type="text"  placeholder="우편번호" readonly="readonly"/>
+               <input type="text"  placeholder="우편번호" name="com_zipcode"  readonly="readonly"/>
                     <input type="button"  onclick="daumPost()" value="우편번호 찾기" />
 
                 </td>
@@ -188,7 +185,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="수정하기" />
+                    <input type="submit" value="수정하기" id="goUpdate"/>
                     <input type="button" value="회원탈퇴" id="goDelete" />
                 </td>
             </tr>
@@ -201,6 +198,11 @@
      const  goDeleteEl  = document.getElementById('goDelete');
      goDeleteEl.addEventListener('click', function(e) {
     	alert('회원 탈퇴 처리 되었습니다'); 
+        location.href = '/Company/View/Delete?nowpage=${nowpage}';
+     });
+     const  goUpdateEl  = document.getElementById('goUpdate');
+     goUpdateEl.addEventListener('click', function(e) {
+    	alert('회원 정보가 수정되었습니다'); 
         location.href = '/Company/View/Delete?nowpage=${nowpage}';
      });
      
