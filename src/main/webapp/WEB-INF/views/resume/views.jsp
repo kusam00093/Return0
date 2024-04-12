@@ -38,6 +38,23 @@
 		.licenseList {
 			display: flex;
 		}
+		
+		 h2 {
+         text-align: center;
+      }
+      
+      form {
+         margin: 0 auto;
+      }   
+      
+		td {
+         border-radius: 5px;
+      }
+      
+      .first-td {
+         background-color: black;
+         color:white;
+      }
 	
 			
 </style>
@@ -70,20 +87,20 @@
 		 <tr>
 		   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" />
 		   <input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/>
-		   <input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
-		   <input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+		   <input type="text" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
+		   <input type="text" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
 		 </tr>
 		 <tr>
 		   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" />
 		   <input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/>
-		   <input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
-		   <input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+		   <input type="text" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
+		   <input type="text" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
 		 </tr>
 		 <tr >
 		   <td><input type="text" name="resume_career_company" value="${mapResumeCareer.resume_career_company}" />
 		   <input type="text" name="resume_career_department"  value="${mapResumeCareer.resume_career_department}"/>
-		   <input type="date" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
-		   <input type="date" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
+		   <input type="text" name="resume_career_startdate"  value="${mapResumeCareer.resume_career_startdate}"/>
+		   <input type="text" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}" /></td>
 		 </tr>
 	 
 	 <tr>
@@ -100,20 +117,8 @@
 	 </tr>
 	 <tr>
 	   <td>기술목록</td>
-	   <td class = "licenseList">
-	   	  
-	   			<input type="checkbox" name="resume_license_content"  value="Java"/>Java
-	   			<input type="checkbox" name="resume_license_content"  value="HTML"/>HTML
-	   			<input type="checkbox" name="resume_license_content"  value="JavaScript"/>JavaScript
-	   			<input type="checkbox" name="resume_license_content"  value="VueJS"/>VueJS
-	   			<input type="checkbox" name="resume_license_content"  value="CSS"/>CSS
-	   			<input type="checkbox" name="resume_license_content"  value="Node.js"/>Node.js
-	   			<input type="checkbox" name="resume_license_content"  value="React"/>React
-	   			<input type="checkbox" name="resume_license_content"  value="ReactJS"/>ReactJS
-	   			<input type="checkbox" name="resume_license_content"  value="Typescript"/>Typescript
-	   			<input type="checkbox" name="resume_license_content"  value="Zustand"/>Zustand
-	   			<input type="checkbox" name="resume_license_content"  value="AWS"/>AWS
-	   		
+	   <td class = "licenseList">  	  
+	   			<input type="text" name="resume_license_content"  value="${mapResumeLicense.resume_license_content}"/>
 	   </td>
 	 </tr>
 	 <tr>

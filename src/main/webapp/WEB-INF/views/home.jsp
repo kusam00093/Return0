@@ -104,7 +104,7 @@
 </head>
 <body>
   
-   <%@include file="/WEB-INF/include/header.jsp" %>
+   <%@include file="/WEB-INF/include/Header.jsp" %>
    <main>
     <section class="inner"> 
 		   <h2>Home</h2>
@@ -118,7 +118,7 @@
 		   <div>&nbsp;</div>
     </section>
 	 </main> 
-   <%@include file="/WEB-INF/include/footer.jsp" %> 
+   <%@include file="/WEB-INF/include/Footer.jsp" %> 
     
 </body>
 </html>

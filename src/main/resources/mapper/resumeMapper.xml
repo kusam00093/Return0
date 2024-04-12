@@ -63,6 +63,33 @@
 					,#{resume_career_department}
 			) 
 	</insert>
+	
+  <insert id="insertAllResumeCareer">
+    	INSERT ALL
+    		INTO RESUME_CAREER( 
+	    		,RESUME_RNO
+					,RESUME_CAREER_COMPANY
+					,RESUME_CAREER_STARTDATE
+					,RESUME_CAREER_ENDDATE
+					,RESUME_CAREER_DEPARTMENT
+				) VALUES (
+					  (SELECT MAX(RESUME_RNO) FROM RESUME )
+					,#{resume_career_company}
+					,#{resume_career_startdate}
+					,#{resume_career_enddate}
+					,#{resume_career_department}
+				)
+				
+			SELECT 
+					RESUME_RNO
+					,RESUME_CAREER_COMPANY
+					,RESUME_CAREER_STARTDATE
+					,RESUME_CAREER_ENDDATE
+					,RESUME_CAREER_DEPARTMENT
+			FROM RESUME
+			
+  </insert>
+
 	<insert id="insertResumeGrade">
 			INSERT INTO RESUME_GRADE (
 			   RESUME_RNO
@@ -86,6 +113,8 @@
 			) 
 	</insert>
 	
+	
+	
 	<select id="getResumeList"  
       resultType="com.board.resume.domain.ResumeVo">
   	 SELECT 
@@ -93,9 +122,10 @@
 			,RESUME_PROFILE
 			,RESUME_CONTENT_SELF
 			,RESUME_CONTENT_MOTIVATION
+			,ROWNUM
   	 FROM
   	  RESUME
-  	 ORDER BY RESUME_RNO ASC
+  	 ORDER BY ROWNUM ASC
   </select>
   <select id="getResume"
   				resultMap="getResumeMap">

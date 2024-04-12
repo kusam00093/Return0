@@ -38,6 +38,23 @@
 		.licenseList {
 			display: flex;
 		}
+		
+		h2 {
+         text-align: center;
+      }
+      
+      form {
+         margin: 0 auto;
+      }   
+      
+		td {
+         border-radius: 5px;
+      }
+      
+      .first-td {
+         background-color: black;
+         color:white;
+      }
 	
 			
 </style>

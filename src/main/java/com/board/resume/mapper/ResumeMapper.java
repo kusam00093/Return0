@@ -21,12 +21,14 @@ public interface ResumeMapper {
 
 	void insertResume(ResumeVo resumeVo);
 
-	void insertResumeCareer(ResumeCareerVo resumeCareerVo);
+//	void insertResumeCareer(ResumeCareerVo resumeCareerVo);
 
 	void insertResumeGrade(ResumeGradeVo resumeGradeVo);
 
 	void insertResumeLicense(ResumeLicenseVo resumeLicenseVo);
     
+	void insertAllResumeCareer(List<ResumeCareerVo> resumeAllCareerVo);
+	
 	void updateResume(ResumeVo resumeVo);
 
 	void updateResumeCareer(ResumeCareerVo resumeCareerVo);
@@ -43,6 +45,8 @@ public interface ResumeMapper {
 	HashMap<String, Object> getResumeGrade(ResumeGradeVo resumeGradeVo);
 
 	HashMap<String, Object> getResumeLicense(ResumeLicenseVo resumeLicenseVo);
+
+	
 
 	
 

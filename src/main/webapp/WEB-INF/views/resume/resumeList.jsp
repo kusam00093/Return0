@@ -38,7 +38,7 @@
            flex-direction: column;
            align-items: center;
            padding: 80px;
-					margin: 10px
+               margin: 10px
       }
       .content .left .person_date > a,
       .content .left .person_date > button {
@@ -97,16 +97,33 @@
         border: 1px solid #ddd; /* 셀 테두리 스타일 지정 */
         text-align: center;
       }
+      
+       h2 {
+         text-align: center;
+      }
+      
+      form {
+         margin: 0 auto;
+      }   
+      
       td{
       font-weight: normal;
    }
+   td {
+         border-radius: 5px;
+      }
+      
+      .first-td {
+         background-color: black;
+         color:white;
+      }
    
    
     </style>
   </head>
   <body>
   
-   <%@include file="/WEB-INF/include/header.jsp" %>
+   <%@include file="/WEB-INF/include/Header.jsp" %>
     
        
     <section class="content inner">
@@ -115,38 +132,39 @@
         <h2>이력서 리스트</h2>
         <div class ="person_date">
            
-<!--             <a href="/Resume/WriteForm?user_id=wodud6967">이력서 등록</a>  -->
+            <a href="/Resume/WriteForm?user_id=wodud6967">이력서 등록</a> 
             
             
-             <button onclick="resumeWrite()">이력서 등록</button>
+<!--              <button onclick="resumeWrite()">이력서 등록</button> -->
  
         </div>
       </div>
       <div class="right">
        
       <table>
-	    <tr>
-	      <td>이력서 번호</td>
-	      <td>이력서 내용</td>
-<!-- 	      <td>이력서 등록일</td> -->
-	      <td>삭제</td>
-	      <td>수정</td>
-	    </tr>
+       <tr>
+         <td>이력서 번호</td>
+         <td>이력서 내용</td>
+<!--          <td>이력서 등록일</td> -->
+         <td>삭제</td>
+         <td>수정</td>
+       </tr>
 
-	    <c:forEach  var="resumeVo"  items="${ resumeList }" >
-	    <tr>
-	      <td>${ resumeVo.resume_rno    }</td>
-	      <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=wodud6967">${ resumeVo.resume_content_self  }</a></td>
-	     
-<%-- 	      <td>${ resumeVo.menu_seq   }</td>	       --%>
-	      <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>	      
-	      <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967">수정</a></td>
-<!-- 	      <td><button onclick="resumeUpdate()">수정</button></td> -->
-	    </tr>
-	    </c:forEach>
-	   
-	   
-	  	</table>
+       <c:forEach  var="resumeVo"  items="${ resumeList }" >
+       <tr>
+         <td>${ resumeVo.rownum     }</td>
+         <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
+         
+<%--          <td><button onclick="resumeView()">${ resumeVo.resume_content_self  }</button></td> --%>
+<%--          <td>${ resumeVo.menu_seq   }</td>          --%>
+         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">삭제</a></td>         
+         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">수정</a></td>
+<!--          <td><button onclick="resumeUpdate()">수정</button></td> -->
+       </tr>
+       </c:forEach>
+      
+      
+        </table>
      </div>   
     </section>
   
@@ -159,23 +177,24 @@
 
 
 <!--------------------------------------------footer---------------------------------------------------  -->
-      <%@include file="/WEB-INF/include/footer.jsp" %>
+      <%@include file="/WEB-INF/include/Footer.jsp" %>
     
   
   
   
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script type="text/javascript">
+    <script>
       function resumeWrite(){
-        window.open("/Resume/WriteForm?user_id=wodud6967", "write", "width=1200, height=800");
+        window.open("/Resume/WriteForm?user_id=wodud6967", "write", "width=1400, height=800");
       }
-    </script>
-    <script type="text/javascript">
       function resumeUpdate(){
-        window.open("/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967", "update", "width=1200, height=800");
-      }
+          window.open("/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967", "update", "width=1400, height=800");
+        }
+      function resumeView(){
+          window.open("/Resume/View?resume_rno=${ resumeVo.resume_rno }&user_id=wodud6967", "views", "width=1400, height=800");
+        }
     </script>
-  </body>
+ </body>
 
 </html>

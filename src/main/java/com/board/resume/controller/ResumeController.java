@@ -1,5 +1,6 @@
 package com.board.resume.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import com.board.resume.domain.ResumeVo;
 import com.board.resume.mapper.ResumeMapper;
 import com.board.resume.userVo.UserVo;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -26,16 +29,23 @@ public class ResumeController {
 	private  ResumeMapper  resumeMapper; 
 	
 	@RequestMapping("/List")
-		public  ModelAndView  list(ResumeVo  resumevo) {
-			// 사용자 목록 조회
-	        List<ResumeVo>  resumeList = resumeMapper.getResumeList();
-			
-			ModelAndView  mv       = new ModelAndView();
-			mv.addObject( "resumeList",  resumeList  );
-			mv.setViewName("resume/resumeList");
-			
-			return  mv;
-		}
+    public  ModelAndView  list(HttpServletRequest request) {
+       HttpSession session = request.getSession();
+//       LoginUserVo loginUserVo = (LoginUserVo)session.getAttribute("userLogin");
+       ResumeVo resumevo = new ResumeVo();
+//       resumevo.setUser_id(loginUserVo.getUser_id());
+       int resume_rno = resumevo.getResume_rno();
+       // 사용자 목록 조회
+       
+         List<ResumeVo>  resumeList = resumeMapper.getResumeList();
+       
+       ModelAndView  mv       = new ModelAndView();
+       mv.addObject( "resumeList",  resumeList  );
+       mv.setViewName("resume/resumeList");
+       
+       return  mv;
+    }
+
 	 @RequestMapping("/WriteForm")
 	 public  ModelAndView   writeForm(UserVo userVo) {
 		String user_id = userVo.getUser_id();
@@ -50,12 +60,13 @@ public class ResumeController {
 		public  ModelAndView  write( ResumeVo  resumeVo, ResumeLicenseVo resumeLicenseVo,
 				ResumeCareerVo resumeCareerVo, ResumeGradeVo resumeGradeVo) {		
 			// 저장
-		   //resumeMapper.insertResumeAll( resumeVo, resumeCareerVo, resumeGradeVo);		
+		   		
 		   resumeMapper.insertResume( resumeVo );		
-		   resumeMapper.insertResumeCareer( resumeCareerVo );		
+//		   resumeMapper.insertResumeCareer( resumeCareerVo );		
+		   List<ResumeCareerVo> resumeAllCareerVo = new ArrayList<>();
+		   resumeMapper.insertAllResumeCareer(resumeAllCareerVo);
 		   resumeMapper.insertResumeGrade( resumeGradeVo );		
 		   resumeMapper.insertResumeLicense( resumeLicenseVo );		
-	
 			// 데이터를 가지고 이동한다
 			ModelAndView   mv   =  new  ModelAndView();
 			mv.setViewName("redirect:/Resume/List");
