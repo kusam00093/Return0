@@ -153,53 +153,50 @@
        			<a href ="#"><img src ="/img/defaultProfile.png"></a>
 	       	</div>
 	       	<p>${ vo.com_name }</p>
+	       	<p>${ vo.com_id }</p>
 	       	<p>${ vo.com_email }</p>
 	       	<p>${ vo.com_phone }</p>
 	       	<p>${ vo.com_ceo }</p>
-	       	<a href="/Company/Comuser/View?nowpage=${nowpage}&com_id=${vo.com_id}">기업회원정보보기</a>
-	       	<a href="/Company/MyPosting?nowpage=${nowpage}&com_id=${com_id}">내가 작성한 모집공고</a>
+	       	<a href="/Company/Comuser/View?nowpage=${nowpage}&com_id=${com_id}">기업회원정보보기</a>
         </div>
       </div>
       <div class="right">
         <div class="tabs">
-          <button class="tab" onclick="openTab0">지원현황</button>
+          <button class="tab" onclick="openTab0">내가 작성한공고</button>
           <button class="tab" onclick="openTab1">추천서비스</button>
           <button class="tab" onclick="openTab2">북마크</button>
 
         </div>
         <div class="tab-content">
           <div class="tab-panel">
-          	<h4>회원님의 회사에 지원하신분들입니다</h4>
+          	<h4>내가 작성한 공고</h4>
           	<ul class="job-list">
 		        <li>
 		          <table>
 		            <thead>
 		              <tr>
 		                <th>번호</th>
-		                <th>이름</th>
-		                <th>이메일</th>
-		                <th>전화번호</th>
-		                <th>결과</th>
+		                <th>제목</th>
+		                <th>모집부서</th>
+		                <th>마감기한</th>
+		                <th>수정</th>
+		                <th>삭제</th>
 		              </tr>
 		            </thead>
 		            <tbody>
 		          
-		              <c:forEach var="us" items="${userList}"> 
+		              <c:forEach var="co" items="${postingList}"> 
 		               <tr>
-		              	<td>${us.row_number}</td>
-		              	<td><a href="/Resume/">${us.user_name}</a></td>
-		              	<td>${us.user_email}</td>
-		              	<td>${us.user_phone}</td>
-		                <td><button type="button" class="btn btn-info">대기</button></td>
+		                  <td>${co.row_number}</td>
+		                  <td><a href="/Company/MyPosting?nowpage=${nowpage}&posting_pno=${co.posting_pno}&com_id=${vo.com_id}">
+		                  ${co.posting_title}</a></td>
+		                  <td>${co.posting_hope_department}</td>
+		                  <td>${co.posting_enddate}</td>
+		                  <td><a href="/Company/Posting/UpdateForm?nowpage=${nowpage}&posting_pno=${co.posting_pno}&com_id=${vo.com_id}" class="btn btn-ifno" id="goView">수정하기</a></td>
+		                  <td><a href="/Company/MyPosting/Delete?nowpage=${nowpage}&posting_pno=${co.posting_pno}" class="btn btn-ifno" id="goDelete">삭제하기</a></td>
 		                </tr>
 		              </c:forEach>
-		              <tr>
-		                <td>기업명 1</td>
-		                <td>공고 1</td>
-		                <td>제목 1</td>
-		                <td>분야 1</td>
-		                <td><button type="button" class="btn btn-warning">수정</button></td>
-		              </tr>
+
 		              <!-- 나머지 행들도 유사하게 추가 -->
 		            </tbody>
 		          </table>

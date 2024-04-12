@@ -14,4 +14,13 @@ public class ResumeVo {
 	private String resume_content_self;
 	private String resume_content_motivation;
 	private int rownum;
+	private int row_number;
+	private int applicant_recode_result;
+	private int applicant_recode_id;
+	private String user_name;
+	private String user_email;
+	private String user_phone;
+	private String user_address;
+	private int    posting_pno;
+	
  }

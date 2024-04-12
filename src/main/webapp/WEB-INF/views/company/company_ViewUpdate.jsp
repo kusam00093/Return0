@@ -140,48 +140,48 @@
  		        <td>기업아이디</td>
             
                 <td>
-                ${co.com_id} 
+                ${com_id} 
                 </td>
             </tr>
             <tr>
             	  <td>기업비밀번호</td>
-                <td><input type="password" name="com_passwd" placeholder="비밀번호를 입력하세요" name="${co.com_passwd }"/></td>
+                <td><input type="password" name="com_passwd" value="${co.com_passwd}" name="${co.com_passwd }"/></td>
             </tr>
             <tr>
             	  <td>기업이름</td>
-                <td><input type="text" name="com_name" placeholder="회사명을 입력하세요" value="${co.com_name }"/></td>
+                <td><input type="text" name="com_name"  value="${co.com_name }"/></td>
             </tr>
             <tr>
             <td>기업 대표명</td>
-                <td><input type="text" name="com_ceo" placeholder="대표자명을 입력하세요" value="${co.com_ceo }"/></td>
+                <td><input type="text" name="com_ceo"  value="${co.com_ceo }"/></td>
             </tr>
             <tr>
             <td>기업 형태</td>
-                <td><input type="text" name="com_type" placeholder="기업형태를 입력하세요" value="${co.com_type}"/></td>
+                <td><input type="text" name="com_type"  value="${co.com_type}"/></td>
             </tr>
             <tr>
             <td>사업자 등록번호</td>
-                <td><input type="text" name="com_num" placeholder="사업자등록번호를 입력하세요" value="${co.com_num }"/></td>
+                <td><input type="text" name="com_num"  value="${co.com_num }"/></td>
             </tr>
             <tr>
             <td>전화번호</td>
-                <td><input type="text" name="com_phone" placeholder="인사담당자 전화번호를 입력하세요" value="${co.com_phone}" /></td>
+                <td><input type="text" name="com_phone"  value="${co.com_phone}" /></td>
             </tr>
             <tr>
             	<td>이메일</td>
-                <td><input type="text" name="com_email" placeholder="이메일을 입력하세요" value="${co.com_email }"/></td>
+                <td><input type="text" name="com_email"  value="${co.com_email }"/></td>
             </tr>
             <tr>
             	<td>회사우편번호</td>
                 <td>
-               <input type="text"  placeholder="우편번호" name="com_zipcode"  readonly="readonly"/>
+               <input type="text"   name="com_zipcode"  readonly="readonly"/>
                     <input type="button"  onclick="daumPost()" value="우편번호 찾기" />
 
                 </td>
             </tr>
             <tr>
             	<td>회사주소</td>
-                <td><input type="text" name="com_address" placeholder="이메일을 입력하세요" value="${co.com_address }"/></td>
+                <td><input type="text" name="com_address"  value="${co.com_address }"/></td>
             </tr>
             <tr>
                 <td colspan="2">

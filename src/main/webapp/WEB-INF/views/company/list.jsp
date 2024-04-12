@@ -91,9 +91,7 @@
 </head>
 <body>
 	<main>
-  <input type="hidden" name="nowpage" value="${nowpage}">
-  <input type="hidden" name="com_id" value="${com_id}">
-  <input type="hidden" name="nowpage" value="${user_id}">
+
  <%@include file="/WEB-INF/include/Header.jsp" %>
 	<div>&nbsp;</div>
 	<div>&nbsp;</div>
@@ -104,7 +102,7 @@
    <div>&nbsp;</div>
    <div>&nbsp;</div>
    <div>&nbsp;</div>
-   <div><input type="button" value="공고 등록하기" id="goPosting"></div>
+   <div><a href="/Company/Posting/WriteForm?nowpage=${nowpage}" id="goPosting">공고 등록하기</a></div>
 	<div class="sub_title">
       <div class="td1">번호</div>
       <div class="td2">제목</div>
@@ -128,7 +126,6 @@
     <script>
      const  goPostingEl  = document.getElementById('goPosting');
      goPostingEl.addEventListener('click', function(e) {
-        location.href = '/Company/Posting/WriteForm?nowpage=${nowpage}&com_id= 33';
      });
      
 

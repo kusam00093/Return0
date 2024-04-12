@@ -21,5 +21,6 @@ public class PostingVo {
 		private String posting_startdate;
 		private String posting_enddate;
 		private String posting_com_profile;
+		private String posting_stack;
 	
 }

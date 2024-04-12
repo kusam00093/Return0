@@ -91,49 +91,7 @@
 		font-weight: bolder;
 }
 </style>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-    function daumPost() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var fullAddr = ''; // 최종 주소 변수
-                var extraAddr = ''; // 조합형 주소 변수
 
-                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져옴
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    fullAddr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    fullAddr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일 경우 조합형 주소 조합
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가
-                    if(data.bname !== ''){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있을 경우 추가
-                    if(data.buildingName !== ''){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 조합형 주소가 있을 경우 마지막에 붙여줌
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합형 주소를 최종 주소에 추가
-                    fullAddr += extraAddr;
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 입력
-                document.getElementsByName('com_zipcode')[0].value = data.zonecode; // 우편번호
-                document.getElementsByName('com_address')[0].value = fullAddr; // 주소
-
-                // 커서를 상세주소 필드로 이동
-                document.getElementsByName('com_address')[0].focus();
-            }
-        }).open();
-    }
-</script>
 </head>
 <body>
   <main>

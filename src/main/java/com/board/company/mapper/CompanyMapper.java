@@ -6,8 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.board.company.domain.CompanyVo;
+import com.board.company.domain.PostingStackVo;
 import com.board.company.domain.PostingVo;
 import com.board.company.domain.UserVo;
+import com.board.resume.domain.ResumeVo;
 
 @Mapper
 public interface CompanyMapper {
@@ -42,6 +44,17 @@ public interface CompanyMapper {
 	List<UserVo> getUserPagingList(int offset, int pageSize);
 
 	List<PostingVo> getMyPostingList(PostingVo postingVo);
+
+	void insertPostingStack(PostingStackVo postingStackVo);
+
+	List<ResumeVo> getResumeList(ResumeVo resumeVo);
+
+
+
+	PostingStackVo getPostingStack(PostingStackVo postingStackVo);
+
+	void insertPostingStack(List<PostingStackVo> postingStackList);
+
 
 
 	//HashMap<String, Object> getPostingList(PostingVo postingVo);

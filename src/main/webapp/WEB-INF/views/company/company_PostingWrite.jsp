@@ -88,52 +88,85 @@
 </head>
 <body>
   <main>
-    <input type="hidden" name="nowpage" value="${nowpage}">
-  <input type="hidden" name="com_id" value="${com_id}">
-  <input type="hidden" name="nowpage" value="${user_id}">
+  
     <h2>공고 등록</h2>
     <form action="/Company/Posting/Write?nowpage=${nowpage}" method="POST">
         <table>
             <tr>
             
             	<td>아이디</td>
-                <td>
+                <td colspan="2">
                     <input type="text" name="com_id" value="${com_id }" readonly />
                 </td>
             </tr>
             <tr>
             	<td>공고 제목</td>
-                <td>
+               <td colspan="2">
                     <input type="text" name="posting_title" placeholder="제목을 입력하세요" />
                 </td>
             </tr>
             <tr>
             	<td>필요경력</td>
-                <td><input type="text" name="posting_career" placeholder="필요경력" /></td>
+                <td colspan="2"><input type="text" name="posting_career" placeholder="필요경력" /></td>
             </tr>
             <tr>
             	<td>필요 학력</td>
-                <td><input type="text" name="posting_grade" placeholder="필요학력" /></td>
+                <td colspan="2"><input type="text" name="posting_grade" placeholder="필요학력" /></td>
             </tr>
             <tr>
             	<td>모집부서</td>
-                <td><input type="text" name="posting_hope_department" placeholder="모집부서를 적으세요" /></td>
+                <td colspan="2"><input type="text" name="posting_hope_department" placeholder="모집부서를 적으세요" /></td>
+            </tr>
+            <tr>
+            	<td>필요 기술</td>
+            </tr>	
+            <tr>
+            <td></td>
+            <td><input type="checkbox" name="posting_stack"     value="Java"/>Java</td>
+            <td>   <input type="checkbox" name="posting_stack"  value="HTML"/>HTML</td>
+            </tr>
+            <tr>
+            <td></td>
+            <td>   <input type="checkbox" name="posting_stack"  value="JavaScript"/>JavaScript</td>
+            <td>   <input type="checkbox" name="posting_stack"  value="VueJS"/>VueJS</td>
+            </tr>
+            <tr>
+            <td></td>
+               <td>  <input type="checkbox" name="posting_stack"  value="CSS"/>CSS</td>
+              <td> <input type="checkbox" name="posting_stack"    value="Node.js"/>Node.js</td>
+              </tr>
+            
+              <tr>
+              <td></td>
+              <td> <input type="checkbox" name="posting_stack"  value="React"/>React</td>
+               <td><input type="checkbox" name="posting_stack"  value="ReactJS"/>ReactJS</td>
+            </tr>
+               <tr>
+               <td></td>
+               <td><input type="checkbox" name="posting_stack"  value="Typescript"/>Typescript </td>
+               <td><input type="checkbox" name="posting_stack"  value="Zustand"/>Zustand </td>
+               </tr>
+               <tr>
+               <td></td>
+               <td><input type="checkbox" name="posting_stack"  value="AWS"/>AWS </td>
+               <td><input type="checkbox" name="posting_stack"  value="MariaDB"/>MariaDB </td>
+                
             </tr>
             <tr>
             	<td>사진</td>
-                <td><input type="text" name="posting_com_profile" placeholder="사진" /></td>
+                <td colspan="2"><input type="text" name="posting_com_profile" placeholder="사진" /></td>
             </tr>
             <tr>
             	<td>마감기한</td>
-                <td><input type="date" name="posting_enddate" placeholder="날짜를 선택하세요" /></td>
+                <td colspan="2"><input type="date" name="posting_enddate" placeholder="날짜를 선택하세요" /></td>
             </tr>
             <tr>
             	<td>채용 공고 내용</td>
-                <td><textarea name="posting_content" placeholder="공고 내용을 입력하세요"></textarea></td>
+                <td colspan="2"><textarea name="posting_content" placeholder="공고 내용을 입력하세요"></textarea></td>
             </tr>
            
             <tr>
-                <td colspan="2">
+                <td colspan="3">
                     <input type="submit" value="등록하기" />
                 </td>
             </tr>

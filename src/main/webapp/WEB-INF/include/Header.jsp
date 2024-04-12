@@ -22,7 +22,7 @@
 			        <!-- 기업 사용자일 경우 -->
 			        <ul class="navbar" id="on_company_login">
 			            <li><a href="/Company/List?nowpage=1">채용목록</a></li>
-			            <li><a href="/Company/MyPage?nowpage=1">기업마이페이지</a></li>
+			            <li><a href="/Company/MyPage?nowpage=1&com_id=${companyLogin.com_id}">기업마이페이지</a></li>
 			            <li><a href="/BoardPaging/List">커뮤니티</a></li>
 			        </ul>
 			    </c:when>

@@ -54,6 +54,32 @@
 	)
 	
 	</insert>
+	
+	<insert id="insertPostingStack">
+      <foreach collection="list" item="postingStack"
+           index      = "i"  
+           open       = "INSERT ALL"    
+           close      = "SELECT * FROM DUAL"
+           separator  = " " >
+           INTO  POSTING_STACK VALUES (
+                (SELECT NVL(MAX(POSTING_PNO),0) FROM POSTING)
+              , #{ postingStack.posting_stack  }
+           )
+      </foreach>
+   
+   </insert>   
+	
+	<insert id="insertPostingStack1" parameterType="java.util.List">
+   		 INSERT ALL
+    <foreach collection="postingStackList" item="postingStack" separator=" ">
+        INTO POSTING_STACK (posting_pno, posting_stack)
+        VALUES ((SELECT NVL(MAX(POSTING_PNO),0) FROM POSTING), #{postingStack.posting_stack})
+    </foreach>
+    SELECT * FROM DUAL
+</insert>
+		
+	
+	
 
 	<update id="getUpdate">
 	
@@ -64,7 +90,7 @@
 	         ,POSTING_CONTENT         = #{posting_content}
 	         ,POSTING_TITLE           = #{posting_title}
 	         ,POSTING_COM_PROFILE     = #{posting_com_profile}  	
-	   WHERE POSTING_PNO = 1     
+	   WHERE POSTING_PNO = #{posting_pno}     
 	
 	
 	
@@ -88,6 +114,31 @@
 	
 	</update>
 	
+	<select id="getResumeList">
+		SELECT  
+		        R.RESUME_RNO
+		        ,R.RESUME_PROFILE
+		        ,R.RESUME_CONTENT_SELF
+		        ,R.RESUME_CONTENT_MOTIVATION
+		        ,A.APPLICANT_RECODE_RESULT
+		        ,A.APPLICANT_RECODE_ID
+		        ,U.USER_ID
+		        ,U.USER_NAME
+		        ,U.USER_EMAIL
+		        ,U.USER_PHONE
+		        ,U.USER_ADDRESS
+		FROM    RESUME R 
+		JOIN    APPLICANT_RECODE A ON R.RESUME_RNO = A.RESUME_RNO
+		JOIN    POSTING P            ON A.POSTING_PNO = P.POSTING_PNO
+		JOIN    USERS U               ON U.USER_ID = R.USER_ID
+		WHERE   P.POSTING_PNO = #{posting_pno}	
+	
+	
+	</select>
+	
+	
+	
+	
 	<select id="getPostingList">
 	 SELECT ROWNUM AS ROW_NUMBER
 	 		,POSTING_PNO
@@ -102,6 +153,7 @@
 	</select>
 	<select id="getMyPostingList">
 	 SELECT ROWNUM AS ROW_NUMBER
+	 		,COM_ID
 	 		,POSTING_PNO
 	 		,POSTING_TITLE
 	 		,POSTING_COM_PROFILE
@@ -201,7 +253,7 @@
 	
 	</select>
 	<resultMap type="java.util.HashMap" id="getPostingMap1">
-	<result property="posting_pno"                      column="posting_pno"/>
+	<result property="posting_pno"                   column="posting_pno"/>
 	<result property="com_name"                      column="com_name"/>
 	<result property="com_type"                      column="com_type"/>
 	<result property="com_address"                   column="com_address"/>
@@ -215,38 +267,44 @@
 	<result property="posting_title"                 column="posting_title"/>
 	<result property="posting_startdate"             column="posting_startdate"/>
 	<result property="posting_enddate"               column="posting_enddate"/>
+	<result property="posting_stack"                 column="posting_stack"/>
 	
 
 	</resultMap>
 	
 	<select id="getPostingMap" resultMap="getPostingMap1">
 	
-	SELECT COM_NAME,
-	       COM_TYPE,
-	       COM_ADDRESS,
-	       COM_CEO,
-	       COM_PHONE,
-	       COM_EMAIL,
-	       POSTING_PNO,
-	       POSTING_CAREER,
-	       POSTING_GRADE,
-	       POSTING_CONTENT,
-	       POSTING_HOPE_DEPARTMENT,
-	       POSTING_TITLE,
-	       POSTING_STARTDATE,
-	       POSTING_ENDDATE
-	 
-  FROM COMPANY C JOIN POSTING P
-  ON   C.COM_ID = P.COM_ID 
-  WHERE P.POSTING_PNO = #{param3}
+ 	SELECT C.COM_NAME,
+	       C.COM_TYPE,
+	       C.COM_ADDRESS,
+	       C.COM_CEO,
+	       C.COM_PHONE,
+	       C.COM_EMAIL,
+	       P.POSTING_PNO,
+	       P.POSTING_CAREER,
+	       P.POSTING_GRADE,
+	       P.POSTING_CONTENT,
+	       P.POSTING_HOPE_DEPARTMENT,
+	       P.POSTING_TITLE,
+	       P.POSTING_STARTDATE,
+	       P.POSTING_ENDDATE
+
+  FROM  COMPANY C 
+  JOIN  POSTING P         ON    C.COM_ID = P.COM_ID 
+
+  WHERE P.POSTING_PNO = #{param3}  
 	
 	</select>
-	
+	<select id="getPostingStack">
+	SELECT LISTAGG(POSTING_STACK, ', ') WITHIN GROUP (ORDER BY POSTING_STACK) AS POSTING_STACK
+	FROM POSTING_STACK
+	WHERE POSTING_PNO = #{posting_pno}
+	</select>
 
 	
 	<delete id="postingDelete">
 		DELETE FROM POSTING
-		WHERE POSTING_PNO = 1
+		WHERE POSTING_PNO =#{posting_pno}
 	</delete>
 	
 	<delete id="deleteCompany">

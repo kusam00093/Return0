@@ -161,9 +161,7 @@
 </head>
 <body>
     <%@ include file="/WEB-INF/include/Header.jsp" %>
-  <input type="hidden" name="nowpage" value="${nowpage}">
-  <input type="hidden" name="com_id" value="${com_id}">
-  <input type="hidden" name="nowpage" value="${user_id}">
+
     <form action="/Resume">
         <div class="title">${map.posting_title}</div>
         <div>&nbsp;</div>
@@ -180,7 +178,7 @@
 	        <div>학력</div>
 	        <div id="inside_title">${map.posting_grade}</div>
 	        <div>스킬</div>
-	        <div id="inside_title">자바</div>
+	        <div id="inside_title">${vo.posting_stack}</div>
         </div>
         <div class="company">
         <div class="sub_title1">기업 정보</div>

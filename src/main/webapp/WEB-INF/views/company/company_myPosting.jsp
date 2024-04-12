@@ -120,31 +120,39 @@
     </div>
   </div>
   <div class="right">
-    <h4>내가 작성한 공고</h4>
+    <h4>내가 작성한 공고에 지원자 현황</h4>
     <ul class="job-list">
         <li>
           <table>
             <thead>
               <tr>
                 <th>번호</th>
-                <th>제목</th>
-                <th>모집부서</th>
-                <th>마감기한</th>
-                <th>수정</th>
-                <th>삭제</th>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>전화번호</th>
+                <th>상세보기</th>
+                <th>비고</th>
               </tr>
             </thead>
             <tbody>
           
-              <c:forEach var="co" items="${postingList}"> 
+              <c:forEach var="vo" items="${ResumeList}"> 
                <tr>
-                  <td>${co.row_number}</td>
-                  <td><a href="/Company/PostingView?nowpage=${nowpage}&posting_pno=${co.posting_pno}">
-                  <input type="hidden"  data-posting-pno="${co.posting_pno}"/>${co.posting_title}</a></td>
-                  <td>${co.posting_hope_department}</td>
-                  <td>${co.posting_enddate}</td>
-                  <td><button type="button" class="btn btn-info" id="goView">수정</button></td>
-                  <td><button type="button" class="btn btn-info" id="goDelete">삭제</button></td>
+                  <td>${vo.row_number}</td>
+                  <td>${vo.user_name}</a></td>
+                  <td>${vo.user_email}</td>
+                  <td>${vo.user_phone}</td>
+                  <td><a href="/Resume/View?nowpage=${nowpage}" class="btn btn-ifno" id="goView">상세보기</a></td>
+                  <td>											    
+                                         			<c:choose>
+                                             			 <c:when test="${item.applicant_recode_result == 1}">
+                                                  			<button type="button" class="btn btn-info">대기</button>
+                                              			</c:when>
+                                             		    <c:when test="${item.applicant_recode_result == 0}">
+                                                 		    <button type="button" class="btn btn-danger">불합격</button> 
+                                                 	   </c:when>
+                                        		    </c:choose>
+                                                 </td>
                 </tr>
               </c:forEach>
              </tbody>
@@ -199,9 +207,9 @@ function displayBookmarks() {
         .catch(error => console.error('Error fetching bookmarks:', error));
 }
 
-const  goViewEl  = document.getElementById('goView');
-goViewEl.addEventListener('click', function(e) {
-    location.href = '/Company/Posting/UpdateForm?nowpage=${nowpage}&posting_pno=${posting_pno}';
+const  goDeleteEl  = document.getElementById('goDelete');
+goDeleteEl.addEventListener('click', function(e) {
+	alert('삭제되었습니다');
 })
 </script> 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

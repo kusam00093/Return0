@@ -88,11 +88,9 @@
 </head>
 <body>
   <main>
-    <input type="hidden" name="nowpage" value="${nowpage}">
-  <input type="hidden" name="com_id" value="${com_id}">
-  <input type="hidden" name="nowpage" value="${user_id}">
+ 
     <h2>공고 수정</h2>
-    <form action="/Company/Posting/Write?nowpage=${nowpage}" method="POST">
+    <form action="/Company/Posting/Update?nowpage=${nowpage}&posting_pno=${vo.posting_pno}" method="POST">
         <table>
             <tr>
             
@@ -131,10 +129,14 @@
             	<td>채용 공고 내용</td>
                 <td><textarea name="posting_content" placeholder="공고 내용을 입력하세요">${vo.posting_content }</textarea></td>
             </tr>
+            <tr>
+                <td><input type="hidden" name="myposting"  value="${vo.posting_title }"/></td>
+            </tr>
+            
            
             <tr>
                 <td colspan="2">
-                    <input type="submit" value="등록하기" />
+                    <input type="submit" value="수정하기" />
                 </td>
             </tr>
         </table>
