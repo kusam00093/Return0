@@ -115,7 +115,7 @@
         <h2>이력서 리스트</h2>
         <div class ="person_date">
            
-           <a href="/Resume/WriteForm">이력서 등록</a>
+           <a href="/Resume/ApplyForm">이력서 지원</a>
             
             
 <!--              <button onclick="resumeWrite()">이력서 등록</button> -->
@@ -137,11 +137,9 @@
        <tr>
          <td>${ resumeVo.resume_rno    }</td>
          <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
+         <td><a href="/Company/Posting?resume_rno=${ resumeVo.resume_rno }">지원하기</a></td>         
         
-<%--          <td>${ resumeVo.menu_seq   }</td>          --%>
-         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>         
-         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">수정</a></td>
-<!--          <td><button onclick="resumeUpdate()">수정</button></td> -->
+
        </tr>
        </c:forEach>
       
