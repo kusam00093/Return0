@@ -1,7 +1,6 @@
 package com.board.login.domain;
 
 import lombok.AllArgsConstructor;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +17,11 @@ public class LoginUserVo {
 	private String user_phone;
 	private String user_social_num;
 	private  String   indate;
+	
+	
+
+	}
 
 
 	
-}
+

@@ -1,8 +1,13 @@
 package com.board.login.controller;
 
+import java.util.HashMap;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.login.domain.LoginUserVo;
@@ -13,9 +18,9 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 
-
-@Slf4j
 @Controller
+@Service
+@Slf4j
 public class LoginUserController {
 
 
@@ -100,8 +105,31 @@ public class LoginUserController {
 		return mv;
 	}
 
+	
+	@RequestMapping("/IdDupCheck")
+	@ResponseBody
+	public String IdDupCheck(LoginUserVo userVo) {
+		
+		HashMap<String, Object>  map =  userMapper.getUser(userVo);
+		System.out.println(map);
+		// db id 중복체크 결과(서버data) 를 html 에 돌려준다
+		
+		if ( map == null  ) {
+			return "<h2 style='color:green'>사용가능한 아이디입니다</h2>";
+		} else {
+			if( userVo.getUser_id().equals(map.get("user_id"))) {
+				return "<h2 style='color:red'>사용할 수 없는 아이디입니다</h2>";			
+			} 
+		
+		}
+		return "<h2 style='color:red'>사용할 수 없는 아이디입니다</h2>";}}
+	
+
+
+   
+
 	    
-}
+
 
 	
 	

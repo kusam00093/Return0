@@ -86,6 +86,16 @@
     #USER_SOCIAL_NUM2 {
         width: calc(70% - 10px); 
     }
+    /* 중복아이디 존재하지 않는경우 */
+	.id_input_re_1{
+		color : green;
+		display : none;
+	}
+	/* 중복아이디 존재하는 경우 */
+	.id_input_re_2{
+		color : red;
+		display : none;
+	}
 </style>
 
 
@@ -145,10 +155,10 @@
  
         <table>
        <tr>
-        <td><input type="text" id="userid" name="user_id" placeholder="아이디를 입력하세요" required />
-                        <button type="button" id="checkDuplicateBtn" style="background-color: #3f98f7; color: white; border: none; 
-                        cursor: pointer; padding: 10px; border-radius: 5px;">중복 확인</button>
-                        <span id="userIdMessage"></span>
+        <td><input type="text" id="userid" name="user_id" maxlength="15" placeholder="아이디를 입력하세요" required />
+                    <input type="button" value="중복확인" id="btnIdCheck"  style="background-color: #3f98f7; color: white; border: none; 
+            cursor: pointer; padding: 10px; border-radius: 5px;"/>   
+                        	<div id="output"></div>
                     </td>
             <tr>
                 <td><input type="password" name="user_passwd" id=pw1 placeholder="비밀번호를 입력하세요" oninput="pwCheck()" />
@@ -165,7 +175,8 @@
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="user_social_num" id= socialnum placeholder="주민등록번호를 입력하세요"  oninput="encryptAndDisplay(this)"/> 
+                    <input type="text" name="user_social_num" id= socialnum placeholder="주민등록번호를 입력하세요" maxlength="13" oninput="encryptAndDisplay(this)"/
+                    > 
                  
                 </td>
             </tr>
@@ -173,7 +184,7 @@
                 <td><input type="text" name="user_phone" placeholder="전화번호를 입력하세요"  /></td>
             </tr>
             <tr>
-                <td><input type="text" name="user_email" placeholder="이메일을 입력하세요" /></td>
+                <td><input type="text" name="user_email" placeholder="이메일을 입력하세요" maxlength="20" /></td>
             </tr>
             <tr>
                 <td>
@@ -225,8 +236,24 @@
             input.value = input.value.slice(0, 6) + encryptedPart;
         }
     </script>
+<script>
 
+const  btnIdCheckEl = document.querySelector('#btnIdCheck');
+btnIdCheckEl.onclick = function(e) {     
+	// alert('중복확인체크');
+	 const  outputEl = document.querySelector('#output');
+	 	  	 
+    let    intext    = document.querySelector('[name=user_id]');
+    // 서버 Controller에 있는 /IdDupCheck 주소를 실행 
+    fetch('/IdDupCheck?user_id=' + intext.value)
+      .then(response => response.text())  // 서버 data 가 html
+      .then((data) => {   // data <- response.text()
+     	  console.log(data);
+		  outputEl.innerHTML = data;    	 
+      });        	 
+}
 
+</script>
 
 </body>
 </html>
