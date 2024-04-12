@@ -42,10 +42,11 @@ public class UserController {
 
             
             @RequestMapping("/User/View")
-            public ModelAndView view(HttpServletRequest request, int nowpage) throws JsonProcessingException {
+            public ModelAndView view(HttpServletRequest request,int nowpage) throws JsonProcessingException {
                HttpSession session = request.getSession();
                LoginUserVo loginUserVo  = (LoginUserVo)session.getAttribute("userLogin");
                String userid = loginUserVo.getUser_id();
+              
               //밑에는 url로 가지고 오는거
               // String userid = request.getParameter("user_id");
                System.out.println("---------------------");
