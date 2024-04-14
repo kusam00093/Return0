@@ -180,6 +180,91 @@ button, lable {
 	display: flex;
 	align-items: center;
 }
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+.btn_filter_box span{
+	font-size: 16px;
+	letter-spacing: 0;
+	line-height: 22px;
+}
+.btn_filter_box span.filter_text.selected{
+	display: inline-block;
+}
+.btn_filter_box span.filter_text{
+	font-weight: 700;
+	color: #003ecb;
+	margin-left: 12px;
+	display: none;
+}
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+.dev_wrap-department .btn_filter{
+	position: relative;
+}
+.dev_wrap-department .btn_filter .filter_text.selected{
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	width: 200px;
+	height: 36px;
+	background-color: #fff;
+	color: #003ecb;
+	font-size: 28px;
+}
+.department-box{
+	width: 466px;
+	top: 108px;
+	
+}
+
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+
+
+
+
+
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+/*------------------------------------  */
+
+
+
 
 .recruitTitBox .btn_filter_box i.arrow {
 	width: 20px;
@@ -347,34 +432,39 @@ button, lable {
 	.recruitWrap .recruitList ul{
 		display: flex;
 		flex-wrap: wrap;
+		gap:20px 4%;
 		margin: 0;
+		padding: 0;
+		list-style: none;
 		 width: 100%; /* 원하는 너비 설정 */
          height: auto;
-         justify-content: space-between;
+        
 	}          
 	.recruitWrap .recruitList ul>li{
+	
+    margin-bottom: 32px;
+   	width: 22%;
 		
-		margin-bottom: 32px;
 		
 	}
-	.recruitWrap .recruitList ul>li:nth-child(4n+1) {
-		
-	}
-	.recruitWrap .recruitList ul>li:nth-child(4n) {
-		m
-	}
-	.recruitWrap .recruitList ul .listCell{
+	
+	.recruitWrap .recruitList ul li .listCell{
 		cursor: pointer;
 		border: 1px solid #e8e8e8;
 		box-sizing: border-box;
 		box-shadow: 2px 2px 10px rgba(0,0,0,.05);
 		border-radius: 8px;
-		width: 286px;
+		width: 100%;
 		height: 350px;
 		position: relative;
 		transition: .3s;
 		color:  #333;
 		
+		
+	}
+
+	.recruitWrap .recruitList ul>li:nth-child(4n) {
+		margin-right: 0;
 	}
 	.recruitWrap .recruitList ul .listCell .pLogo{
 		position: relative;
@@ -636,16 +726,49 @@ button, lable {
 			<div class="recruitTitContainer">
 				<div class="recruitTitBox">
 					<div class="container">
-						<div class="box_top">
+						<div class="box_top dev_wrap-department">
 							<p class="recruitTit">직무 전체</p>
-							<button class="btn_filter">직무를 선택해주세요(버튼)</button>
-							<div class="filter-box"></div>
+							<button class="btn_filter">
+								<span>직무를 선택해주세요</span>
+								<span class ="filter_text dev-select-text"></span>
+								<i class ="arrow"></i>
+							</button>
+							<div class="filter-box department-box">
+								<ul>
+									<li>
+										<button class ="dev-button-all">전체</button>
+									</li>
+									<li>
+										<button class ="dev-button-item">백엔드</button>
+									</li>
+									<li>
+										<button class ="dev-button-item">프론트엔드</button>
+									</li>
+									<li>
+										<button class ="dev-button-item">물류</button>
+									</li>
+									<li>
+										<button class ="dev-button-item">금융</button>
+									</li>
+									<li>
+										<button class ="dev-button-item">의료</button>
+									</li>
+									<li>
+										<button class ="dev-button-item">영업</button>
+									</li>
+								</ul>
+								<div class ="button-box">
+									<button class ="search-reset">초기화</button>
+									<button class = "search-button">적용하기</button>
+								</div>
+							</div>
 						</div>
 						<div class="box_bottom">
 							<div class="btn_boxes">
 								<div class="btn_box dev_wrap-local">
 									<button class="btn_filter btn_filter_box">
 										<span>지역</span> 
+										<span class ="filter_text dev-select-text">서울</span>
 										<i class="arrow"></i>
 									</button>
 									<div class="filter-box district-box">
@@ -675,8 +798,9 @@ button, lable {
 								<div class="btn_box dev_wrap-career">
 									<button class="btn_filter btn_filter_box">
 										<span>경력</span> 
+										<span class ="filter_text dev-select-text">신입</span>
 										<i class="arrow"></i>
-										<!-- 여기버튼 div  -->
+									
 									</button>
 									<div class="filter-box carreer-box" >
 										<ul>
@@ -784,165 +908,41 @@ button, lable {
 					<div id ="searchLog"></div>
 					<div id ="searchList" class ="recruitList">
 						<ul data-totalcount = "4" data-pageno ="1">
+						<c:forEach var="item" items="${ homeSearchVo }" varStatus="loop">
+						
 							<li>
 								<a href ="#" class ="listCell">
 									<div class="pLogo"><img src ="/img/searchbg06.jpg"></div>
 									<div class="listCont">
 										<div class="pCor">
-											<span class ="posNm">콜로세움퍼레이션</span>
+											<span class ="posNm">${item.com_name }</span>
 										</div>
-										<div class ="pTit">Brand Marketing 본부장(팀장)</div>
+										<div class ="pTit">${item.posting_title }</div>
 										<div class ="pInfo">
 											<span class ="pPart">
-												"백엔드"
+												${item.posting_hope_department }
 											</span>
 											<span class ="pAddress">
-											  서울 강남구
+											  ${item.com_address }
 											</span>
 										</div>
 										<div class ="pStackBox">
-											<span class ="tag tag-tack">css</span>
-											<span class ="tag tag-tack">java</span>
-											<span class ="tag tag-tack">html</span>
+											<span class ="tag tag-tack">${item.posting_stack }</span>
+											<!-- <span class ="tag tag-tack">java</span>
+											<span class ="tag tag-tack">html</span> -->
 										</div>
 									</div><!-- listCount -->
 									<div class="listFoot">
 										<div class ="pAssist">
 											<span>🏆 합격축하금 100만원</span>
-											<span class ="pPeriod">~05/11</span>
-										</div>
-									</div>
-									<button class="bookmark"></button>
-								</a>
-							</li>
-							<li>
-								<a href ="#" class ="listCell">
-									<div class="pLogo"><img src ="/img/searchbg06.jpg"></div>
-									<div class="listCont">
-										<div class="pCor">
-											<span class ="posNm">콜로세움퍼레이션</span>
-										</div>
-										<div class ="pTit">Brand Marketing 본부장(팀장)</div>
-										<div class ="pInfo">
-											<span class ="pPart">
-												"백엔드"
-											</span>
-											<span class ="pAddress">
-											  서울 강남구
-											</span>
-										</div>
-										<div class ="pStackBox">
-											<span class ="tag tag-tack">css</span>
-											<span class ="tag tag-tack">java</span>
-											<span class ="tag tag-tack">html</span>
-										</div>
-									</div><!-- listCount -->
-									<div class="listFoot">
-										<div class ="pAssist">
-											<span>🏆 합격축하금 100만원</span>
-											<span class ="pPeriod">~05/11</span>
-										</div>
-									</div>
-									<button class="bookmark"></button>
-								</a>
-							</li>
-							<li>
-								<a href ="#" class ="listCell">
-									<div class="pLogo"><img src ="/img/searchbg06.jpg"></div>
-									<div class="listCont">
-										<div class="pCor">
-											<span class ="posNm">콜로세움퍼레이션</span>
-										</div>
-										<div class ="pTit">Brand Marketing 본부장(팀장)</div>
-										<div class ="pInfo">
-											<span class ="pPart">
-												"백엔드"
-											</span>
-											<span class ="pAddress">
-											  서울 강남구
-											</span>
-										</div>
-										<div class ="pStackBox">
-											<span class ="tag tag-tack">css</span>
-											<span class ="tag tag-tack">java</span>
-											<span class ="tag tag-tack">html</span>
-										</div>
-									</div><!-- listCount -->
-									<div class="listFoot">
-										<div class ="pAssist">
-											<span>🏆 합격축하금 100만원</span>
-											<span class ="pPeriod">~05/11</span>
-										</div>
-									</div>
-									<button class="bookmark"></button>
-								</a>
-							</li>
-							<li>
-								<a href ="#" class ="listCell">
-									<div class="pLogo"><img src ="/img/searchbg06.jpg"></div>
-									<div class="listCont">
-										<div class="pCor">
-											<span class ="posNm">콜로세움퍼레이션</span>
-										</div>
-										<div class ="pTit">Brand Marketing 본부장(팀장)</div>
-										<div class ="pInfo">
-											<span class ="pPart">
-												"백엔드"
-											</span>
-											<span class ="pAddress">
-											  서울 강남구
-											</span>
-										</div>
-										<div class ="pStackBox">
-											<span class ="tag tag-tack">css</span>
-											<span class ="tag tag-tack">java</span>
-											<span class ="tag tag-tack">html</span>
-										</div>
-									</div><!-- listCount -->
-									<div class="listFoot">
-										<div class ="pAssist">
-											<span>🏆 합격축하금 100만원</span>
-											<span class ="pPeriod">~05/11</span>
-										</div>
-									</div>
-									<button class="bookmark"></button>
-								</a>
-							</li>
-							<li>
-								<a href ="#" class ="listCell">
-									<div class="pLogo"><img src ="/img/searchbg06.jpg"></div>
-									<div class="listCont">
-										<div class="pCor">
-											<span class ="posNm">콜로세움퍼레이션</span>
-										</div>
-										<div class ="pTit">Brand Marketing 본부장(팀장)</div>
-										<div class ="pInfo">
-											<span class ="pPart">
-												"백엔드"
-											</span>
-											<span class ="pAddress">
-											  서울 강남구
-											</span>
-										</div>
-										<div class ="pStackBox">
-											<span class ="tag tag-tack">css</span>
-											<span class ="tag tag-tack">java</span>
-											<span class ="tag tag-tack">html</span>
-										</div>
-									</div><!-- listCount -->
-									<div class="listFoot">
-										<div class ="pAssist">
-											<span>🏆 합격축하금 100만원</span>
-											<span class ="pPeriod">~05/11</span>
+											<span class ="pPeriod">${item.posting_enddate }</span>
 										</div>
 									</div>
 									<button class="bookmark"></button>
 								</a>
 							</li>
 							
-							
-							
-
+						</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -954,18 +954,46 @@ button, lable {
 	<script>
 	 
 	document.addEventListener("DOMContentLoaded", function() {
+	 
+
+		var searchLikeVo ={
+				department: "전체",
+				local: "전체",
+				career: "경력무관"
+				
+		}
+		var searchLikeIndex = 0; 
+		
+		function changeLikeIndex(index, value){
+			switch (index){
+			case 0:
+				searchLikeVo.department = value;
+				break;
+			case 1:
+				searchLikeVo.local = value;
+				break;
+			case 2:
+				searchLikeVo.career =value;
+				break;
+			default:
+				console.log("서치버튼클릭중 인데슥에서 오류남");
+				break;
+			}	
+		}
+		
 	    // 모든 버튼 요소를 선택합니다.
-	    var btnBoxes = document.querySelectorAll('.btn_filter_box');
+	    var btnBoxes = document.querySelectorAll('.btn_filter');
 
 	    // 각 버튼 요소에 대해 클릭 이벤트를 추가합니다.
 	    btnBoxes.forEach(function(btnBox) {
 	        btnBox.addEventListener('click', function() {
+	        	// 현재 클릭된 버튼의 부모 요소에서 모든 버튼을 찾습니다.
 	            var parentClass = btnBox.parentElement.classList;
-	     
+	     	
 	            // 클릭된 버튼 요소의 클래스를 확인하여 이벤트를 처리합니다.
-	            var btnClass = parentClass.contains('dev_wrap-local') ? 'local' :
-	                           parentClass.contains('dev_wrap-career') ? 'career' :
-	                           parentClass.contains('dev_wrap-edu-level') ? 'level' : '';
+	            var btnClass = parentClass.contains('dev_wrap-department') ? 'department' :
+	                           parentClass.contains('dev_wrap-local') ? 'local' :
+	                           parentClass.contains('dev_wrap-career') ? 'career' : '';
 	            var filterBox = btnBox.nextElementSibling;
 
 	            var siblingFilterBoxes = document.querySelectorAll('.filter-box');
@@ -977,21 +1005,25 @@ button, lable {
 	            
 	            // 각 버튼에 대한 처리
 	            switch (btnClass) {
+	                case 'department':
+	                	filterBox.classList.toggle('open');
+	                	searchLikeIndex = 0;
+	                	break;
 	                case 'local':
 	                   filterBox.classList.toggle('open');
+	                   searchLikeIndex = 1;
 	                    break;
 	                case 'career':
 	                    filterBox.classList.toggle('open');
-	                    break;
-	                case 'level':
-	                    filterBox.classList.toggle('open');
+	                    searchLikeIndex = 2;
 	                    break;
 	                default:
 	                    break;
 	            }
 
-	            // 현재 클릭된 버튼의 부모 요소에서 모든 버튼을 찾습니다.
+	            
 	            var buttons = filterBox.querySelectorAll('ul li button');
+	            
 	            // 각 버튼에 대해 클릭 이벤트를 추가합니다.
 	            buttons.forEach(function(button) {
 	                button.addEventListener('click', function() {
@@ -1003,13 +1035,172 @@ button, lable {
 	                    });
 	                    // 현재 클릭된 버튼에 active 클래스를 추가합니다.
 	                    button.classList.add('active');
+	                    
 	                });
 	            });//buttons.forEach
 	            var applybtn = filterBox.querySelector('.button-box .search-button');
-	            applybtn.addEventListener('click', function() {
+	            applybtn.addEventListener('click', function() {//적용하기 클릭
                    
-	            	var activeButtons = document.querySelector('.dev-button-tiem.active');
+	            	//var activeButtons = document.querySelector('.dev-button-item.active');
+	            	var activeButton = filterBox.querySelector('.active');
+	            	if(activeButton){
+	            		var chooseBtnText = activeButton.innerText;
+	            		
+	            		changeLikeIndex(searchLikeIndex, chooseBtnText);
+	            		
+	            		
+	            		console.log(searchLikeVo);
+	            		console.log(searchLikeVo);
+	            		console.log(searchLikeVo);
+		            	var choosetxt = btnBox.querySelector('.dev-select-text');
+		            	
+		            	choosetxt.classList.add('selected');
+		            	choosetxt.innerText = chooseBtnText;
+	            		
+	            	}
+	           /*------------------------------------------  */
+     			  fetch("/Home/Search", {
+     					method:'POST',
+     					headers:{
+     						 'Content-Type': 'application/json'
+     					},
+     					body:JSON.stringify(searchLikeVo)
+     					
+     				})
+     				.then(response =>{
+     					if(!response.ok){
+     						throw new Error('리스폰 객체를 못가지고 옴')
+     					}
+     					return response.json();
+     					
+     				})
+     				.then(homeSearchString =>{
+     					console.log('서버에서 데이터 가지고 옴', homeSearchString);
+     					var oldUlEl = document.querySelector('#searchList ul');
+     					
+     					oldUlEl.remove();
+     						
+     					
+     					const newUlEl = document.createElement('ul');
+     					
+     					/* 생성 */
+     				/* 	const listUl = document.querySelector('.sarchList ul'); */
+     					homeSearchString.forEach(item => {
+    	            	    // 각각의 book 데이터로부터 <tr> 요소를 생성합니다.
+    	            	    const liEL = document.createElement('li');
+    	            	    
+    	            	    // 각 필드에 대한 데이터를 삽입하여 <td> 요소를 생성하고 <tr> 요소에 추가합니다.
+    	            	    const aEl = document.createElement('a');
+    	            	    aEl.href = "/company/"+item.posting_pno;
+    	            	    aEl.classList.add("listCell");
+    	            	    liEL.appendChild(aEl);
+    	            	    
+    	            	    const pLogoEl = document.createElement('div');
+    	            	    pLogoEl.classList.add("pLogo");
+    	            	    aEl.appendChild(pLogoEl);
+    	            	    
+    	            	    const pLogoImgEl = document.createElement('img');
+    	            	    pLogoImgEl.src ="/img/"+item.posting_com_profile +".jpg";
+    	            	    pLogoEl.appendChild(pLogoImgEl);
+    	            	    
+    	            	    // a 요소 내부에 있는 listCont div 요소 생성
+    	            	    const listContEl = document.createElement('div');
+    	            	    listContEl.classList.add("listCont");
+    	            	    aEl.appendChild(listContEl);
+    	            	    
+    	            	    
+    	            	    
+    	            	 // listCont div 요소 내부에 있는 pCor div 요소 생성
+    	            	    const pCorEl = document.createElement('div');
+    	            	    pCorEl.classList.add("pCor");
+    	            	    listContEl.appendChild(pCorEl);
+
+    	            	    // pCor div 요소 내부에 있는 span 요소 생성 및 텍스트 설정
+    	            	    const posNmSpan = document.createElement('span');
+    	            	    posNmSpan.classList.add("posNm");
+    	            	    posNmSpan.textContent = item.com_name;
+    	            	    pCorEl.appendChild(posNmSpan);
+
+    	            	    // listCont div 요소 내부에 있는 pTit div 요소 생성
+    	            	    const pTitEl = document.createElement('div');
+    	            	    pTitEl.classList.add("pTit");
+    	            	    pTitEl.textContent = item.posting_title;
+    	            	    listContEl.appendChild(pTitEl);
+
+    	            	    // listCont div 요소 내부에 있는 pInfo div 요소 생성
+    	            	    const pInfoEl = document.createElement('div');
+    	            	    pInfoEl.classList.add("pInfo");
+    	            	    listContEl.appendChild(pInfoEl);
+
+    	            	    // pInfo div 요소 내부에 있는 pPart span 요소 생성 및 텍스트 설정
+    	            	    const pPartSpan = document.createElement('span');
+    	            	    pPartSpan.classList.add("pPart");
+    	            	    pPartSpan.textContent = item.posting_hope_department;
+    	            	    pInfoEl.appendChild(pPartSpan);
+
+    	            	    // pInfo div 요소 내부에 있는 pAddress span 요소 생성 및 텍스트 설정
+    	            	    const pAddressSpan = document.createElement('span');
+    	            	    pAddressSpan.classList.add("pAddress");
+    	            	    pAddressSpan.textContent = item.com_address;
+    	            	    pInfoEl.appendChild(pAddressSpan);
+
+    	            	    // listCont div 요소 내부에 있는 pStackBox div 요소 생성
+    	            	    const pStackBoxEl = document.createElement('div');
+    	            	    pStackBoxEl.classList.add("pStackBox");
+    	            	    listContEl.appendChild(pStackBoxEl);
+
+    	            	    // pStackBox div 요소 내부에 있는 tag span 요소 생성 및 텍스트 설정
+    	            	    const tagSpan = document.createElement('span');
+    	            	    tagSpan.classList.add("tag", "tag-tack");
+    	            	    tagSpan.textContent = item.posting_stack;
+    	            	    pStackBoxEl.appendChild(tagSpan);
+
+    	            	    // listCont div 요소 내부에 있는 listFoot div 요소 생성
+    	            	    const listFootEl = document.createElement('div');
+    	            	    listFootEl.classList.add("listFoot");
+    	            	    aEl.appendChild(listFootEl);
+
+    	            	    // listFoot div 요소 내부에 있는 pAssist div 요소 생성
+    	            	    const pAssistEl = document.createElement('div');
+    	            	    pAssistEl.classList.add("pAssist");
+    	            	    listFootEl.appendChild(pAssistEl);
+
+    	            	    // pAssist div 요소 내부에 있는 span 요소 생성 및 텍스트 설정
+    	            	    const congratSpan = document.createElement('span');
+    	            	    congratSpan.textContent = "🏆 합격축하금 100만원";
+    	            	    pAssistEl.appendChild(congratSpan);
+
+    	            	    // pAssist div 요소 내부에 있는 pPeriod span 요소 생성 및 텍스트 설정
+    	            	    const pPeriodSpan = document.createElement('span');
+    	            	    pPeriodSpan.classList.add("pPeriod");
+    	            	    pPeriodSpan.textContent = item.posting_enddate;
+    	            	    pAssistEl.appendChild(pPeriodSpan);
+
+    	            	    // a 요소 내부에 있는 button 요소 생성
+    	            	    const buttonEl = document.createElement('button');
+    	            	    buttonEl.classList.add("bookmark");
+    	            	    aEl.appendChild(buttonEl);
+    	            	    
+    	            	    
+    	            	    newUlEl.appendChild(liEL);
+
+    	            	});
+     					 document.querySelector('.secContents #searchList').appendChild(newUlEl);
+     					 
+     					
+     					
+     				})
+     				.catch(error =>{
+     					console.error('fetch에서 뭔가 문제가 생김', error);
+     				}); 
+     				
+     				/*-------------------------  */
+	            	
+	            	filterBox.classList.remove('open');
+	            	
+	            	//siblingFilterBoxes.style.display = 'none';
                 });
+	            //.btn_filter_box span.filter_text selected
 	        });
 	    });// btnBoxes.forEach
 	});
