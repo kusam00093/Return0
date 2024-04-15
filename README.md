@@ -43,7 +43,12 @@
 ●이력서 홈 만들기<br>
 ●이력서 등록,삭제, 수정<br>
 <h2>데이터베이스 설계</h2>
-![DBFINAL](https://github.com/kusam00093/Return0/assets/160395424/1e512288-2e57-4508-9a84-24c063dee893)
+![image](https://github.com/kusam00093/Return0/assets/160395424/930f8139-6e9f-4acd-b432-50eaf3483227)
+
+<h2>테스트</h2>
+![image](https://github.com/kusam00093/Return0/assets/160395424/974af28e-803f-42ab-a6a6-1aa9f341620f)
+
+
 <h2>GitHub</h2>
 ●레파지토리 생성 후 각 팀원에게 하나의 branch 를 배당하여 분담역할 진행
 <h2>일정관리</h2>
