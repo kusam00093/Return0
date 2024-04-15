@@ -14,4 +14,8 @@ public interface HomeMapper {
 
 	List<HomeSearchVo> getLikeList(HomeSearchLikeVo request);
 
+	int getCount();
+
+	int getLikeCount(HomeSearchLikeVo request);
+
 }

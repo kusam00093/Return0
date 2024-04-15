@@ -11,7 +11,7 @@ public class HomeSearchLikeVo {
  private String department;
  private String local;
  private String career;
-
+ private String searchIcon;
  
 
 }

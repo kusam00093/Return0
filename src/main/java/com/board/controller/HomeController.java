@@ -2,6 +2,7 @@ package com.board.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +30,14 @@ public class HomeController {
 	public  ModelAndView   home() {
 		ModelAndView    mv    = new ModelAndView("home");
 		List<HomeSearchVo> homeSearchVo = homeMapper.getAllList(); 
-		
+		int count = homeMapper.getCount();
 		mv.addObject("homeSearchVo", homeSearchVo);
-		
+		mv.addObject("count",count);
 		
 		return mv;
 	}
 	@RequestMapping("/Home/Search")
-	public ResponseEntity<String> likeHome(@RequestBody  HomeSearchLikeVo request) throws JsonProcessingException{
+	public ResponseEntity<Map<String, Object>> likeHome(@RequestBody  HomeSearchLikeVo request) throws JsonProcessingException{
 		if (request.getDepartment().equals("전체")) {
 	        request.setDepartment(null);
 	    }
@@ -46,18 +47,29 @@ public class HomeController {
 		if (request.getCareer().equals("경력무관")) {
 	        request.setCareer(null);
 	    }
+		if (request.getSearchIcon().equals("") || request.getSearchIcon().equals("전체")) {
+	        request.setSearchIcon(null);
+	    }
+		
 		System.out.println(request);
 		System.out.println(request);
 		System.out.println(request);
 		
 			List<HomeSearchVo> homeSearchVo = homeMapper.getLikeList(request);
+			int count = homeMapper.getLikeCount(request);
+			
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			String homeSearchString = objectMapper.writeValueAsString(homeSearchVo);
 			System.out.println(homeSearchString);
+			
+			Map<String, Object> responseData = new HashMap<>();
+			responseData.put("count", count);
+			responseData.put("homeSearchString", homeSearchString);
 	    	
-	    	 return ResponseEntity.ok(homeSearchString);
+	    	 return ResponseEntity.ok(responseData);
 	}
+	
 
 
 	

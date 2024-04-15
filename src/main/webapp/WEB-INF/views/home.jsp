@@ -106,6 +106,15 @@ main {
 	margin: 0 auto;
 	padding-top: 56px
 }
+.recruitTitBox.fixed{
+	position: fixed;
+    top: 0;
+    background-color: #fff;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 0;
+    z-index: 555;
+}
 
 .container {
 	min-width: 1200px;
@@ -171,6 +180,9 @@ button, lable {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+}
+.box_bottom .btn_boxes .btn_box{
+
 }
 
 .recruitTitBox .btn_filter_box {
@@ -362,7 +374,9 @@ button, lable {
 	display: block;
 	clear: both;
 }
-
+.recruitFilter-section .sort-select-box .sort-select-all{
+	float: left;
+}
 .recruitFilter-section .sort-select-box .sort-select-all span {
 	font-size: 16px;
 	letter-spacing: 0;
@@ -455,7 +469,7 @@ button, lable {
 		box-shadow: 2px 2px 10px rgba(0,0,0,.05);
 		border-radius: 8px;
 		width: 100%;
-		height: 350px;
+		height: 330px;
 		position: relative;
 		transition: .3s;
 		color:  #333;
@@ -820,6 +834,12 @@ button, lable {
 										</div>
 									</div>
 								</div>
+								<div class ="btn_box">
+									<button class ="btn_reset" id ="resetCondition">
+										<i></i>
+										<span>초기화</span>
+									</button>
+								</div>
 								
 							</div>
 							<!-- btn_boxes -->
@@ -892,7 +912,7 @@ button, lable {
 				<div class="recruitFilter-section">
 					<div class="sort-select-box">
 						<div class="sort-select-all">
-							<span> 총 <em id="totalCount">22</em> 건
+							<span> 총 <em id="totalCount">${count }</em> 건
 							</span>
 						</div>
 						<div class="drop-down-box">
@@ -912,7 +932,7 @@ button, lable {
 						
 							<li>
 								<a href ="#" class ="listCell">
-									<div class="pLogo"><img src ="/img/searchbg06.jpg"></div>
+									<div class="pLogo"><img src ="/img/${item.posting_com_profile}.jpg"></div>
 									<div class="listCont">
 										<div class="pCor">
 											<span class ="posNm">${item.com_name }</span>
@@ -952,14 +972,18 @@ button, lable {
 	
 	<%@include file="/WEB-INF/include/Footer.jsp"%>
 	<script>
-	 
+	
+	
+	
+	
 	document.addEventListener("DOMContentLoaded", function() {
 	 
 
 		var searchLikeVo ={
 				department: "전체",
 				local: "전체",
-				career: "경력무관"
+				career: "경력무관",
+				searchIcon:"전체"
 				
 		}
 		var searchLikeIndex = 0; 
@@ -975,12 +999,126 @@ button, lable {
 			case 2:
 				searchLikeVo.career =value;
 				break;
+			case 3:
+				searchLikeVo.searchIcon = value;
+				break;
 			default:
 				console.log("서치버튼클릭중 인데슥에서 오류남");
 				break;
 			}	
 		}
-		
+		function fetchData(){
+			fetch("/Home/Search", {
+					method:'POST',
+					headers:{
+						 'Content-Type': 'application/json'
+					},
+					body:JSON.stringify(searchLikeVo)
+					
+				})
+				.then(response =>{
+					if(!response.ok){
+						throw new Error('리스폰 객체를 못가지고 옴')
+					}
+					return response.json();
+					
+				})
+				.then(responseData =>{
+					const data = JSON.parse(responseData.homeSearchString); // responseData의 homeSearchString을 JavaScript 객체로 변환
+				    console.log('서버에서 데이터 가지고 옴', data);
+			        var oldUlEl = document.querySelector('#searchList ul');
+			        oldUlEl.remove();
+
+			        const newUlEl = document.createElement('ul');
+
+			        data.forEach(item => {
+			            const liEL = document.createElement('li');
+			            const aEl = document.createElement('a');
+			            aEl.href = "/company/" + item.posting_pno;
+			            aEl.classList.add("listCell");
+			            liEL.appendChild(aEl);
+
+			            const pLogoEl = document.createElement('div');
+			            pLogoEl.classList.add("pLogo");
+			            aEl.appendChild(pLogoEl);
+
+			            const pLogoImgEl = document.createElement('img');
+			            pLogoImgEl.src = "/img/" + item.posting_com_profile + ".jpg";
+			            pLogoEl.appendChild(pLogoImgEl);
+
+			            const listContEl = document.createElement('div');
+			            listContEl.classList.add("listCont");
+			            aEl.appendChild(listContEl);
+
+			            const pCorEl = document.createElement('div');
+			            pCorEl.classList.add("pCor");
+			            listContEl.appendChild(pCorEl);
+
+			            const posNmSpan = document.createElement('span');
+			            posNmSpan.classList.add("posNm");
+			            posNmSpan.textContent = item.com_name;
+			            pCorEl.appendChild(posNmSpan);
+
+			            const pTitEl = document.createElement('div');
+			            pTitEl.classList.add("pTit");
+			            pTitEl.textContent = item.posting_title;
+			            listContEl.appendChild(pTitEl);
+
+			            const pInfoEl = document.createElement('div');
+			            pInfoEl.classList.add("pInfo");
+			            listContEl.appendChild(pInfoEl);
+
+			            const pPartSpan = document.createElement('span');
+			            pPartSpan.classList.add("pPart");
+			            pPartSpan.textContent = item.posting_hope_department;
+			            pInfoEl.appendChild(pPartSpan);
+
+			            const pAddressSpan = document.createElement('span');
+			            pAddressSpan.classList.add("pAddress");
+			            pAddressSpan.textContent = item.com_address;
+			            pInfoEl.appendChild(pAddressSpan);
+
+			            const pStackBoxEl = document.createElement('div');
+			            pStackBoxEl.classList.add("pStackBox");
+			            listContEl.appendChild(pStackBoxEl);
+
+			            const tagSpan = document.createElement('span');
+			            tagSpan.classList.add("tag", "tag-tack");
+			            tagSpan.textContent = item.posting_stack;
+			            pStackBoxEl.appendChild(tagSpan);
+
+			            const listFootEl = document.createElement('div');
+			            listFootEl.classList.add("listFoot");
+			            aEl.appendChild(listFootEl);
+
+			            const pAssistEl = document.createElement('div');
+			            pAssistEl.classList.add("pAssist");
+			            listFootEl.appendChild(pAssistEl);
+
+			            const congratSpan = document.createElement('span');
+			            congratSpan.textContent = "🏆 합격축하금 100만원";
+			            pAssistEl.appendChild(congratSpan);
+
+			            const pPeriodSpan = document.createElement('span');
+			            pPeriodSpan.classList.add("pPeriod");
+			            pPeriodSpan.textContent = item.posting_enddate;
+			            pAssistEl.appendChild(pPeriodSpan);
+
+			            const buttonEl = document.createElement('button');
+			            buttonEl.classList.add("bookmark");
+			            aEl.appendChild(buttonEl);
+
+			            newUlEl.appendChild(liEL);
+			        });
+
+			        document.querySelector('.secContents #searchList').appendChild(newUlEl);
+			        document.querySelector( '.sort-select-all em').innerText = responseData.count;
+			    })
+			    .catch(error => {
+			        console.error('fetch에서 뭔가 문제가 생김', error);
+			    });
+			
+		}
 	    // 모든 버튼 요소를 선택합니다.
 	    var btnBoxes = document.querySelectorAll('.btn_filter');
 
@@ -1059,140 +1197,8 @@ button, lable {
 	            		
 	            	}
 	           /*------------------------------------------  */
-     			  fetch("/Home/Search", {
-     					method:'POST',
-     					headers:{
-     						 'Content-Type': 'application/json'
-     					},
-     					body:JSON.stringify(searchLikeVo)
-     					
-     				})
-     				.then(response =>{
-     					if(!response.ok){
-     						throw new Error('리스폰 객체를 못가지고 옴')
-     					}
-     					return response.json();
-     					
-     				})
-     				.then(homeSearchString =>{
-     					console.log('서버에서 데이터 가지고 옴', homeSearchString);
-     					var oldUlEl = document.querySelector('#searchList ul');
-     					
-     					oldUlEl.remove();
-     						
-     					
-     					const newUlEl = document.createElement('ul');
-     					
-     					/* 생성 */
-     				/* 	const listUl = document.querySelector('.sarchList ul'); */
-     					homeSearchString.forEach(item => {
-    	            	    // 각각의 book 데이터로부터 <tr> 요소를 생성합니다.
-    	            	    const liEL = document.createElement('li');
-    	            	    
-    	            	    // 각 필드에 대한 데이터를 삽입하여 <td> 요소를 생성하고 <tr> 요소에 추가합니다.
-    	            	    const aEl = document.createElement('a');
-    	            	    aEl.href = "/company/"+item.posting_pno;
-    	            	    aEl.classList.add("listCell");
-    	            	    liEL.appendChild(aEl);
-    	            	    
-    	            	    const pLogoEl = document.createElement('div');
-    	            	    pLogoEl.classList.add("pLogo");
-    	            	    aEl.appendChild(pLogoEl);
-    	            	    
-    	            	    const pLogoImgEl = document.createElement('img');
-    	            	    pLogoImgEl.src ="/img/"+item.posting_com_profile +".jpg";
-    	            	    pLogoEl.appendChild(pLogoImgEl);
-    	            	    
-    	            	    // a 요소 내부에 있는 listCont div 요소 생성
-    	            	    const listContEl = document.createElement('div');
-    	            	    listContEl.classList.add("listCont");
-    	            	    aEl.appendChild(listContEl);
-    	            	    
-    	            	    
-    	            	    
-    	            	 // listCont div 요소 내부에 있는 pCor div 요소 생성
-    	            	    const pCorEl = document.createElement('div');
-    	            	    pCorEl.classList.add("pCor");
-    	            	    listContEl.appendChild(pCorEl);
-
-    	            	    // pCor div 요소 내부에 있는 span 요소 생성 및 텍스트 설정
-    	            	    const posNmSpan = document.createElement('span');
-    	            	    posNmSpan.classList.add("posNm");
-    	            	    posNmSpan.textContent = item.com_name;
-    	            	    pCorEl.appendChild(posNmSpan);
-
-    	            	    // listCont div 요소 내부에 있는 pTit div 요소 생성
-    	            	    const pTitEl = document.createElement('div');
-    	            	    pTitEl.classList.add("pTit");
-    	            	    pTitEl.textContent = item.posting_title;
-    	            	    listContEl.appendChild(pTitEl);
-
-    	            	    // listCont div 요소 내부에 있는 pInfo div 요소 생성
-    	            	    const pInfoEl = document.createElement('div');
-    	            	    pInfoEl.classList.add("pInfo");
-    	            	    listContEl.appendChild(pInfoEl);
-
-    	            	    // pInfo div 요소 내부에 있는 pPart span 요소 생성 및 텍스트 설정
-    	            	    const pPartSpan = document.createElement('span');
-    	            	    pPartSpan.classList.add("pPart");
-    	            	    pPartSpan.textContent = item.posting_hope_department;
-    	            	    pInfoEl.appendChild(pPartSpan);
-
-    	            	    // pInfo div 요소 내부에 있는 pAddress span 요소 생성 및 텍스트 설정
-    	            	    const pAddressSpan = document.createElement('span');
-    	            	    pAddressSpan.classList.add("pAddress");
-    	            	    pAddressSpan.textContent = item.com_address;
-    	            	    pInfoEl.appendChild(pAddressSpan);
-
-    	            	    // listCont div 요소 내부에 있는 pStackBox div 요소 생성
-    	            	    const pStackBoxEl = document.createElement('div');
-    	            	    pStackBoxEl.classList.add("pStackBox");
-    	            	    listContEl.appendChild(pStackBoxEl);
-
-    	            	    // pStackBox div 요소 내부에 있는 tag span 요소 생성 및 텍스트 설정
-    	            	    const tagSpan = document.createElement('span');
-    	            	    tagSpan.classList.add("tag", "tag-tack");
-    	            	    tagSpan.textContent = item.posting_stack;
-    	            	    pStackBoxEl.appendChild(tagSpan);
-
-    	            	    // listCont div 요소 내부에 있는 listFoot div 요소 생성
-    	            	    const listFootEl = document.createElement('div');
-    	            	    listFootEl.classList.add("listFoot");
-    	            	    aEl.appendChild(listFootEl);
-
-    	            	    // listFoot div 요소 내부에 있는 pAssist div 요소 생성
-    	            	    const pAssistEl = document.createElement('div');
-    	            	    pAssistEl.classList.add("pAssist");
-    	            	    listFootEl.appendChild(pAssistEl);
-
-    	            	    // pAssist div 요소 내부에 있는 span 요소 생성 및 텍스트 설정
-    	            	    const congratSpan = document.createElement('span');
-    	            	    congratSpan.textContent = "🏆 합격축하금 100만원";
-    	            	    pAssistEl.appendChild(congratSpan);
-
-    	            	    // pAssist div 요소 내부에 있는 pPeriod span 요소 생성 및 텍스트 설정
-    	            	    const pPeriodSpan = document.createElement('span');
-    	            	    pPeriodSpan.classList.add("pPeriod");
-    	            	    pPeriodSpan.textContent = item.posting_enddate;
-    	            	    pAssistEl.appendChild(pPeriodSpan);
-
-    	            	    // a 요소 내부에 있는 button 요소 생성
-    	            	    const buttonEl = document.createElement('button');
-    	            	    buttonEl.classList.add("bookmark");
-    	            	    aEl.appendChild(buttonEl);
-    	            	    
-    	            	    
-    	            	    newUlEl.appendChild(liEL);
-
-    	            	});
-     					 document.querySelector('.secContents #searchList').appendChild(newUlEl);
-     					 
-     					
-     					
-     				})
-     				.catch(error =>{
-     					console.error('fetch에서 뭔가 문제가 생김', error);
-     				}); 
+	           fetchData();
+     			  
      				
      				/*-------------------------  */
 	            	
@@ -1203,7 +1209,29 @@ button, lable {
 	            //.btn_filter_box span.filter_text selected
 	        });
 	    });// btnBoxes.forEach
+	    
+	    	let searchIcon = document.querySelector('#searchForm .search-box button');
+	    	console.log(searchIcon);
+	    	
+	    	
+	    	
+	        searchIcon.addEventListener('click', function(){
+	        	 let iconText = this.parentElement.querySelector('input').value;
+	        	 changeLikeIndex(3, iconText);
+	        	 console.log(iconText);
+	 	    	 console.log(searchLikeVo);
+		           // input 태그의 값 출력
+		           
+		           fetchData();
+		           
+		           
+		     
+	        	
+	        });
+	    	
 	});
+	
+	
 	</script>
 
 </body>
