@@ -9,8 +9,24 @@
 <link rel="icon" type="image/png" href="/img/favicon.png" />
 <link href="/css/start.css" rel="stylesheet" />
 <link href="/css/test.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 
 <style>
+*{
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+.nanum-gothic-extrabold {
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
 main {
 	
 }
@@ -110,11 +126,98 @@ main {
 	position: fixed;
     top: 0;
     background-color: #fff;
-    width: 100%;
+    width: 1200px;
     margin: 0 auto;
     padding-top: 0;
     z-index: 555;
 }
+.recruitTitBox.fixed .container{
+		min-width: 1200px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		position: relative;
+}
+.recruitTitBox.fixed .box_top{
+	position: relative;
+    padding: 18px 0 24px;
+    margin-right: 8px;
+}
+.recruitTitBox.fixed .box_top>button{
+	padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d2d2d2;
+    align-items: center;
+}
+.recruitTitBox.fixed .box_top>button span{
+    color: #6a6a6a;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 22px;
+}
+.recruitTitBox.fixed .box_bottom{
+	padding: 16px 0 22px;
+    border: none;
+    width: unset;
+}
+.recruitTitBox.fixed .box_bottom .btn_boxes{
+	gap: 8px;
+}
+.recruitTitBox.fixed .box_top .bottom_tit{
+	display: flex;
+}
+.recruitTitBox.fixed .box_top .recruitTit,
+.recruitTitBox.fixed .box_top .top_tit{
+	display: none;
+}
+.recruitTitBox.fixed .box_top>button i.arrow{
+    width: 20px;
+    height: 20px;
+    background-image: url(img/arrownone.svg);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    -webkit-background-size: 100% 100%;
+    background-size: 100%;
+    margin-left: 4px;
+}
+
+.recruitTitBox.fixed .fiex_layout .filter_text.selected{
+	position: absolute;
+    left: 10px;
+    top: 13px;
+    z-index: 100;
+    width: 151px;
+    height: 18px;
+    background-color: #fff;
+    color: #003ecb;
+    font-size: 27px;
+}
+
+.recruitTitBox.fixed .box_bottom .search-box{
+	width: 210px;
+    position: absolute;
+    right: 0;
+    top: 16px;
+}
+
+.recruitTitBox.tag_box.fixed{
+	position: fixed;
+    top: 90px;
+    margin-top: 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f4f4f4;
+    z-index: 444;
+    box-shadow: 2px 2px 10px 0 rgba(0,0,0,.05);
+}
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+/*  */
+
+
 
 .container {
 	min-width: 1200px;
@@ -143,7 +246,7 @@ main {
 /* ----------------- .box_top 전체 css------------ */
 .recruitTitBox .box_top>button {
 	font-size: 24px;
-	letter-spacing: -5px;
+	letter-spacing: -2px;
 	line-height: 36px;
 	display: flex;
 	align-items: center;
@@ -233,6 +336,8 @@ button, lable {
 	margin-left: 12px;
 	display: none;
 }
+
+
 /*  */
 /*  */
 /*  */
@@ -759,8 +864,8 @@ button, lable {
 				<div class="recruitTitBox">
 					<div class="container">
 						<div class="box_top dev_wrap-department">
-							<p class="recruitTit">직무 전체</p>
-							<button class="btn_filter">
+							<p class="recruitTit dev-title">직무 전체</p>
+							<button class="btn_filter fiex_layout">
 								<span>직무를 선택해주세요</span>
 								<span class ="filter_text dev-select-text"></span>
 								<i class ="arrow"></i>
@@ -949,7 +1054,7 @@ button, lable {
 						<c:forEach var="item" items="${ homeSearchVo }" varStatus="loop">
 						
 							<li>
-								<a href ="#" class ="listCell">
+								<a href ="/Company/PostingView?posting_pno=${item.posting_pno }&nowpage=1" class ="listCell">
 									<div class="pLogo"><img src ="/img/${item.posting_com_profile}.jpg"></div>
 									<div class="listCont">
 										<div class="pCor">
@@ -990,7 +1095,23 @@ button, lable {
 	
 	<%@include file="/WEB-INF/include/Footer.jsp"%>
 	<script>
+	const content = document.querySelector('.recruitTitBox .container');
+	// 컨텐츠 영역부터 브라우저 최상단까지의 길이 구하기
+	const contentTop = content.getBoundingClientRect().top + window.scrollY;
+	const recruitTitBox = document.querySelector('.recruitTitBox');
+	const tagBox =  document.querySelector('.recruitTitBox.tag_box');
 	
+	console.log(contentTop);
+	window.addEventListener('scroll', function(){
+		console.log(window.scrollY );
+	  if(window.scrollY >= contentTop){
+		  recruitTitBox.classList.add('fixed');
+		  tagBox.classList.add('fixed');
+	  }else{
+		  recruitTitBox.classList.remove('fixed');
+		  tagBox.classList.remove('fixed');
+	  }
+	});
 	
 	
 	
@@ -1055,7 +1176,7 @@ button, lable {
 			        data.forEach(item => {
 			            const liEL = document.createElement('li');
 			            const aEl = document.createElement('a');
-			            aEl.href = "/company/" + item.posting_pno;
+			            aEl.href = "/Company/PostingView?posting_pno="+item.posting_pno+"&nowpage=1";
 			            aEl.classList.add("listCell");
 			            liEL.appendChild(aEl);
 
