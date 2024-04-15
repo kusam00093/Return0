@@ -181,8 +181,26 @@ button, lable {
 	align-items: center;
 	gap: 12px;
 }
-.box_bottom .btn_boxes .btn_box{
-
+.box_bottom .btn_boxes .btn_box .btn_reset{
+	display: flex;
+	align-items: center;
+}
+.btn_boxes .btn_box .btn_reset span {
+    font-size: 16px;
+    letter-spacing: 0;
+    color: #9e9e9e;
+    line-height: 20px;
+}
+.box_bottom .btn_boxes .btn_box .btn_reset i{
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: url(img/reset-icon.svg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin-right: 4px;
+	
+	
 }
 
 .recruitTitBox .btn_filter_box {
@@ -975,9 +993,10 @@ button, lable {
 	
 	
 	
-	
-	document.addEventListener("DOMContentLoaded", function() {
-	 
+
+		
+		
+		
 
 		var searchLikeVo ={
 				department: "전체",
@@ -1228,7 +1247,27 @@ button, lable {
 		     
 	        	
 	        });
-	    	
+	       let resetBtn = document.querySelector('.btn_boxes .btn_box .btn_reset');
+	       console.log(resetBtn);
+	     
+	       resetBtn.addEventListener('click', function(){
+	    	   changeLikeIndex(0,"전체")
+	    	   changeLikeIndex(1,"전체")
+	    	   changeLikeIndex(2,"경력무관")
+	    	   changeLikeIndex(3,"전체")
+	    	   let button_texts = document.querySelectorAll('.btn_filter .filter_text.selected');
+	    	   button_texts.forEach(function(button){
+	    		   button.innerText = "전체";
+	    		   
+	    		   
+	    		   });
+	    	   
+	    	   fetchData();
+	    	  
+	            
+	           
+	    	   
+	       });
 	});
 	
 	
