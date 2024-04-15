@@ -13,7 +13,8 @@ import com.board.login.domain.LoginCompanyVo;
 
 @Mapper
 public interface LoginCompanyMapper {
-
+	
+	// total@@@@@@@@@@@@@@@@@
 	static void insertCom(LoginCompanyVo companyVo) {
 		// TODO Auto-generated method stub
 		

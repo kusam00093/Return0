@@ -211,7 +211,7 @@
      
      const  goDeleteEl  = document.getElementById('goDelete');
      goDeleteEl.addEventListener('click', function(e) {
-    	 alert('삭제되었습니다');
+    	 alert('탈퇴되었습니다');
 
         location.href = '/User/View/Delete?nowpage=${nowpage}&user_id=${userVo.user_id}';
      });

@@ -7,13 +7,19 @@
     <meta charset="UTF-8">
     <title>게시물 목록</title>
     <link rel="icon" type="image/png" href="/img/logo02.png" />
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/test.css" />
-    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet"  href="/css/test.css" />
+	<link rel="stylesheet" href="/css/common.css" />
     <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
-
-	
+.img-container{
+   height: 350px; 
+   background-image: url('/img/intro.jpg');
+   background-size: cover; 
+   background-position: center; 
+   display: flex;
+   justify-content: center; 
+   align-items: center; /
+}
     table {
         border-collapse: collapse;
         width: 55%; 
@@ -49,8 +55,8 @@
    
     #goWrite {
         
-       margin: 20px auto; /* 위아래 여백 20px, 좌우 여백은 자동으로 설정하여 수평 가운데 정렬 */
-       display: block; /* 블록 레벨 요소로 설정하여 가로폭을 사용 가능한 최대로 설정 */
+	    margin: 20px auto; /* 위아래 여백 20px, 좌우 여백은 자동으로 설정하여 수평 가운데 정렬 */
+	    display: block; /* 블록 레벨 요소로 설정하여 가로폭을 사용 가능한 최대로 설정 */
         margin-top: 20px; /* 버튼 위 여백을 설정합니다. */
         padding: 10px 20px; /* 버튼 내부 여백을 설정합니다. */
         background-color: #3f98f7; /* 버튼 배경색을 설정합니다. */
@@ -78,13 +84,15 @@ h2 {
 }
 </style>
 
-<%@include file="/WEB-INF/include/Header.jsp" %>
+
 
 
 </head>
 <body>
-
-<h2 >게시물 목록</h2>
+<%@include file="/WEB-INF/include/Header.jsp" %>
+<section class="img-container"></section>
+		<div class = "main-wrap inner"></div>
+<h2>게시물 목록</h2>
 <table>
     <thead>
     <tr>
@@ -111,12 +119,11 @@ h2 {
     </c:forEach>
     </tbody>
 </table>
-
 <input type="button" id="goWrite" value="새 글 추가">
 <script>
     const goWriteEl = document.getElementById('goWrite');
     goWriteEl.addEventListener('click', function (e) {
-        location.href = '/BoardPaging/WriteForm?user_id=wodud6967';
+        location.href = '/BoardPaging/WriteForm?user_id=${user_id}';
     })
 </script>
 <%@include file="/WEB-INF/include/Footer.jsp" %>

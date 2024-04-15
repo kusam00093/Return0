@@ -11,7 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.board.boardpaging.domain.BoardPagingVo;
 import com.board.boardpaging.mapper.BoardPagingMapper;
+import com.board.company.domain.UserVo;
+import com.board.login.domain.LoginCompanyVo;
+import com.board.login.domain.LoginUserVo;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -23,8 +28,8 @@ public class BoardPagingController {
 	private BoardPagingMapper boardPagingMapper;
 	
 	@RequestMapping("/List")
-	public ModelAndView list () {
-		List<BoardPagingVo> boardPagingList = boardPagingMapper.getBoardPagingList();
+	public ModelAndView list (BoardPagingVo boardPagingVo) {
+		List<BoardPagingVo> boardPagingList = boardPagingMapper.getBoardPagingList(boardPagingVo);
 		
 		ModelAndView mv = new ModelAndView() ;
 		mv.addObject("boardPagingList", boardPagingList);
@@ -34,7 +39,11 @@ public class BoardPagingController {
 	}
 	
 	@RequestMapping("/WriteForm")
-	public  ModelAndView   writeForm(String user_id ) {
+	public  ModelAndView   writeForm(HttpServletRequest request,UserVo userVo ) {
+		HttpSession session = request.getSession();
+		LoginUserVo loginUserVo = (LoginUserVo)session.getAttribute("userLogin");
+		String user_id = loginUserVo.getUser_id();
+		userVo.setUser_id(user_id);
 		
 		ModelAndView  mv  = new ModelAndView();
 		mv.addObject( "user_id", user_id  );
@@ -94,7 +103,7 @@ public class BoardPagingController {
 	@RequestMapping("/UpdateForm")
 	public  ModelAndView  updateForm(  BoardPagingVo boardPagingVo ) {
 		
-		List<BoardPagingVo> boardPagingList = boardPagingMapper.getBoardPagingList();
+		List<BoardPagingVo> boardPagingList = boardPagingMapper.getBoardPagingList(boardPagingVo);
 	
 		BoardPagingVo vo = boardPagingMapper.getBoardPaging(boardPagingVo);
 		ModelAndView  mv  = new ModelAndView();	

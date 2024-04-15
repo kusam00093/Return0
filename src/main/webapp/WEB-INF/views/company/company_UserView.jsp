@@ -142,7 +142,7 @@
                 <td>${co.com_email }</td>
             </tr>
             <tr>
-                <td><input type="button"  value="수정하기" id="goUpdate"/></td>
+                <td colspan='2'><input type="button"  value="수정하기" id="goUpdate"/></td>
             </tr>
 
         </table>

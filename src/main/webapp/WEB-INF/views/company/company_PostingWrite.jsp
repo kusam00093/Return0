@@ -49,7 +49,8 @@
     input[type="text"],
     input[type="password"],
     input[type="submit"],
-    input[type="button"] {
+    input[type="button"],
+    input[type="date"] {
         width: calc(100% - 30px);
         padding: 15px; 
         margin-bottom: 30px; 
@@ -72,7 +73,7 @@
     input[type="button"]:hover {
         background-color: #1e7fd7;
     }
-
+	
     #doubleCheckMsg {
         margin-left: 10px; 
         color: #ff0000; 
@@ -82,6 +83,24 @@
         width: calc(50% - 10px); 
         margin-right: 10px; 
     }
+    
+   .posting_content textarea {
+        width: calc(100% - 30px);
+        padding: 15px; 
+        margin-bottom: 30px; 
+        border: 1px solid #ddd;
+        border-radius: 8px; 
+        box-sizing: border-box;
+        font-size: 18px; 
+        height: 200px; 
+    }
+
+    .posting_content_title{
+    	text-align: center;
+    	font-size: 30px;
+    	font-weight: bold;
+    }    
+    
 </style>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 
@@ -161,8 +180,10 @@
                 <td colspan="2"><input type="date" name="posting_enddate" placeholder="날짜를 선택하세요" /></td>
             </tr>
             <tr>
-            	<td>채용 공고 내용</td>
-                <td colspan="2"><textarea name="posting_content" placeholder="공고 내용을 입력하세요"></textarea></td>
+            	<td colspan="3" class="posting_content_title" >채용 공고 내용</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="posting_content"><textarea name="posting_content" placeholder="공고 내용을 입력하세요"></textarea></td>
             </tr>
            
             <tr>

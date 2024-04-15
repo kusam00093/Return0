@@ -11,7 +11,7 @@ import com.board.boardpaging.domain.BoardPagingVo;
 @Mapper
 public interface BoardPagingMapper {
 
-	List<BoardPagingVo> getBoardPagingList();
+	//List<BoardPagingVo> getBoardPagingList();
 
 	void incHit(BoardPagingVo boardPagingVo);
 
@@ -22,6 +22,8 @@ public interface BoardPagingMapper {
 	void insertBoardPaging(BoardPagingVo boardPagingVo);
 
 	void deleteBoardPaging(BoardPagingVo boardpagingvo);
+
+	List<BoardPagingVo> getBoardPagingList(BoardPagingVo boardPagingVo);
 	
 
 

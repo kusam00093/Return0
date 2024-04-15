@@ -215,7 +215,7 @@
 		                  <td>${bo.user_name}</td>
 		                  <td>${bo.user_phone}</td>
 		                  <td>${bo.user_email}</td>
-		                  <td><a href="/Company/MyPosting" class="btn btn-ifno" id="goDelete">삭제하기</a></td>
+		                  <td><a href="/Company/MyPosting" class="btn btn-ifno" name="goDelete">삭제하기</a></td>
 		                </tr>
 		              </c:forEach>
 		            </tbody>
@@ -248,14 +248,15 @@
   document.addEventListener('DOMContentLoaded', function() {
       displayBookmarks();
       var com_id = "${resumeVo.com_id}";
-      var first_view = document.querySelector('#first-view');
-      first_view.classList.add('active');
-      
+      // 기본적으로 '내가 작성한 공고' 탭을 열도록 설정
+      const defaultTab = document.querySelector('.tab:nth-child(1)');
+      defaultTab.classList.add('active');
+      const defaultTabPanel = document.querySelector('.tab-panel:nth-child(1)');
+      defaultTabPanel.classList.add('active');
   });  
+
  document.addEventListener('DOMContentLoaded', function() {
       //로드시 북마크 부터 표시 
-      
-    
       const tabs = document.querySelectorAll('.tab');
       const tabPanels = document.querySelectorAll('.tab-panel');
 
@@ -270,15 +271,9 @@
               tabPanels[index].classList.add('active');
               
               displayBookmarks();
-              
           });
-          
-         
-          
       });
-      
-    
-  });
+ });
  
  function displayBookmarks() {
       // 북마크를 가져오는 fetch 요청

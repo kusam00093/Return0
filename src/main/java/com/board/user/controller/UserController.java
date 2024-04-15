@@ -1,5 +1,7 @@
 package com.board.user.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +37,8 @@ public class UserController {
    @Autowired
    private UserPagingMapper userPagingMapper;
    
-   
+   LocalDate currentDate =LocalDate.now();
+   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
 
 
             

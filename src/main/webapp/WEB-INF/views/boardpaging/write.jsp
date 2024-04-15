@@ -6,18 +6,25 @@
 <meta charset="UTF-8">
 <title>게시글 등록</title>
 <link rel="icon" type="image/png" href="/img/logo02.png" />
-<link rel="stylesheet"  href="/css/main.css" />
-<link rel="stylesheet"  href="/css/stat.css" />
 <link rel="stylesheet"  href="/css/test.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
-body {
-    margin: 0 auto;
-    width: 80%;
+.img-container{
+   height: 350px; 
+   background-image: url('/img/intro.jpg');
+   background-size: cover; 
+   background-position: center; 
+   display: flex;
+   justify-content: center; 
+   align-items: center; /
 }
+
   
 table {
-    border-collapse: collapse;
-    width: 55%;
+      border-collapse: separate; /* 바깥 테두리를 제거하기 위해 separate로 변경 */
+    border-spacing: 0; /* 셀 사이의 간격을 없애기 위해 0으로 설정 */
+    width: 70%;
     color: #333;
     font-family: Arial, sans-serif;
     font-size: 14px;
@@ -28,12 +35,12 @@ table {
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    border: none; /* 바깥 테두리 제거 */
+    
 }
 
 table td {
-    padding: 15px;
     text-align: center;
+    padding: 10px;
     border: 1px solid white; /* 안쪽 테두리를 흰색으로 설정 */
 }
 
@@ -85,11 +92,14 @@ h2 {
 }
 </style>
 
+
 </head>
 <body>
 <main>
     
 <%@include file="/WEB-INF/include/Header.jsp" %>
+<section class="img-container"></section>
+		<div class = "main-wrap inner"></div>
 
 <h2>게시글 등록</h2>
 <form action="/BoardPaging/Write" method="POST">

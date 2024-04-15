@@ -7,155 +7,278 @@
 <title>Insert title here</title>
 <link rel="icon" type="image/png" href="/img/favicon.png" />
 <link rel="stylesheet"  href="/css/common.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style>
-   input:not(input[type=submit]) { width:100%; }
-   input[type=submit] { width : 100px; }
-   
-   #goList  { width : 80px; }
-   
-   tr {
-   	 border: 1px solid black;
+   body {
+      font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 40px; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
    }
-   
-   td { 
-      padding:10px;
-      width: 1000px;
-      text-align: center;
-     border: 1px solid black;
+
+   .main-container {
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 60px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
    }
-   
-   td:nth-of-type(1) {
-      width : 250px;
+
+   h2 {
+        text-align: center;
+        margin-bottom: 40px; 
+        color: #3f98f7;
+        font-weight: bold;
+    }
+    form {
+        text-align: center;
+    }
+
+   .form-group {
+      margin-bottom: 20px;
    }
-   
-   td:not([colspan]):first-child {
-      background: white;
-      color : black;
+
+   .form-group label {
       font-weight: bold;
    }
+
+   .form-control {
+      width: 100%;
+   }
+
+   .btn {
+      width: 100px;
+   }
    
+   .btn-center {
+      text-align: center;
+   }
+   
+   input[type="text"],
+    input[type="password"],
+    input[type="submit"],
+    input[type="button"] {
+        width: calc(100% - 30px);
+        padding: 15px; 
+        margin-bottom: 30px; 
+        border: 1px solid #ddd;
+        border-radius: 8px; 
+        box-sizing: border-box;
+        font-size: 18px; 
+    }
+
+    input[type="submit"],
+    input[type="button"] {
+        background-color: #3f98f7;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover,
+    input[type="button"]:hover {
+        background-color: #1e7fd7;
+    }
+    
+       input[type="date"] {
+    width: calc(100% - 30px);
+    padding: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+    
  
-		.licenseList {
-			display: flex;
-		}
-	
-			
+#userStackList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 열의 크기를 자동 조절하고 최소 150px로 설정 */
+    gap: 10px; /* 열과 행 사이의 간격 */
+}
+
+.form-check {
+    display: flex;
+    align-items: center; /* 체크박스를 세로 중앙으로 정렬 */
+}
+
+.form-check-input {
+    margin-right: 5px; /* 체크박스와 레이블 사이의 간격 조절 */
+}
+
+.form-check-label {
+    margin-bottom: 0; /* 레이블 아래쪽 여백 제거 */
+}
 </style>
 </head>
 <body>
-  <main>
-	<h2>이력서 수정하기</h2>
-	<form action="/Resume/Update" method="POST">
-	<input type="hidden" name="user_id" value="${mapResume.user_id}" >
-	<input type="hidden" name="resume_rno" value="${mapResume.resume_rno}" >
 
-	<table>
-	 <tr>
-	   <td>이름</td>
-	   <td><input type="text" name="user_name" value="강재영" READONLY /></td>
-	 </tr>
-	 <tr>
-	   <td>사진</td>
-	   <td><input type="text" name="resume_profile"  value="1번째 사진"/></td>
-	 </tr>
-	 <tr class="experience-details">
-	   <td rowspan="4">경력사항</br>
-	                   1. 회사이름</br>
-	                   2. 회사부서</br> 
-	                   3. 회사입사</br>
-	                   4. 회사퇴사</br>
-	  </td>
-	 </tr>
-	 
-		 <tr>
-		   <td><input type="text" name="resume_career_company" value="1번째 회사" />
-		   <input type="text" name="resume_career_department"  value="1번째 부서"/>
-		   <input type="date" name="resume_career_startdate"  value="1999-12-30"/>
-		   <input type="date" name="resume_career_enddate" value="2113-12-30" /></td>
-		 </tr>
-		 <tr>
-		   <td><input type="text" name="resume_career_company" value="2번째 회사" />
-		   <input type="text" name="resume_career_department"  value="2번째 부서"/>
-		   <input type="date" name="resume_career_startdate"  value="1999-12-30"/>
-		   <input type="date" name="resume_career_enddate" value="2113-12-30" /></td>
-		 </tr>
-		 <tr >
-		   <td><input type="text" name="resume_career_company" value="3번째 회사" />
-		   <input type="text" name="resume_career_department"  value="3번째 부서"/>
-		   <input type="date" name="resume_career_startdate"  value="1999-12-30"/>
-		   <input type="date" name="resume_career_enddate" value="2113-12-30" /></td>
-		 </tr>
-	 
-	 <tr>
-	   <td>최종학력</td>
-	   <td><input type="text" name="resume_grade_universe" value="1번째 최종학력" /></td> 
-	 </tr>
-	 <tr>
-	 	 <td>졸업여부</td>
-	   <td><input type="text" name="resume_grade_state" value="1번째 졸업여부" /></td>
-	 </tr>
-	 <tr>
-	 	 <td>학력내용</td>
-	   <td><input type="text" name="resume_grade_content" value="1번째 학력내용" /></td>
-	 </tr>
-	 <tr>
-	   <td>기술목록</td>
-	   <td class = "licenseList">
-	   	  
-	   			<input type="checkbox" name="resume_license_content"  value="Java"/>Java
-	   			<input type="checkbox" name="resume_license_content"  value="HTML"/>HTML
-	   			<input type="checkbox" name="resume_license_content"  value="JavaScript"/>JavaScript
-	   			<input type="checkbox" name="resume_license_content"  value="VueJS"/>CSS
-	   			<input type="checkbox" name="resume_license_content"  value="CSS"/>CSS
-	   			<input type="checkbox" name="resume_license_content"  value="Node.js"/>Node.js
-	   			<input type="checkbox" name="resume_license_content"  value="React"/>React
-	   			<input type="checkbox" name="resume_license_content"  value="ReactJS"/>ReactJS
-	   			<input type="checkbox" name="resume_license_content"  value="Typescript"/>Typescript
-	   			<input type="checkbox" name="resume_license_content"  value="Zustand"/>Zustand
-	   			<input type="checkbox" name="resume_license_content"  value="AWS"/>AWS
-	   		
-	   </td>
-	 </tr>
-	 <tr>
-	   <td>자기소개서</td>
-	   <td><input type="text" name="resume_content_self"  value="1번째 자기소개서"/></td>
-	 </tr>
-	 <tr>
-	   <td>지원동기</td>
-	   <td><input type="text" name="resume_content_motivation"  value="1번째 지원동기"/></td>
-	 </tr>
-	
-	 
-	 <tr>
-	   <td colspan="2">
-	    <button onclick="resumeWrite()">수정</button>
-<!-- 	    <input type="submit" value="수정" /> -->
-	    <input type="button" value="목록" id="goList" />
-	   </td>
-	 </tr>
-	
-	</table>	
-	</form>   
-	
-  </main>
-  
-  <script>
-  	const  goListEl  = document.getElementById('goList');
-  	goListEl.addEventListener('click', function(e) {
-  		location.href = '/Resume/List?user_id=wodud6967';
-  	})
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      function resumeWrite(){
-        window.open("/Resume/UpdateForm?user_id=wodud6967", "write", "width=1200, height=800");
-      }
-    </script>
+<div class="container">
+   <div class="main-container">
+      <h2>이력서 수정하기</h2>
+
+      <form action="/Resume/Update" method="POST">
+         <input type="hidden" name="user_id" value="${user_id}">
+         <input type="hidden" name="resume_rno" value="${mapResume.resume_rno}">
+         
+
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">이름</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="user_name" value="${user_name}" readonly>
+            </div>
+         </div>
+
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">사진</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_profile" value="${mapResume.resume_profile}">
+            </div>
+         </div>
+
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">회사이름</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_career_company" value="${mapResumeCareer.resume_career_company}">
+            </div>
+         </div>
+
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">회사부서</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_career_department" value="${mapResumeCareer.resume_career_department}">
+            </div>
+         </div>
+
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">회사입사</label>
+            <div class="col-sm-9">
+               <input type="date" class="form-control" name="resume_career_startdate" value="${mapResumeCareer.resume_career_startdate}">
+            </div>
+         </div>
+
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">회사퇴사</label>
+            <div class="col-sm-9">
+               <input type="date" class="form-control" name="resume_career_enddate" value="${mapResumeCareer.resume_career_enddate}">
+            </div>
+         </div>
+         
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">최종학력</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_grade_universe" value="${mapResumeGrade.resume_grade_universe}">
+            </div>
+         </div>
+         
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">졸업여부</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_grade_state" value="${mapResumeGrade.resume_grade_state}">
+            </div>
+         </div>
+         
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">학력내용</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_grade_content" value="${mapResumeGrade.resume_grade_content}">
+            </div>
+         </div>
+         
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">자격증</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_license_content" value="${mapResumeLicense.resume_license_content}">
+            </div>
+         </div>
+         
+        <div class="form-group row">
+                <label class="col-sm-3 col-form-label">기술목록</label>
+                <div class="col-sm-9">
+               <input type="text" class="form-control" name="user_stack_name"  value="${mapUserStack.user_stack_name}" /> 
+            </div>
+         </div>    
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="HTML" id="HTMLCheckbox"/> -->
+<!--                            <label class="form-check-label" for="HTMLCheckbox">HTML</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="JavaScript" id="JavaScriptCheckbox"/> -->
+<!--                            <label class="form-check-label" for="JavaScriptCheckbox">JavaScript</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="VueJS" id="VueJSCheckbox"/> -->
+<!--                            <label class="form-check-label" for="VueJSCheckbox">VueJS</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="CSS" id="CSSCheckbox"/> -->
+<!--                            <label class="form-check-label" for="CSSCheckbox">CSS</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="Node.js" id="Node.jsCheckbox"/> -->
+<!--                            <label class="form-check-label" for="Node.jsCheckbox">Node.js</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="React" id="ReactCheckbox"/> -->
+<!--                            <label class="form-check-label" for="ReactCheckbox">React</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="ReactJS" id="ReactJSCheckbox"/> -->
+<!--                            <label class="form-check-label" for="ReactJSCheckbox">ReactJS</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="Typescript" id="TypescriptCheckbox"/> -->
+<!--                            <label class="form-check-label" for="TypescriptCheckbox">Typescript</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="Zustand" id="ZustandCheckbox"/> -->
+<!--                            <label class="form-check-label" for="ZustandCheckbox">Zustand</label> -->
+<!--                        </div> -->
+<!--                        <div class="form-check"> -->
+<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="AWS" id="AWSCheckbox"/> -->
+<!--                            <label class="form-check-label" for="AWSCheckbox">AWS</label> -->
+<!--                        </div> -->
+<!--                    </div> -->
+<!--                </div> -->
+         
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">자기소개서</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_content_self" value="${mapResume.resume_content_self}">
+            </div>
+         </div>
+         
+         <div class="form-group row">
+            <label class="col-sm-3 col-form-label">지원동기</label>
+            <div class="col-sm-9">
+               <input type="text" class="form-control" name="resume_content_motivation" value="${mapResume.resume_content_motivation}">
+            </div>
+         </div>
+
+
+         <div class="form-group row">
+            <div class="col-sm-12 btn-center">
+                <input type="submit" value="수정" />
+               <input type="button" value="목록" onclick="goToList()"/>
+            </div>
+         </div>
+      </form>
+   </div>
+</div>
+
+<script>
+function goToList() {
+   location.href = '/Resume/List?user_id=${user_id}';
+}
+
+</script>
+
 </body>
 </html>
-
-
-
-
-

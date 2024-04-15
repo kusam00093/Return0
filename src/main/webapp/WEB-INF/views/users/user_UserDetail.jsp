@@ -102,7 +102,7 @@
   <input type="hidden" name="com_id" value="${com_id}">
   <input type="hidden" name="nowpage" value="${user_id}">
 
-    <h2>기업정보 상세보기</h2>
+    <h2>개인정보 상세보기</h2>
 
         <table>
 
@@ -140,7 +140,7 @@
             </tr>
  
             <tr>
-                <td><input type="button"  value="수정하기" id="goUpdate"/></td>
+                <td colspan="2"><input type="button"  value="수정하기" id="goUpdate"/></td>
             </tr>
 
         </table>

@@ -82,7 +82,11 @@
 	}
 	
 	.td5{
-		width : 150px;
+		width : 100px;
+		border-radius: 5px;
+		border: 1px solid black;
+		font-weight: bold;
+		
 	}
 		
 	}
@@ -127,7 +131,12 @@
       <div class="td2"><a href="/Company/PostingView?nowpage=${nowpage}&posting_pno=${co.posting_pno}">${co.posting_title}</a></div>
       <div class="td3">${co.posting_hope_department}</div>
       <div class="td4">${co.posting_enddate}</div>
-      <div class="td5"><input type="submit" value = "즉시지원"></div>
+                <c:choose>
+			    <c:when test="${sessionScope.userLogin != null }">
+			        <!-- 기업 사용자일 경우 -->
+      <div class="td5"><a href="/Resume/ResumeApplyList?nowpage=${nowpage }&posting_pno=${co.posting_pno}">즉시지원</a></div>
+			    </c:when>
+			    </c:choose>
 	</div>
    </c:forEach>
 <div>&nbsp;</div>

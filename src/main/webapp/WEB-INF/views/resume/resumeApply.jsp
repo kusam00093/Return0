@@ -13,7 +13,7 @@
     <link href="/css/test.css" rel="stylesheet" />
     
     
-    <style>
+     <style>
        .main {
         display: flex;
         justify-content: center;
@@ -115,7 +115,7 @@
         <h2>이력서 리스트</h2>
         <div class ="person_date">
            
-           <a href="/Resume/WriteForm">이력서 등록</a>
+           <a href="/Resume/ResumeApply">이력서 지원</a>
             
             
 <!--              <button onclick="resumeWrite()">이력서 등록</button> -->
@@ -128,20 +128,18 @@
        <tr>
          <td>이력서 번호</td>
          <td>이력서 내용</td>
-<!--          <td>이력서 등록일</td> -->
-         <td>삭제</td>
-         <td>수정</td>
+
+         <td>지원하기</td>
+         <td>지원취소하기</td>
+         
        </tr>
 
        <c:forEach  var="resumeVo"  items="${ resumeList }" >
        <tr>
-         <td>${ resumeVo.rownum    }</td>
+         <td>${ resumeVo.resume_rno    }</td>
          <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
-        
-         
-         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>         
-         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">수정</a></td>
-<!--          <td><button onclick="resumeUpdate()">수정</button></td> -->
+         <td><a href="/Resume/ResumeApply?resume_rno=${ resumeVo.resume_rno }&nowpage=${nowpage}&posting_pno=${postingVo.posting_pno}">지원하기</a></td>         
+         <td><a href="/Resume/ResumeApplyCancel?resume_rno=${ resumeVo.resume_rno }&nowpage=${nowpage}&posting_pno=${postingVo.posting_pno}">지원취소하기</a></td>         
        </tr>
        </c:forEach>
       

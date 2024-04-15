@@ -132,18 +132,18 @@
             <tr>
             
                 <td>
-                    <input type="text" name="com_id" id=comid placeholder="아이디를 입력하세요" />
-                  <button type="button" onclick="checkDuplicate()" style="background-color: #3f98f7; color: white; border: none; 
-            cursor: pointer; padding: 10px; border-radius: 5px;">중복 확인</button>
-                    <span id="comIdMessage"></span>
-                </td>
+                    <input type="text" name="com_id" id=comid placeholder="아이디를 입력하세요" maxlength="15" />
+                   <input type="button" value="중복확인" id="btnIdCheck"  style="background-color: #3f98f7; color: white; border: none; 
+            cursor: pointer; padding: 10px; border-radius: 5px;"/>   
+                        	<div id="output"></div>
+                    </td>
             </tr>
             <tr>
                 <td><input type="password" name="com_passwd" id=pw1 placeholder="비밀번호를 입력하세요" oninput="pwCheck()"/></td>
             </tr>
             <tr>
                 <td><input type="password" name="passwd" id=pw2 placeholder="비밀번호를 다시 입력하세요" oninput="pwCheck()"/></td>
-               </tr> <td><span id="pwConfirm">  </span></td>
+            	</tr> <td><span id="pwConfirm">  </span></td>
          
             <tr>
                 <td><input type="text" name="com_name"  placeholder="회사명을 입력하세요" /></td>
@@ -161,7 +161,7 @@
                 <td><input type="text" name="com_phone" placeholder="인사담당자 전화번호를 입력하세요"  /></td>
             </tr>
             <tr>
-                <td><input type="text" name="com_email" placeholder="이메일을 입력하세요" /></td>
+                <td><input type="text" name="com_email" placeholder="이메일을 입력하세요" maxlength="20" /></td>
             </tr>
             <tr>
                 <td>
@@ -170,9 +170,7 @@
                     <br><input type="text" name="com_address" placeholder="상세주소"></br>
                 </td>
             </tr>
-            <tr>
-                <td><input type="date"  value="${ now }" readonly /></td>
-            </tr>
+
             <tr>
                 <td colspan="2">
                     <input type="submit" value="회원가입" />
@@ -214,19 +212,36 @@
             });
   </script>
   <script>
-     const  goListEl  = document.getElementById('goList');
-     goListEl.addEventListener('click', function(e) {
-        location.href = '/';
-     });
-     
+  	const  goListEl  = document.getElementById('goList');
+  	goListEl.addEventListener('click', function(e) {
+  		location.href = '/';
+  	});
+  	
 
    
   </script>
-  
+  <script>
+
+const  btnIdCheckEl = document.querySelector('#btnIdCheck');
+btnIdCheckEl.onclick = function(e) {     
+	// alert('중복확인체크');
+	 const  outputEl = document.querySelector('#output');
+	 	  	 
+    let    intext    = document.querySelector('[name=com_id]');
+    // 서버 Controller에 있는 /IdDupCheck 주소를 실행 
+    fetch('/IdDupCheck1?com_id=' + intext.value)
+      .then(response => response.text())  // 서버 data 가 html
+      .then((data) => {   // data <- response.text()
+     	  console.log(data);
+		  outputEl.innerHTML = data;    	 
+      });        	 
+}
+
+</script>
 </body>
 </html>
 
 
-   
+	
 
 

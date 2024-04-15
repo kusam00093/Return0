@@ -228,7 +228,7 @@
 
     </form>
     <c:if test="${sessionScope.com_id != null || com_id != ''}">
-        <a href="/Resume/List"><button id="goUpdate" onclick="goToUpdate()">지원하기</a></button>
+        <a href="/Resume/ResumeApplyList?nowpage=${nowpage }&posting_pno=${postingVo.posting_pno}">지원하기</a>
     </c:if>
     
 
@@ -248,7 +248,7 @@
       <div class="td2"><a href="/Company/PostingView?nowpage=${nowpage}">${co.posting_title}</a></div>
       <div class="td3">${co.posting_hope_department}</div>
       <div class="td4">${co.posting_enddate}</div>
-      <div class="td5"><input type="submit" value = "즉시지원"></div>
+      <div class="td5"><a href="/Resume/ResumeApplyList?nowpage=${nowpage }&posting_pno=${co.posting_pno}">즉시지원</a></div>
 	</div>
    </c:forEach>
 <div>&nbsp;</div>

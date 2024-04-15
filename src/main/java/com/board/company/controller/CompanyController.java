@@ -19,6 +19,7 @@ import com.board.company.domain.PostingVo;
 import com.board.company.domain.UserVo;
 import com.board.company.mapper.CompanyMapper;
 import com.board.login.domain.LoginCompanyVo;
+import com.board.login.domain.LoginUserVo;
 import com.board.resume.domain.ResumeVo;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -271,15 +272,7 @@ public class CompanyController {
 		for (String posting_stack : stackList) {
 			postingStackList.add(new PostingStackVo(postingVo.getPosting_pno(), posting_stack));
 		}
-//		System.out.println("=as=df=as=df=asd=f=asd=f=asd=f=a=sd=f===");
-//		for (String stack : stackList) {
-//		    System.out.println(stack);
-//		}
-//		System.out.println("postingStackList의 크기: " + postingStackList.size());
-//		System.out.println("=as=df=as=df=asd=f=asd=f=asd=f=a=sd=f===");
-//		System.out.println(postingStackList);
-//		System.out.println(stackList.toString());
-//		System.out.println(postingVo.getPosting_stack());
+
 		
 		
 		
@@ -295,8 +288,13 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/PostingView")
-	public ModelAndView posting( CompanyVo companyVo, PostingVo postingVo, int nowpage, String user_id,int posting_pno,PostingStackVo postingStackVo) {
+	public ModelAndView posting( UserVo userVo,CompanyVo companyVo, PostingVo postingVo, int nowpage, int posting_pno,PostingStackVo postingStackVo, HttpServletRequest request) {
 		
+		
+		HttpSession session = request.getSession();
+		LoginUserVo loginuserVo = (LoginUserVo)session.getAttribute("userLogin");
+		String user_id = loginuserVo.getUser_id();
+		userVo.setUser_id(user_id);
 		
 //		PostingVo vo = companyMapper.getPostingPno(postingVo);
 //		int posting_pno = vo.getPosting_pno();
@@ -347,7 +345,7 @@ public class CompanyController {
 		mv.addObject("com_id",com_id);
 		mv.addObject("vo",vo);
 		mv.addObject("user_id",user_id);		
-		mv.setViewName("redirect:/Company/MyPosting");
+		mv.setViewName("redirect:/Company/MyPage");
 		return mv;
 	}
 	@RequestMapping("/Posting/Delete")

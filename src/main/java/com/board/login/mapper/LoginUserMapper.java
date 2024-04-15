@@ -13,7 +13,7 @@ import com.board.login.domain.LoginUserVo;
 
 @Mapper
 public interface LoginUserMapper {
-
+	// total@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	List<LoginUserVo> getUserList();
 
 	void insertUser(LoginUserVo userVo);

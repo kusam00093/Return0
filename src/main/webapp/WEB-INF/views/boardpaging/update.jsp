@@ -4,25 +4,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 내용 수정</title>
+<title>Insert title here</title>
 <link rel="icon" type="image/png" href="/img/logo02.png" />
-<link rel="stylesheet"  href="/css/main.css" />
-<link rel="stylesheet"  href="/css/stat.css" />
 <link rel="stylesheet"  href="/css/test.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
+.img-container{
+   height: 350px; 
+   background-image: url('/img/intro.jpg');
+   background-size: cover; 
+   background-position: center; 
+   display: flex;
+   justify-content: center; 
+   align-items: center; /
+}
+
 h2 {
     text-align: center;
     margin-top: 50px;
     margin-bottom: 30px;
 }
+
 table {
-    border-collapse: collapse;
-    border-radius : 10px;
-    width: 50%;
+   border-collapse: separate; /* 바깥 테두리를 제거하기 위해 separate로 변경 */
+    border-spacing: 0; /* 셀 사이의 간격을 없애기 위해 0으로 설정 */
+    width: 70%;
     color: #333;
     font-family: Arial, sans-serif;
     font-size: 14px;
     text-align: left;
+    border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     margin: auto;
@@ -95,59 +107,65 @@ footer {
 
 </head>
 <body>
-<main>
+  <main>
     
-<%@include file="/WEB-INF/include/Header.jsp" %>
-  
-<h2>게시글 내용 수정</h2>
-<form action="/BoardPaging/Update" method="POST">
-    <input type="hidden" name="board_bno" value="${vo.board_bno}" />
-    <input type="hidden" name="user_id" value="${vo.user_id}" />
-    <div>&nbsp;</div>
-    <table>
-        <tr>
-            <td>글번호</td>
-            <td>${vo.board_bno}</td>
-            <td>조회수</td>
-            <td>${vo.board_hit}</td>
-        </tr>
-        <tr>
-            <td>작성자</td>
-            <td>${vo.user_id}</td>
-            <td>작성일</td>
-            <td>${vo.board_indate}</td>
-        </tr>
-        <tr>
-            <td>제목</td>
-            <td colspan="3">
-                <input type="text" name="board_title" value="${vo.board_title}" />
-            </td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td colspan="3">
-                <textarea name="board_conent">${vo.board_conent}</textarea>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="4">
-                <input class="btn btn-primary btn-sm" type="submit" value="수정" />
-                
-                <input class="btn btn-primary btn-sm" type="button" value="목록" onclick="location.href='/BoardPaging/List?user_id=${user_id}&nowpage=${nowpage}'" />
-                
-            </td>
-        </tr>
-    </table>
-</form>   
-
-</main>
+    <%@include file="/WEB-INF/include/Header.jsp" %>
+  <section class="img-container"></section>
+		<div class = "main-wrap inner"></div>
+	<h2>게시글 내용  수정</h2>
+	<form  action="/BoardPaging/Update"  method = "POST">
+	<input type="hidden"  name="board_bno"     value="${ vo.board_bno}" />  
+	<input type="hidden"  name="user_id" value="${ vo.user_id }" />  
+<%-- 	<input type="hidden"  name="nowpage" value="${ nowpage }" />   --%>
+	<table id="table">
+	 <tr>
+	   <td>글번호</td>
+	   <td>${ vo.board_bno}</td>
+	   <td>조회수</td>
+	   <td>${ vo.board_hit }</td>	   
+	 </tr>
+	 <tr>
+	   <td>작성자</td>
+	   <td>${ vo.user_id }</td>
+	   <td>작성일</td>
+	   <td>${ vo.board_indate }</td>
+	 </tr>
+	 <tr>
+	   <td>제목</td>
+	   <td colspan="3">
+	   <input type="text" name="board_title" value="${ vo.board_title }" />	   
+	   </td>	
+	 </tr>
+	 <tr>
+	   <td>내용</td>
+	   <td colspan="3">
+	   <textarea name="board_conent">${vo.board_conent}</textarea>
+	   </td>
+	 </tr>	
+	 <tr>
+	   <td colspan="4">
+	    <input class="btn btn-primary btn-sm"  type="submit" value="수정" />
+	    <a     class="btn btn-primary btn-sm"  href="/BoardPaging/List?user_id=${user_id}&nowpage=${nowpage}">목록</a>
+	   </td>
+	 </tr>
+	
+	</table>	
+   </form>   
+	
+  </main>
  
-<script>
-const goListEl = document.getElementById('goList');
-goListEl.addEventListener('click', function(e) {
-    location.href = '/BoardPaging/List';
-})
-</script>
-<%@include file="/WEB-INF/include/Footer.jsp" %>
+  <script>
+  	const  goListEl  = document.getElementById('goList');
+  	goListEl.addEventListener('click', function(e) {
+  		location.href = '/BoardPaging/List';
+  	})
+  
+  </script>
+  <%@include file="/WEB-INF/include/Footer.jsp" %>
 </body>
 </html>
+
+
+
+
+
