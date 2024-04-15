@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.board.company.domain.CompanyBookmarkVo;
 import com.board.company.domain.CompanyVo;
 import com.board.company.domain.PostingStackVo;
 import com.board.company.domain.PostingVo;
@@ -54,6 +55,22 @@ public interface CompanyMapper {
 	PostingStackVo getPostingStack(PostingStackVo postingStackVo);
 
 	void insertPostingStack(List<PostingStackVo> postingStackList);
+
+	List<ResumeVo> getRecommendList(ResumeVo resumeVo);
+
+
+
+
+
+	boolean existBookmark(CompanyBookmarkVo companyBookmarkVo);
+
+	void deleteBookmark(CompanyBookmarkVo companyBookmarkVo);
+
+	void insertBookmark(CompanyBookmarkVo companyBookmarkVo);
+
+	List<ResumeVo> getBookmarkList(ResumeVo resumeVo);
+
+
 
 
 

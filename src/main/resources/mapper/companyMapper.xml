@@ -76,7 +76,7 @@
         VALUES ((SELECT NVL(MAX(POSTING_PNO),0) FROM POSTING), #{postingStack.posting_stack})
     </foreach>
     SELECT * FROM DUAL
-</insert>
+    </insert>
 		
 	
 	
@@ -114,6 +114,88 @@
 	
 	</update>
 	
+	<select id="getBookmarkList">
+ SELECT 
+ 		ROWNUM AS ROW_NUMBER
+ 		,R.RESUME_RNO
+        ,CB.CB_BOOLEAN
+        ,U.USER_NAME
+        ,U.USER_PHONE
+        ,U.USER_EMAIL
+        ,P.POSTING_PNO
+        ,P.POSTING_TITLE
+        ,C.COM_ID
+   FROM RESUME R JOIN COMPANY_BOOKMARK CB
+   ON   R.RESUME_RNO = CB.RESUME_RNO
+   JOIN USERS U  
+   ON   R.USER_ID = U.USER_ID
+   JOIN POSTING P
+   ON   CB.POSTING_PNO = P.POSTING_PNO
+   JOIN COMPANY C
+   ON   P.COM_ID = C.COM_ID
+   WHERE C.COM_ID = #{com_id}
+	
+	</select>
+	<select id="getRecommendList">
+		SELECT  
+				ROWNUM AS ROW_NUMBER
+		        ,R.RESUME_RNO
+                ,S.USER_STACK_NAME
+                ,P.POSTING_TITLE
+                ,P.POSTING_PNO
+                ,K.POSTING_STACK
+		        ,U.USER_ID
+		        ,U.USER_NAME
+		        ,U.USER_EMAIL
+		        ,U.USER_PHONE
+		        ,B.POSTING_PNO
+		        ,B.COM_ID
+		        ,B.CB_CBNO
+		        ,B.CB_BOOLEAN
+		FROM    RESUME R 
+		JOIN    USER_STACK S          ON R.RESUME_RNO = S.RESUME_RNO
+		JOIN    USERS U               ON U.USER_ID = R.USER_ID
+        JOIN    APPLICANT_RECODE A    ON R.RESUME_RNO = A.RESUME_RNO
+        JOIN    POSTING P             ON P.POSTING_PNO = A.POSTING_PNO
+        JOIN    POSTING_STACK K       ON P.POSTING_PNO = K.POSTING_PNO
+        JOIN    COMPANY C             ON P.COM_ID = C.COM_ID
+        JOIN    COMPANY_BOOKMARK B    ON B.POSTING_PNO = P.POSTING_PNO
+        WHERE   S.USER_STACK_NAME = K.POSTING_STACK
+        AND     C.COM_ID = #{com_id}
+	
+	
+	</select>
+	
+	<select id="existBookmark">
+		SELECT
+				 COUNT(*)
+	    FROM     COMPANY_BOOKMARK
+	    WHERE    RESUME_RNO=#{resume_rno}
+		
+	</select>
+	
+	<insert id="insertBookmark">
+	INSERT INTO COMPANY_BOOKMARK(
+				POSTING_PNO
+				,COM_ID
+				,CB_CBNO
+				,CB_BOOLEAN
+				,RESUME_RNO
+				)
+	VALUES      (
+				#{posting_pno}
+				,#{com_id}
+				,(select nvl(max(cb_cbno),0)+1 from company_bookmark)
+				,1
+				,#{resume_rno}
+				)			
+				
+	</insert>
+	<delete id="deleteBookmark">
+	DELETE FROM COMPANY_BOOKMARK
+	WHERE  RESUME_RNO = #{resume_rno}
+	</delete>
+	
 	<select id="getResumeList">
 		SELECT  
 		        R.RESUME_RNO
@@ -127,10 +209,13 @@
 		        ,U.USER_EMAIL
 		        ,U.USER_PHONE
 		        ,U.USER_ADDRESS
+		        ,C.COM_ID
+		        
 		FROM    RESUME R 
 		JOIN    APPLICANT_RECODE A ON R.RESUME_RNO = A.RESUME_RNO
 		JOIN    POSTING P            ON A.POSTING_PNO = P.POSTING_PNO
 		JOIN    USERS U               ON U.USER_ID = R.USER_ID
+		JOIN    COMPANY C       ON P.COM_ID = C.COM_ID
 		WHERE   P.POSTING_PNO = #{posting_pno}	
 	
 	
@@ -140,15 +225,14 @@
 	
 	
 	<select id="getPostingList">
-	 SELECT ROWNUM AS ROW_NUMBER
-	 		,POSTING_PNO
-	 		,POSTING_TITLE
-	 		,POSTING_COM_PROFILE
-	 		,POSTING_ENDDATE
-	 		,POSTING_HOPE_DEPARTMENT
-	 FROM   POSTING
-	
-			
+	 SELECT ROW_NUMBER() OVER (ORDER BY POSTING_PNO DESC) AS ROW_NUMBER,
+	       POSTING_PNO,
+	       POSTING_TITLE,
+	       POSTING_COM_PROFILE,
+	       POSTING_ENDDATE,
+	       POSTING_HOPE_DEPARTMENT
+	FROM POSTING
+				
 	
 	</select>
 	<select id="getMyPostingList">

@@ -17,4 +17,6 @@ public class CompanyVo {
 	private String com_ceo;
 	private String com_phone;
 	private String com_email;
+	private int    resume_rno;
+	private int    posting_pno;
 }

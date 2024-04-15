@@ -6,9 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.board.company.domain.CompanyBookmarkVo;
 import com.board.company.domain.CompanyVo;
 import com.board.company.domain.PostingStackVo;
 import com.board.company.domain.PostingVo;
@@ -92,6 +96,9 @@ public class CompanyController {
 		CompanyVo vo = companyMapper.getCompany(companyVo);
 		
 		List<ResumeVo> ResumeList = companyMapper.getResumeList(resumeVo);
+		List<ResumeVo> recommendList = companyMapper.getRecommendList(resumeVo);
+		
+		
 		
 		
 		ModelAndView mv = new ModelAndView();
@@ -100,7 +107,9 @@ public class CompanyController {
 		mv.addObject("vo",vo);
 		mv.addObject("ResumeList",ResumeList);
 		mv.addObject("nowpage",nowpage);
+		mv.addObject("recommendList",recommendList);
 		mv.addObject("com_id",com_id);
+		mv.addObject("bookmarkActionUrl", "/toggleBookmark");
 		mv.setViewName("company/company_myPosting");
 		return mv;
 		
@@ -108,22 +117,26 @@ public class CompanyController {
 	
 	
 	@RequestMapping("/MyPage")
-	public ModelAndView companyView(int nowpage,CompanyVo companyVo, UserVo userVo, HttpServletRequest request, PostingVo postingVo) {
+	public ModelAndView companyView(int nowpage,CompanyVo companyVo, UserVo userVo, HttpServletRequest request, PostingVo postingVo, ResumeVo resumeVo) {
         
 		HttpSession session = request.getSession();
 		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
 		String com_id = logincompanyVo.getCom_id();
 		companyVo.setCom_id(com_id);	
-		System.out.println( "postingVo=" + postingVo  );
+		
+		
+		List<ResumeVo> bookmarkList = companyMapper.getBookmarkList(resumeVo);
 		List<PostingVo> postingList = companyMapper.getMyPostingList(postingVo);
-		System.out.println(postingList);
 		CompanyVo vo = companyMapper.getCompany(companyVo);
-		System.out.println("vo:"+vo);
 		List<UserVo> userList = companyMapper.getUserList(userVo);
 		List<UserVo> userstackList = companyMapper.getUserStackList(userVo);
+		
+		
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("vo", vo);
 		mv.addObject("postingList",postingList);
+		mv.addObject("bookmarkList",bookmarkList);
 		mv.addObject("nowpage", nowpage);
 		mv.addObject("userList",userList);
 		mv.addObject("userstackList",userstackList);
@@ -132,6 +145,32 @@ public class CompanyController {
 		mv.setViewName("company/company_myPage");
 		return mv;
 	}
+	
+    @PostMapping("/toggleBookmark") // JSP 파일에서 보낸 URL과 일치해야 함
+    @ResponseBody
+    public String toggleBookmark(@RequestBody CompanyBookmarkVo companyBookmarkVo) {
+    		
+//    	System.out.println("==================ASDZfasdfasdf==");
+//    	int resume_rno=companyBookmarkVo.getResume_rno();
+//    	System.out.println("==================ASDZfasdfasdf==");
+//    	System.out.println(companyBookmarkVo);
+//    	
+//    	CompanyBookmarkVo vo = companyMapper.existBookmark(companyBookmarkVo);
+//    	vo.setResume_rno(resume_rno);
+        if (companyMapper.existBookmark(companyBookmarkVo)) {
+        
+            companyMapper.deleteBookmark(companyBookmarkVo);
+            System.out.println("북마크가 삭제");
+            return "북마크가 삭제되었습니다.";
+        } else {
+            companyMapper.insertBookmark(companyBookmarkVo);
+            System.out.println("북마크가 추가추가");
+            return "북마크가 추가되었습니다.";
+        }
+    }
+	
+	
+	
 	@RequestMapping("/View/UpdateForm")
 	public ModelAndView companyViewUpdateForm(CompanyVo companyVo, int nowpage, String user_id, HttpServletRequest request) {
 
@@ -225,20 +264,24 @@ public class CompanyController {
 		LoginCompanyVo logincompanyVo = (LoginCompanyVo)session.getAttribute("companyLogin");
 		String com_id = logincompanyVo.getCom_id();
 		companyVo.setCom_id(com_id);
+		
+		// 스택 각자 행 삽입
 		List<PostingStackVo> postingStackList = new ArrayList<>();
 		String []  stackList = postingVo.getPosting_stack().split(",");
 		for (String posting_stack : stackList) {
 			postingStackList.add(new PostingStackVo(postingVo.getPosting_pno(), posting_stack));
 		}
-		System.out.println("=as=df=as=df=asd=f=asd=f=asd=f=a=sd=f===");
-		for (String stack : stackList) {
-		    System.out.println(stack);
-		}
-		System.out.println("postingStackList의 크기: " + postingStackList.size());
-		System.out.println("=as=df=as=df=asd=f=asd=f=asd=f=a=sd=f===");
-		System.out.println(postingStackList);
-		System.out.println(stackList.toString());
-		System.out.println(postingVo.getPosting_stack());
+//		System.out.println("=as=df=as=df=asd=f=asd=f=asd=f=a=sd=f===");
+//		for (String stack : stackList) {
+//		    System.out.println(stack);
+//		}
+//		System.out.println("postingStackList의 크기: " + postingStackList.size());
+//		System.out.println("=as=df=as=df=asd=f=asd=f=asd=f=a=sd=f===");
+//		System.out.println(postingStackList);
+//		System.out.println(stackList.toString());
+//		System.out.println(postingVo.getPosting_stack());
+		
+		
 		
 		companyMapper.insertPosting(postingVo);
 		companyMapper.insertPostingStack(postingStackList);

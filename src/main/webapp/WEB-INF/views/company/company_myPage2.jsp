@@ -150,6 +150,7 @@
       <div class="right">
         <div class="tabs">
           <button class="tab" onclick="openTab0">내가 작성한공고</button>
+          <button class="tab" onclick="openTab1">추천서비스</button>
           <button class="tab" onclick="openTab2">북마크</button>
 
         </div>
@@ -189,7 +190,38 @@
 		        </li>
 		      </ul>
           </div>
-          
+          <div class="tab-panel">
+           <h4>회원님의 기업과 어울리는 이력서들입니다 </h4>
+          	<ul class="job-list">
+		        <li>
+		          <table>
+		            <thead>
+		              <tr class ="f-col">
+		                <th>번호</th>
+		                <th>이름</th>
+		                <th>지원한 공고</th>
+		                <th>일치하는 기술</th>
+		                <th>북마크</th>
+		                <th>비고</th>
+		              </tr>
+		            </thead>
+ 		          <tbody> 
+						<c:forEach var="vo" items="${ recommendList }"
+ 							varStatus="loop"> 
+							<tr> 
+								<td>${vo.row_number }</td>
+								<td>${vo.user_name }</td>
+								<td>${vo.posting_title}</td>
+								<td>${vo.user_stack_name }</td>
+								<td><button id="toggleBookmarkButton" > 북마크</button></td>
+								<td><button type="button" class="btn btn-warning">상세보기</button></td>
+ 							</tr>
+						</c:forEach> 
+		            </tbody>
+		          </table>
+		        </li>
+		      </ul>
+          </div>
           <div class="tab-panel">
           	<h4>회원님이 북마크한 이력서입니다.</h4>
           	<ul class="job-list">
@@ -198,26 +230,16 @@
 		            <thead>
 		              <tr>
 		                <th>번호</th>
-		                <th>지원한 공고</th>
 		                <th>이름</th>
-		                <th>전화번호</th>
-		                <th>이메일</th>
-		                <th>비고</th>
+		                <th>지원한 공고</th>
+		                <th>일치하는 기술</th>
 		                
 		              </tr>
 		            </thead>
 		            <tbody>
-		              <c:forEach var="bo" items="${bookmarkList}"> 
-		               <tr>
-		                  <td>${bo.row_number}</td>
-		                  <td><a href="/Company/PostingView?nowpage=${nowpage}&posting_pno=${co.posting_pno}&com_id=${vo.com_id}">
-		                  ${bo.posting_title}</a></td>
-		                  <td>${bo.user_name}</td>
-		                  <td>${bo.user_phone}</td>
-		                  <td>${bo.user_email}</td>
-		                  <td><a href="/Company/MyPosting" class="btn btn-ifno" id="goDelete">삭제하기</a></td>
-		                </tr>
-		              </c:forEach>
+		              <tr>
+
+		              </tr>
 		            </tbody>
 		          </table>
 		        </li>
@@ -394,7 +416,44 @@
 	    .catch(error => console.error('Error toggling bookmark:', error));
 	}
  </script>
-
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+	    // '#toggleBookmarkButton' 요소를 찾아 변수에 할당
+	    var toggleBookmarkButton = document.getElementById('toggleBookmarkButton');
+	    
+	    // '#toggleBookmarkButton' 요소에 클릭 이벤트 리스너 추가
+	    toggleBookmarkButton.addEventListener('click', function() {
+	        // fetch를 사용하여 AJAX 요청 보내기
+	        fetch('toggleBookmark', {
+	            method: 'POST'
+	        })
+	        .then(function(response) {
+	            if (!response.ok) {
+	                throw new Error('Network response was not ok');
+	            }
+	            return response.text();
+	        })
+	        .then(function(data) {
+	            // 성공적으로 응답 받았을 때 실행되는 부분
+	            if (data === "북마크가 추가되었습니다.") {
+	                alert('추가되었습니다.');
+	                var bookmarkIcon = document.getElementById('bookmarkIcon');
+	                bookmarkIcon.setAttribute('src', 'bookmark-check.svg');
+	            } else {
+	                alert('삭제되었습니다.');
+	                var bookmarkIcon = document.getElementById('bookmarkIcon');
+	                bookmarkIcon.setAttribute('src', 'bookmark-check-fill.png');
+	            }
+	            alert(data); // 서버에서 반환한 응답을 알림으로 표시
+	        })
+	        .catch(function(error) {
+	            // 에러 발생 시 실행되는 부분
+	            console.error('There was a problem with the fetch operation:', error);
+	            alert('오류가 발생했습니다.');
+	        });
+	    });
+	});
+</script>
  <script>
 	const  goBookmarkEl  = document.getElementById('bookmarkbutton');
   	goBookmarkEl.addEventListener('click', function(e) {

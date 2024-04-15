@@ -22,5 +22,11 @@ public class ResumeVo {
 	private String user_phone;
 	private String user_address;
 	private int    posting_pno;
+	private String posting_title;
+	private String posting_stack;
+	private String user_stack_name;
+	private String com_id;
+	private String cb_cbno;
+	private int    cb_boolean;
 	
  }

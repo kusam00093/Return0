@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.board.company.domain.CompanyVo;
+import com.board.login.domain.LoginCompanyVo;
 import com.board.login.domain.LoginUserVo;
 import com.board.user.domain.Pagination;
 import com.board.user.domain.PagingResponse;
@@ -153,15 +155,26 @@ public class UserController {
             	
             }
             @RequestMapping("/User/View/Delete")
-            public ModelAndView userViewDelete(UserVo userVo, int nowpage) {
+            public String userViewDelete(UserVo userVo, int nowpage, HttpServletRequest request) {
+            	
+            	HttpSession session = request.getSession();
             	userMapper.userDelete(userVo);
             	ModelAndView mv = new ModelAndView();
             	mv.addObject("nowpage",nowpage);
-            	mv.setViewName("users/view");
-            	return mv;
             	
+        		String loc = "";
+        		if(userVo.getUser_id()== userVo.getUser_id()) {
+        			session.invalidate();
+        			loc = "/";
+        		}else {
+        			
+        			loc = "/";
+        		}
+
+        		return "redirect:"+loc;
+
             }
-            
+   
 }
 
 

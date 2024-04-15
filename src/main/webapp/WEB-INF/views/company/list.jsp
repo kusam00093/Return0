@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
  <link rel="icon" type="image/png" href="/img/favicon.png" />
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link href="/css/start.css" rel="stylesheet" />
 <link href="/css/test.css" rel="stylesheet" />
 <title>기업 공고 목록</title>
@@ -85,7 +86,10 @@
 	}
 		
 	}
-	
+	#on_com_login{
+		display: block;
+		float: right; 
+	}
 	
 </style>
 </head>
@@ -102,7 +106,15 @@
    <div>&nbsp;</div>
    <div>&nbsp;</div>
    <div>&nbsp;</div>
-   <div><a href="/Company/Posting/WriteForm?nowpage=${nowpage}" id="goPosting">공고 등록하기</a></div>
+   
+               <c:choose>
+			    <c:when test="${sessionScope.companyLogin != null }">
+			        <!-- 기업 사용자일 경우 -->
+			        <ul class="navbar" id="on_com_login">
+			            <li><a href="/Company/Posting/WriteForm?nowpage=${nowpage}" class="btn btn-primary">공고 등록하기</a></li>
+			        </ul>
+			    </c:when>
+			    </c:choose>
 	<div class="sub_title">
       <div class="td1">번호</div>
       <div class="td2">제목</div>
