@@ -993,7 +993,9 @@ button, lable {
 	
 	
 	
-
+	
+	document.addEventListener("DOMContentLoaded", function() {
+	 	
 		
 		
 		
