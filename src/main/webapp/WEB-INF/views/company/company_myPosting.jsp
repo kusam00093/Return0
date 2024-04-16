@@ -14,114 +14,158 @@
     
     
     <style>
-    	.main {
-		  display: flex;
-		  justify-content: center;
-		}
-		
-		.content {
-		  display: flex;
-		}
-		
-		.content .left {
-		  flex: 1;
-		  padding: 20px;
-		}
-		.content .left h2{
-		
-		}
-		.content .left .person_date{
-			 border: 1px solid black;
-			 text-align: center;
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  padding: 10px 0;
+    	main {
+   display: flex;
+   justify-content: center;
+}
 
-		}
-		.content .left .person_date > a{
-			display: inline-block;
-			border: 1px solid #3f98f7;
-			border-radius: 5px; 
-			padding: 2px 4px;
-			color: #3f98f7;
-			margin: 4px 0;
-		}
-		.content .left .profile_pic{
-			width: 50%
-		}
-		
-		
-		.content .right {
-		  flex: 3;
-		  padding: 20px;
-		}
-		
-		.content .tabs {
-		  display: flex;
-		}
-		
-		.content .tab {
-		  background-color: #f7faf9;
-		  border: none;
-		  padding: 10px 20px;
-		  cursor: pointer;
-		}
-		
-		.content .tab:hover {
-		  background-color: #ccc;
-		  font-weight: bold;
-		}
-		.content .tab.active{
-		font-weight: bold;
-		}
-		
-		.content .tab-panel {
-		  display: none;
-		}
-		
-		.content .tab-panel.active {
-		  display: block;
-		  font-weight: bold;
-		}
-		table {
-		  border-collapse: collapse;
-		  width: 100%;
-		}
-		
-		th, td {
-		  padding: 10px;
-		  border: 1px solid #ddd; /* 셀 테두리 스타일 지정 */
-		  text-align: center;
-		}
-		td{
-		font-weight: normal;
-		
-	}
-		.f-col{
-			background-color: #f7faf9;
-		}
-		main h4{
-		margin: 20px 0}
-		main button{
-			background-color : inherit;
-			border:none; box-shadow:none; border-radius:0; padding:0; 
-			
-		}
-		main button.bookmark{
-			
-			background: url("/img/bookmark-check.svg");
-			background-size: cover;
-			display: inline-block;
-			width : 30px;
-			height: 30px;
-			margin-top: 2px
-		}
-		main button.bookmark:hover {
-			background: url("/img/bookmark-check-fill.svg");
-			background-size: cover;
-		}
-		
+.content {
+   display: flex;
+}
+
+.content .left {
+   flex: 1;
+   padding: 20px;
+   margin-top: 75px;
+}
+
+.content .left h2 {
+   
+}
+
+.content .left .person_date {
+   border: 1px solid #d9d9d9;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 10px 0;
+}
+
+.content .left .person_date>a {
+   display: inline-block;
+   border: 1px solid #3f98f7;
+   border-radius: 5px;
+   padding: 2px 4px;
+   color: #3f98f7;
+   margin: 4px 0;
+}
+
+.content .left .profile_pic {
+   width: 50%
+}
+
+.content .left .person_date a {
+   width: 150px
+}
+
+.content .right {
+   flex: 3;
+   padding: 20px;
+}
+
+.content .tabs {
+   display: flex;
+}
+
+.content .tab {
+   background-color: #f7faf9;
+   border: none;
+   padding: 10px 20px;
+   cursor: pointer;
+}
+
+.content .tab:hover {
+   background-color: #ccc;
+   font-weight: bold;
+}
+
+.content .tab.active {
+   font-weight: bold;
+}
+
+.content .tab-panel {
+   display: none;
+}
+
+.content .tab-panel.active {
+   display: block;
+   font-weight: bold;
+}
+
+table {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+th, td {
+   padding: 10px;
+   border: 1px solid #ddd; /* 셀 테두리 스타일 지정 */
+   text-align: center;
+}
+
+td {
+   font-weight: normal;
+}
+
+.f-col {
+   
+}
+.pagination{
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+   
+}
+
+.pagination .page-link{
+ color: black;
+}
+
+main h4 {   
+   margin: 20px 0
+}
+
+main button {
+   background-color: inherit;
+   border: none;
+   box-shadow: none;
+   border-radius: 0;
+   padding: 0;
+}
+
+main button.bookmark {
+   background: url("/img/bookmark-check.svg");
+   background-size: cover;
+   display: inline-block;
+   width: 30px;
+   height: 30px;
+   margin-top: 2px
+}
+
+main button.bookmark:hover {
+   background: url("/img/bookmark-check-fill.svg");
+   background-size: cover;
+}
+
+main button.bookmarkOn {
+   background: url("/img/bookmark-check-fill.svg");
+   background-size: cover;
+}
+		.btn-detail {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-detail:hover {
+    background-color: #0056b3;
+    color: white;
+}
     </style>
   </head>
   <body>
@@ -149,6 +193,7 @@
 	       	<p>${ vo.com_phone }</p>
 	       	<p>${ vo.com_ceo }</p>
 	       	<a href="/Company/Comuser/View?nowpage=${nowpage}&com_id=${com_id}">기업회원정보보기</a>
+	       	<a href="/Company/MyPage?nowpage=${nowpage}&com_id=${com_id}">지원현황</a>
         </div>
       </div>
       <div class="right">
@@ -170,7 +215,6 @@
                 <th>이메일</th>
                 <th>전화번호</th>
                 <th>상세보기</th>
-                <th>비고</th>
               </tr>
             </thead>
             <tbody>
@@ -178,20 +222,11 @@
               <c:forEach var="vo" items="${ResumeList}"> 
                <tr>
                   <td>${vo.row_number}</td>
-                  <td>${vo.user_name}</a></td>
+                  <td>${vo.user_name}</td>
                   <td>${vo.user_email}</td>
                   <td>${vo.user_phone}</td>
-                  <td><a href="/Resume/View?nowpage=${nowpage}&resume_rno=${vo.resume_rno}" class="btn btn-ifno" >상세보기</a></td>
-                  <td>											    
-                                         			<c:choose>
-                                             			 <c:when test="${item.applicant_recode_result == 1}">
-                                                  			<button type="button" class="btn btn-info">대기</button>
-                                              			</c:when>
-                                             		    <c:when test="${item.applicant_recode_result == 0}">
-                                                 		    <button type="button" class="btn btn-danger">불합격</button> 
-                                                 	   </c:when>
-                                        		    </c:choose>
-                                                 </td>
+                  <td><a href="/Resume/View?nowpage=${nowpage}&resume_rno=${vo.resume_rno}" class="btn-detail" >상세보기</a></td>
+
                 </tr>
               </c:forEach>
              </tbody>
@@ -223,10 +258,13 @@
 								<td>${vo.posting_title}</td>
 								<td>${vo.user_stack_name }</td>
 								<td>
-								   <button  class="bookmark"  name="bookmark"
-								   data-resume_rno="${vo.resume_rno}" data-posting_pno="${vo.posting_pno}" data-com_id="${vo.com_id}"></button>
+								    <button class="bookmark" name="bookmark"  
+            data-resume_rno="${vo.resume_rno}" data-posting_pno="${vo.posting_pno}" data-com_id="${vo.com_id}" >
+           </button>
 								</td>
-                                <td></td>                
+              
+                                <td></td>
+                                
  							</tr>
 						</c:forEach> 
 		            </tbody>
@@ -234,45 +272,10 @@
 		        </li>
 		      </ul>
           </div>
-          <div class="tab-panel">
-          	<h4>회원님이 북마크한 이력서입니다.</h4>
-          	<ul class="job-list">
-		        <li>
-		          <table>
-		            <thead>
-		              <tr>
-		                <th>번호</th>
-		                <th>이름</th>
-		                <th>지원한 공고</th>
-		                <th>일치하는 기술</th>
-		                
-		              </tr>
-		            </thead>
-		            <tbody>
-		              <tr>
-
-		              </tr>
-		            </tbody>
-		          </table>
-		        </li>
-		      </ul>
-          </div>
-        </div>
-      </div>
+         
     </section>
   </main>
 
-
-
-
-
-
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
 
 
 <!--------------------------------------------footer---------------------------------------------------  -->

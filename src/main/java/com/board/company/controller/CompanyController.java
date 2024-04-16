@@ -288,34 +288,25 @@ public class CompanyController {
 		return mv;
 	}
 	@RequestMapping("/PostingView")
-	public ModelAndView posting( UserVo userVo,CompanyVo companyVo, PostingVo postingVo, int nowpage, int posting_pno,PostingStackVo postingStackVo, HttpServletRequest request) {
-		
-		
-		HttpSession session = request.getSession();
-		LoginUserVo loginuserVo = (LoginUserVo)session.getAttribute("userLogin");
-		String user_id = loginuserVo.getUser_id();
-		userVo.setUser_id(user_id);
-		
-//		PostingVo vo = companyMapper.getPostingPno(postingVo);
-//		int posting_pno = vo.getPosting_pno();
-		HashMap<String, Object> map = companyMapper.getPostingMap(companyVo,postingVo,posting_pno);
-		List<PostingVo> postingList = companyMapper.getPostingList(postingVo);
-		PostingStackVo vo = companyMapper.getPostingStack(postingStackVo);
-		
-		
-		
-		
-		
-		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("nowpage",nowpage);
-		mv.addObject("map",map);
-		mv.addObject("vo",vo);
-		mv.addObject("com_id",companyVo.getCom_id());
-		mv.addObject("user_id",user_id);
-		mv.addObject("postingList",postingList);
-		mv.setViewName("company/company_PostingView");
-		return mv;
+	public ModelAndView posting(UserVo userVo, CompanyVo companyVo, PostingVo postingVo, int nowpage, int posting_pno, PostingStackVo postingStackVo, HttpServletRequest request) {
+
+	    HttpSession session = request.getSession();
+	    LoginUserVo loginuserVo = (LoginUserVo) session.getAttribute("userLogin");
+	    String user_id = (loginuserVo != null) ? loginuserVo.getUser_id() : null;
+
+	    HashMap<String, Object> map = companyMapper.getPostingMap(companyVo, postingVo, posting_pno);
+	    List<PostingVo> postingList = companyMapper.getPostingList(postingVo);
+	    PostingStackVo vo = companyMapper.getPostingStack(postingStackVo);
+
+	    ModelAndView mv = new ModelAndView();
+	    mv.addObject("nowpage", nowpage);
+	    mv.addObject("map", map);
+	    mv.addObject("vo", vo);
+	    mv.addObject("com_id", companyVo.getCom_id());
+	    mv.addObject("user_id", user_id);
+	    mv.addObject("postingList", postingList);
+	    mv.setViewName("company/company_PostingView");
+	    return mv;
 	}
 	
 	

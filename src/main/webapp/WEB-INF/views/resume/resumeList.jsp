@@ -101,7 +101,20 @@
       font-weight: normal;
    }
    
-   
+   			.btn-detail {
+	    display: inline-block;
+	    padding: 8px 16px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border-radius: 3px;
+	    text-decoration: none;
+	    transition: background-color 0.3s ease;
+		}
+
+.btn-detail:hover {
+    background-color: #0056b3;
+    color: white;
+}
     </style>
   </head>
   <body>
@@ -123,7 +136,8 @@
         </div>
       </div>
       <div class="right">
-       
+       <h2>이력서</h2>
+  <div>&nbsp;</div>
       <table>
        <tr>
          <td>이력서 번호</td>
@@ -139,8 +153,8 @@
          <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
         
          
-         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }">삭제</a></td>         
-         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}">수정</a></td>
+         <td><a href="/Resume/Delete?resume_rno=${ resumeVo.resume_rno }" class="btn-detail">삭제</a></td>         
+         <td><a href="/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}" class="btn-detail">수정</a></td>
 <!--          <td><button onclick="resumeUpdate()">수정</button></td> -->
        </tr>
        </c:forEach>

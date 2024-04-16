@@ -17,7 +17,7 @@
     <result property="matching_stack_count"    column="matching_stack_count"   />
     <result property="posting_title"  column="posting_title" />
     <result property="posting_hope_department"     column="posting_hope_department"   />
-    <result property="posting_startdate"       column="posting_startdate"     />
+    <result property="posting_startdate"       column="posting_startdate"  jdbcType="DATE" javaType="java.time.LocalDate"    />
     <result property="com_name"       column="com_name"     />
     <result property="ub_ubno"       column="ub_ubno"     />
     <result property="ub_boolean"       column="ub_boolean"     />
@@ -35,7 +35,6 @@
     
     
 </resultMap>
-
 
       
  <select id ="getInfo">
@@ -81,16 +80,16 @@
  </select>
  
  <select id="totalSupport">
- 	SELECT COUNT(*)
-   	FROM users u
-   	JOIN RESUME RE ON u.user_id = re.user_id
-   	JOIN applicant_recode ar ON re.resume_rno = ar.resume_rno
-   	JOIN posting p ON ar.posting_pno = p.posting_pno
-   	JOIN company c ON p.com_id = c.com_id
-   	WHERE u.user_id = #{user_id}
+ SELECT COUNT(*)
+   FROM users u
+   JOIN RESUME RE ON u.user_id = re.user_id
+   JOIN applicant_recode ar ON re.resume_rno = ar.resume_rno
+   JOIN posting p ON ar.posting_pno = p.posting_pno
+   JOIN company c ON p.com_id = c.com_id
+   WHERE u.user_id = #{user_id}
  </select>
- 
 
+ 
  
  <select id="getRecommend" resultMap ="getUserRec">
      SELECT
@@ -98,7 +97,7 @@
     COUNT(*) AS matching_stack_count,
     p.posting_title,
     p.posting_hope_department,
-    p.posting_startdate,
+    TO_CHAR(posting_startdate + INTERVAL '4' DAY, 'YYYY-MM-DD') AS posting_startdate,
     c.com_name,
     ub.ub_ubno,
     ub.ub_boolean
@@ -138,7 +137,7 @@ ORDER BY
      
  </select>
 <select id ="getCtlBookList"  resultMap="getBookMap">
-	SELECT 
+   SELECT 
        USER_ID,
       UB_BOOLEAN,
       COM_NAME,
@@ -152,7 +151,6 @@ ORDER BY
      AND  UB_BOOLEAN = 1
 
 </select>
-
 <update id="userUpdate">
 	UPDATE USERS
 	SET 
@@ -171,6 +169,7 @@ ORDER BY
 	DELETE USERS
 	WHERE USER_ID=#{user_id}
 </delete>
+
    
 </mapper>
 

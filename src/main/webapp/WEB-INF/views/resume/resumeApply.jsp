@@ -123,7 +123,8 @@
         </div>
       </div>
       <div class="right">
-       
+             <h2>이력서</h2>
+  <div>&nbsp;</div>
       <table>
        <tr>
          <td>이력서 번호</td>
@@ -138,8 +139,8 @@
        <tr>
          <td>${ resumeVo.resume_rno    }</td>
          <td><a href="/Resume/View?resume_rno=${ resumeVo.resume_rno}&user_id=${resumeVo.user_id}">${ resumeVo.resume_content_self  }</a></td>
-         <td><a href="/Resume/ResumeApply?resume_rno=${ resumeVo.resume_rno }&nowpage=${nowpage}&posting_pno=${postingVo.posting_pno}">지원하기</a></td>         
-         <td><a href="/Resume/ResumeApplyCancel?resume_rno=${ resumeVo.resume_rno }&nowpage=${nowpage}&posting_pno=${postingVo.posting_pno}">지원취소하기</a></td>         
+         <td><a href="/Resume/ResumeApply?resume_rno=${ resumeVo.resume_rno }&nowpage=${nowpage}&posting_pno=${postingVo.posting_pno}" id="goApply">지원하기</a></td>         
+         <td><a href="/Resume/ResumeApplyCancel?resume_rno=${ resumeVo.resume_rno }&nowpage=${nowpage}&posting_pno=${postingVo.posting_pno}" id="goDelete"> 지원취소하기</a></td>         
        </tr>
        </c:forEach>
       
@@ -174,6 +175,20 @@
         window.open("/Resume/UpdateForm?resume_rno=${ resumeVo.resume_rno }&user_id=${resumeVo.user_id}", "update", "width=1400, height=800");
       }
     </script>
+    <script>
+    const goApplyEl = document.getElementById('goApply');
+    goApplyEl.addEventListener('click', function (e) {
+	alert('지원이 완료되었습니다');
+    })
+</script>
+<script>
+    const goDeleteEl = document.getElementById('goDelete');
+    goDeleteEl.addEventListener('click', function (e) {
+	alert('지원이 취소되었습니다');
+    })
+</script>
+    
+    
   </body>
 
 </html>

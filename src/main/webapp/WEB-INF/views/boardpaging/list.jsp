@@ -11,15 +11,7 @@
 	<link rel="stylesheet" href="/css/common.css" />
     <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
-.img-container{
-   height: 350px; 
-   background-image: url('/img/intro.jpg');
-   background-size: cover; 
-   background-position: center; 
-   display: flex;
-   justify-content: center; 
-   align-items: center; /
-}
+
     table {
         border-collapse: collapse;
         width: 55%; 

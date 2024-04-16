@@ -71,6 +71,9 @@
             text-align: center;
             margin-bottom: 20px; 
         }
+              li{
+        	list-style: none;
+        }
         
     </style>
 </head>
@@ -81,7 +84,9 @@
         <section class="category_box">
             <div class="box">
                 <ul class="category">
+                
                     <li>
+                    
                         <button type="button" class="btm_image" onclick="location.href='/User/Write'">
                             <img src="/img/personal.png" alt="개인 회원가입">
                         </button>

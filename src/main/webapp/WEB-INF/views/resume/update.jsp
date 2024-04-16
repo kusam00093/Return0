@@ -205,48 +205,7 @@
                <input type="text" class="form-control" name="user_stack_name"  value="${mapUserStack.user_stack_name}" /> 
             </div>
          </div>    
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="HTML" id="HTMLCheckbox"/> -->
-<!--                            <label class="form-check-label" for="HTMLCheckbox">HTML</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="JavaScript" id="JavaScriptCheckbox"/> -->
-<!--                            <label class="form-check-label" for="JavaScriptCheckbox">JavaScript</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="VueJS" id="VueJSCheckbox"/> -->
-<!--                            <label class="form-check-label" for="VueJSCheckbox">VueJS</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="CSS" id="CSSCheckbox"/> -->
-<!--                            <label class="form-check-label" for="CSSCheckbox">CSS</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="Node.js" id="Node.jsCheckbox"/> -->
-<!--                            <label class="form-check-label" for="Node.jsCheckbox">Node.js</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="React" id="ReactCheckbox"/> -->
-<!--                            <label class="form-check-label" for="ReactCheckbox">React</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="ReactJS" id="ReactJSCheckbox"/> -->
-<!--                            <label class="form-check-label" for="ReactJSCheckbox">ReactJS</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="Typescript" id="TypescriptCheckbox"/> -->
-<!--                            <label class="form-check-label" for="TypescriptCheckbox">Typescript</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="Zustand" id="ZustandCheckbox"/> -->
-<!--                            <label class="form-check-label" for="ZustandCheckbox">Zustand</label> -->
-<!--                        </div> -->
-<!--                        <div class="form-check"> -->
-<!--                            <input type="checkbox" class="form-check-input" name="user_stack_name"  value="AWS" id="AWSCheckbox"/> -->
-<!--                            <label class="form-check-label" for="AWSCheckbox">AWS</label> -->
-<!--                        </div> -->
-<!--                    </div> -->
-<!--                </div> -->
+
          
          <div class="form-group row">
             <label class="col-sm-3 col-form-label">자기소개서</label>
@@ -265,7 +224,7 @@
 
          <div class="form-group row">
             <div class="col-sm-12 btn-center">
-                <input type="submit" value="수정" />
+                <input type="submit" value="수정" id="goUpdate"/>
                <input type="button" value="목록" onclick="goToList()"/>
             </div>
          </div>
@@ -279,6 +238,11 @@ function goToList() {
 }
 
 </script>
-
+<script>
+    const goUpdateEl = document.getElementById('goUpdate');
+    goWriteEl.addEventListener('click', function (e) {
+	alert('수정되었습니다');
+    })
+</script>
 </body>
 </html>

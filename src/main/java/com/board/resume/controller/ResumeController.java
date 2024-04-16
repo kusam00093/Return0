@@ -215,10 +215,10 @@ public class ResumeController {
 		 // resume_rno=aa db 조회
 		 
 		 
-		 HttpSession session = request.getSession();
-		   LoginUserVo loginUserVo = (LoginUserVo)session.getAttribute("userLogin");
-		   String user_id = request.getParameter("user_id");
-		   String user_name = loginUserVo.getUser_name(); 
+		    HttpSession session = request.getSession();
+		    LoginUserVo loginuserVo = (LoginUserVo) session.getAttribute("userLogin");
+		    String user_id = (loginuserVo != null) ? loginuserVo.getUser_id() : null;
+		    String user_name = (loginuserVo != null) ? loginuserVo.getUser_name() : null;
 		   int resume_rno = resumeVo.getResume_rno();
 		 
 		 HashMap<String,Object> mapResume = resumeMapper.getResume(resumeVo);

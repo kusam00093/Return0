@@ -49,6 +49,7 @@
 			        
 			        <c:otherwise>
 			            <a href="/Loginform">로그인</a>
+			             <span class="separator">|</span>
 			            <a href="/writeform">회원가입</a>
 			        </c:otherwise>
 			    </c:choose>

@@ -31,7 +31,7 @@ public class HomeController {
 		int count = homeMapper.getCount();
 		mv.addObject("homeSearchVo", homeSearchVo);
 		mv.addObject("count",count);
-		
+		mv.setViewName("/home");
 		return mv;
 	}
 	@RequestMapping("/Home/Search")

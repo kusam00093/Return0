@@ -99,6 +99,21 @@ footer {
     background-color: #f2f2f2;
     border-top: 1px solid #ddd;
 }
+
+				.btn-detail {
+	    display: inline-block;
+	    padding: 8px 16px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border-radius: 3px;
+	    text-decoration: none;
+	    transition: background-color 0.3s ease;
+		}
+
+.btn-detail:hover {
+    background-color: #0056b3;
+    color: white;
+}
 </style>
 
 
@@ -144,8 +159,8 @@ footer {
 	 </tr>	
 	 <tr>
 	   <td colspan="4">
-	    <input class="btn btn-primary btn-sm"  type="submit" value="수정" />
-	    <a     class="btn btn-primary btn-sm"  href="/BoardPaging/List?user_id=${user_id}&nowpage=${nowpage}">목록</a>
+	    <input class="btn-detail"  type="submit" value="수정" />
+	    <a     class="btn-detail"  href="/BoardPaging/List?user_id=${user_id}&nowpage=${nowpage}">목록</a>
 	   </td>
 	 </tr>
 	

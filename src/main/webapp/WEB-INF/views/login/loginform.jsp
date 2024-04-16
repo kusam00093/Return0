@@ -71,6 +71,9 @@
             text-align: center;
             margin-bottom: 20px; 
         }
+        li{
+        	list-style: none;
+        }
         
     </style>
 </head>

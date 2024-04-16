@@ -14,113 +14,158 @@
     
     
     <style>
-    	.main {
-		  display: flex;
-		  justify-content: center;
-		}
-		
-		.content {
-		  display: flex;
-		}
-		
-		.content .left {
-		  flex: 1;
-		  padding: 20px;
-		}
-		.content .left h2{
-		
-		}
-		.content .left .person_date{
-			 border: 1px solid black;
-			 text-align: center;
-			  display: flex;
-			  flex-direction: column;
-			  align-items: center;
-			  padding: 10px 0;
+ main {
+   display: flex;
+   justify-content: center;
+}
 
+.content {
+   display: flex;
+}
+
+.content .left {
+   flex: 1;
+   padding: 20px;
+   margin-top: 75px;
+}
+
+.content .left h2 {
+   
+}
+
+.content .left .person_date {
+   border: 1px solid #d9d9d9;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 10px 0;
+}
+
+.content .left .person_date>a {
+   display: inline-block;
+   border: 1px solid #3f98f7;
+   border-radius: 5px;
+   padding: 2px 4px;
+   color: #3f98f7;
+   margin: 4px 0;
+}
+
+.content .left .profile_pic {
+   width: 50%
+}
+
+.content .left .person_date a {
+   width: 150px
+}
+
+.content .right {
+   flex: 3;
+   padding: 20px;
+}
+
+.content .tabs {
+   display: flex;
+}
+
+.content .tab {
+   background-color: #f7faf9;
+   border: none;
+   padding: 10px 20px;
+   cursor: pointer;
+}
+
+.content .tab:hover {
+   background-color: #ccc;
+   font-weight: bold;
+}
+
+.content .tab.active {
+   font-weight: bold;
+}
+
+.content .tab-panel {
+   display: none;
+}
+
+.content .tab-panel.active {
+   display: block;
+   font-weight: bold;
+}
+
+table {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+th, td {
+   padding: 10px;
+   border: 1px solid #ddd; /* 셀 테두리 스타일 지정 */
+   text-align: center;
+}
+
+td {
+   font-weight: normal;
+}
+
+.f-col {
+   
+}
+.pagination{
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+   
+}
+
+.pagination .page-link{
+ color: black;
+}
+
+main h4 {   
+   margin: 20px 0
+}
+
+main button {
+   background-color: inherit;
+   border: none;
+   box-shadow: none;
+   border-radius: 0;
+   padding: 0;
+}
+
+main button.bookmark {
+   background: url("/img/bookmark-check.svg");
+   background-size: cover;
+   display: inline-block;
+   width: 30px;
+   height: 30px;
+   margin-top: 2px
+}
+
+main button.bookmark:hover {
+   background: url("/img/bookmark-check-fill.svg");
+   background-size: cover;
+}
+
+main button.bookmarkOn {
+   background: url("/img/bookmark-check-fill.svg");
+   background-size: cover;
+}
+				.btn-detail {
+	    display: inline-block;
+	    padding: 8px 16px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border-radius: 3px;
+	    text-decoration: none;
+	    transition: background-color 0.3s ease;
 		}
-		.content .left .person_date > a{
-			display: inline-block;
-			border: 1px solid #3f98f7;
-			border-radius: 5px; 
-			padding: 2px 4px;
-			color: #3f98f7;
-			margin: 4px 0;
-		}
-		.content .left .profile_pic{
-			width: 50%
-		}
-		
-		
-		.content .right {
-		  flex: 3;
-		  padding: 20px;
-		}
-		
-		.content .tabs {
-		  display: flex;
-		}
-		
-		.content .tab {
-		  background-color: #f7faf9;
-		  border: none;
-		  padding: 10px 20px;
-		  cursor: pointer;
-		}
-		
-		.content .tab:hover {
-		  background-color: #ccc;
-		  font-weight: bold;
-		}
-		.content .tab.active{
-		font-weight: bold;
-		}
-		
-		.content .tab-panel {
-		  display: none;
-		}
-		
-		.content .tab-panel.active {
-		  display: block;
-		  font-weight: bold;
-		}
-		table {
-		  border-collapse: collapse;
-		  width: 100%;
-		}
-		
-		th, td {
-		  padding: 10px;
-		  border: 1px solid #ddd; /* 셀 테두리 스타일 지정 */
-		  text-align: center;
-		}
-		td{
-		font-weight: normal;
-		
-	}
-		.f-col{
-			background-color: #f7faf9;
-		}
-		main h4{
-		margin: 20px 0}
-		main button{
-			background-color : inherit;
-			border:none; box-shadow:none; border-radius:0; padding:0; 
-			
-		}
-		main button.bookmark{
-			
-			background: url("/img/bookmark-check.svg");
-			background-size: cover;
-			display: inline-block;
-			width : 30px;
-			height: 30px;
-			margin-top: 2px
-		}
-		main button.bookmark:hover {
-			background: url("/img/bookmark-check-fill.svg");
-			background-size: cover;
-		}
+
+.btn-detail:hover {
+    background-color: #0056b3;
+    color: white;
+}
 		
     </style>
   </head>
@@ -178,8 +223,8 @@
 		                  ${co.posting_title}</a></td>
 		                  <td>${co.posting_hope_department}</td>
 		                  <td>${co.posting_enddate}</td>
-		                  <td><a href="/Company/Posting/UpdateForm?nowpage=${nowpage}&posting_pno=${co.posting_pno}&com_id=${vo.com_id}" class="btn btn-ifno" id="goView">수정하기</a></td>
-		                  <td><a href="/Company/MyPosting/Delete?nowpage=${nowpage}&posting_pno=${co.posting_pno}" class="btn btn-ifno" id="goDelete">삭제하기</a></td>
+		                  <td><a href="/Company/Posting/UpdateForm?nowpage=${nowpage}&posting_pno=${co.posting_pno}&com_id=${vo.com_id}" class="btn-detail" >수정</a></td>
+		                  <td><a href="/Company/MyPosting/Delete?nowpage=${nowpage}&posting_pno=${co.posting_pno}" class="btn-detail" id="goDelete">삭제</a></td>
 		                </tr>
 		              </c:forEach>
 
@@ -202,7 +247,6 @@
 		                <th>이름</th>
 		                <th>전화번호</th>
 		                <th>이메일</th>
-		                <th>비고</th>
 		                
 		              </tr>
 		            </thead>
@@ -215,7 +259,6 @@
 		                  <td>${bo.user_name}</td>
 		                  <td>${bo.user_phone}</td>
 		                  <td>${bo.user_email}</td>
-		                  <td><a href="/Company/MyPosting" class="btn btn-ifno" name="goDelete">삭제하기</a></td>
 		                </tr>
 		              </c:forEach>
 		            </tbody>
@@ -229,16 +272,6 @@
   </main>
 
 
-
-
-
-
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
-<div>&nbsp;</div>
 
 
 <!--------------------------------------------footer---------------------------------------------------  -->
@@ -397,7 +430,18 @@
   	});
  
  </script>
- </script>
+ <script>
+    const goDeleteEl = document.getElementById('goDelete');
+    goDeleteEl.addEventListener('click', function (e) {
+	alert('삭제되었습니다');
+    })
+</script>
+ <script>
+    const goViewEl = document.getElementById('goView');
+    goViewEl.addEventListener('click', function (e) {
+	alert('수정되었습니다');
+    })
+</script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
 		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"

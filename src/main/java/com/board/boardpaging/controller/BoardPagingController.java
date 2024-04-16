@@ -70,16 +70,16 @@ public class BoardPagingController {
 	
 	@RequestMapping("View")
 	public ModelAndView view(BoardPagingVo boardPagingVo ) {
-		boardPagingMapper.incHit( boardPagingVo );
-		BoardPagingVo  vo  = boardPagingMapper.getBoardPaging ( boardPagingVo);
+		boardPagingMapper.incHit(boardPagingVo);
+		BoardPagingVo  vo  = boardPagingMapper.getBoardPaging(boardPagingVo);
 		
-		String board_content = vo.getBoard_conent();
-		
-		
-		  if(board_content != null) { board_content = board_content.replace("\n",
-		  "<br>"); vo.setBoard_conent(board_content);
-		  
-		  }
+//		String board_content = vo.getBoard_conent();
+//		
+//		
+//		  if(board_content != null) { board_content = board_content.replace("\n",
+//		  "<br>"); vo.setBoard_conent(board_content);
+//		  
+//		  }
 		 
 		
 		ModelAndView mv = new ModelAndView();

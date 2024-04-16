@@ -20,19 +20,21 @@ public interface UserMapper {
 
    
 
-   List<HashMap<String, Object>> getRecommend(UserVo userVo);
+   List<RserviceVo> getRecommend(UserVo userVo);
 
    List<HashMap<String, Object>> getBookList(UserVo userVo);
 
    List<HashMap<String, Object>> getCtlBookList(BookmarkVo request);
 
-   UserVo getInfo(UserVo userVo);
+int totalSupport(UserVo userVo);
 
-   void userUpdate(UserVo userVo);
+UserVo getInfo(UserVo userVo);
 
-   void userDelete(UserVo userVo);
+void userDelete(UserVo userVo);
 
-   int totalSupport(UserVo userVo);  
+void userUpdate(UserVo userVo);
+
+  
 
    
 

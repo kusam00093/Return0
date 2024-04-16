@@ -130,7 +130,7 @@
          <div class="form-group row">
             <label class="col-sm-3 col-form-label">이름</label>
             <div class="col-sm-9">
-               ${user_name} 
+               송승훈
             </div>
          </div>
 
@@ -269,7 +269,7 @@
          <div class="form-group row">
             <div class="col-sm-12 btn-center">
 <!--                    <input type="submit" value="추가" /> -->
-                <input type="button" value="목록" onclick="goToList()"/>
+                <input type="button" value="목록" onclick="goBack()"/>
 <!--                <button type="button" class="btn btn-secondary btn-block" onclick="goToList()">목록</button> -->
             </div>
          </div>
@@ -278,8 +278,8 @@
 </div>
 
 <script>
-function goToList() {
-   location.href = '/Resume/List?user_id=${user_id}';
+function goBack() {
+    window.history.back(); // 브라우저의 뒤로 가기 기능 실행
 }
 
 // //서버에서 받은 사용자의 기술 목록 배열

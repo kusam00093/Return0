@@ -10,7 +10,6 @@
               <p>Write your to us and our speciallist will get back to you</p>
             </div>
             <div class="info_right">
-              <button>Button</button>
             </div>
           </div>
           <ul class="support">

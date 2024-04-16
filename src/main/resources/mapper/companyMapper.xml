@@ -23,7 +23,7 @@
 			,#{posting_content}
 			,#{posting_title}
 			,#{posting_enddate}
-			,#{posting_com_profile}
+			,'searchbg03'
 	)		
 	</insert>
 	
@@ -159,7 +159,7 @@
         JOIN    POSTING P             ON P.POSTING_PNO = A.POSTING_PNO
         JOIN    POSTING_STACK K       ON P.POSTING_PNO = K.POSTING_PNO
         JOIN    COMPANY C             ON P.COM_ID = C.COM_ID
-        JOIN    COMPANY_BOOKMARK B    ON B.POSTING_PNO = P.POSTING_PNO
+        LEFT JOIN    COMPANY_BOOKMARK B    ON B.POSTING_PNO = P.POSTING_PNO
         WHERE   S.USER_STACK_NAME = K.POSTING_STACK
         AND     C.COM_ID = #{com_id}
 	
@@ -199,6 +199,7 @@
 	<select id="getResumeList">
 		SELECT  
 		        R.RESUME_RNO
+		        ,ROW_NUMBER() OVER (ORDER BY r.resume_rno DESC) AS ROW_NUMBER
 		        ,R.RESUME_PROFILE
 		        ,R.RESUME_CONTENT_SELF
 		        ,R.RESUME_CONTENT_MOTIVATION
@@ -225,13 +226,15 @@
 	
 	
 	<select id="getPostingList">
-	 SELECT ROW_NUMBER() OVER (ORDER BY POSTING_PNO DESC) AS ROW_NUMBER,
-	       POSTING_PNO,
-	       POSTING_TITLE,
-	       POSTING_COM_PROFILE,
-	       POSTING_ENDDATE,
-	       POSTING_HOPE_DEPARTMENT
-	FROM POSTING
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY POSTING_PNO DESC) AS ROW_NUMBER,
+    POSTING_PNO,
+    POSTING_TITLE,
+    POSTING_COM_PROFILE,
+    TO_CHAR(POSTING_ENDDATE, 'YYYY"년"MM"월"DD"일"') AS POSTING_ENDDATE,
+    POSTING_HOPE_DEPARTMENT
+FROM 
+    POSTING
 				
 	
 	</select>
@@ -241,7 +244,7 @@
 	 		,POSTING_PNO
 	 		,POSTING_TITLE
 	 		,POSTING_COM_PROFILE
-	 		,POSTING_ENDDATE
+	 		,TO_CHAR(POSTING_ENDDATE, 'YYYY"년"MM"월"DD"일"') AS POSTING_ENDDATE
 	 		,POSTING_HOPE_DEPARTMENT
 	 FROM   POSTING
 	 WHERE  COM_ID=#{com_id}

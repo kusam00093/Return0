@@ -34,7 +34,7 @@
 	    board_bno
 	FROM
 	    board
-	where board_bno =#{board_bno}
+	where board_bno=#{board_bno}
    	</select>
    	<update  id = "updateBoardpaging">
     
