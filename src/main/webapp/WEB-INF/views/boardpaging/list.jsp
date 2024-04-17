@@ -1,98 +1,123 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@taglib  prefix="c"  uri="http://java.sun.com/jsp/jstl/core"  %>    
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="icon" type="image/png" href="/img/favicon.png" />
-<link rel="stylesheet"  href="/css/common.css" />
-<script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
+    <meta charset="UTF-8">
+    <title>게시물 목록</title>
+    <link rel="icon" type="image/png" href="/img/logo02.png" />
+    <link rel="stylesheet"  href="/css/test.css" />
+	<link rel="stylesheet" href="/css/common.css" />
+    <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
- 
-  #table {
-	  td { 
-	    padding     : 10px;
-	    text-align  : center; 
-	  }
-	  
-	  td:nth-of-type(1) { width : 100px; }  
-	  td:nth-of-type(2) { width : 380px; text-align : left;  }  
-	  td:nth-of-type(3) { width : 110px; }  
-	  td:nth-of-type(4) { width : 110px; }  
-	  td:nth-of-type(5) { width : 100px; }
-	  
-	  tr:first-child > td { text-align:center; }
-	   
-	  tr:first-child {
-	     background-color: black;
-	     color : white;
-	     font-weight: bold;
-	     /* SCSS 문법에 적용 
-	     https://www.jsdelivr.com/package/npm/browser-scss
-	      */
-	     td {
-	        border-color : white;
-	     }
-	  }
-	 
-	  tr:nth-child(2) > td {
-	     text-align : right;
-	  }
-  }
+
+    table {
+        border-collapse: collapse;
+        width: 55%; 
+        color: #333;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        text-align: left;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        margin-top: 20px; /* 상단 여백을 줄입니다. */
+        margin-bottom: 20px; /* 하단 여백을 줄입니다. */
+    }
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd; /* 셀 테두리 스타일 지정 */
+    }
+    th {
+        background-color: #5199FA; /* 테이블 헤더 배경색을 메인 색상으로 설정합니다. */
+        color: white;
+    }
+    th:first-child {
+        background-color: #5199FA; /* 첫 번째 열의 배경색을 메인 색상으로 설정합니다. */
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* 짝수 행 배경색을 지정합니다. */
+    }
+    tr:hover {
+        background-color: #ddd; /* 호버 시 배경색 변경 */
+    }
+   
+    #goWrite {
+        
+	    margin: 20px auto; /* 위아래 여백 20px, 좌우 여백은 자동으로 설정하여 수평 가운데 정렬 */
+	    display: block; /* 블록 레벨 요소로 설정하여 가로폭을 사용 가능한 최대로 설정 */
+        margin-top: 20px; /* 버튼 위 여백을 설정합니다. */
+        padding: 10px 20px; /* 버튼 내부 여백을 설정합니다. */
+        background-color: #3f98f7; /* 버튼 배경색을 설정합니다. */
+        color: white; /* 버튼 텍스트 색상을 설정합니다. */
+        border: none; /* 버튼 테두리를 없앱니다. */
+        border-radius: 5px; /* 버튼 모서리를 둥글게 만듭니다. */
+        cursor: pointer; /* 클릭 가능 상태를 나타내는 포인터로 커서를 변경합니다. */
+    }
+    #goWrite:hover {
+        background-color: #2a6496; /* 호버 시 배경색 변경 */
+    }
+   
+    footer {
+    text-align: center;
+    margin-top: 400px; /* 푸터 위 여백 설정 */
+    padding: 10px; /* 푸터 내부 여백 설정 */
+    background-color: #f2f2f2; /* 푸터 배경색 설정 */
+    border-top: 1px solid #ddd; /* 푸터 상단에 1px 실선 테두리 추가 */
+}
   
+h2 {
+    text-align: center; /* 제목 가운데 정렬 */
+    margin-top: 50px; /* 제목 위 여백 설정 */
+    margin-bottom: 30px; /* 제목 아래 여백 설정 */
+}
 </style>
 
+
+
+
 </head>
-<body>	
-	<main>  
-	  
-	 <%@include file="/WEB-INF/include/pagingmenus.jsp" %>
-	
-	  <h2>게시물 목록</h2>
-	  <table id="table" >
-	    <tr>
-	      <td>번호</td>
-	      <td>제목</td>
-	      <td>작성자</td>	      
-	      <td>작성일</td>	   
-	      <td>조회수</td>	   
-	    </tr>
-	    <tr>
-	      <td colspan="5">
-	        [<a href="/BoardPaging/WriteForm?menu_id=${ menu_id }&nowpage=${nowpage}">새 글 추가</a>]
-	      </td>
-	    </tr>
-	    
-	    <c:forEach  var="boardVo"  items="${ response.list }" >
-	    <tr>
-	      <td>${ boardVo.bno   }</td>
-	      <td>
-	       <a href="/BoardPaging/View?bno=${ boardVo.bno }&nowpage=${nowpage}&menu_id=${menu_id}">
-	          ${ boardVo.title       }
-	       </a>
-	      </td>	      	      
-	      <td>${ boardVo.writer      }</td>	      
-	      <td>${ boardVo.regdate     }</td>      
-	      <td>${ boardVo.hit         }</td>      
-	    </tr>
-	    </c:forEach>
-	    
-	    
-	  </table>
-	  
-	  <%@include file="/WEB-INF/include/paging.jsp" %>
-	
-	</main>
+<body>
+<%@include file="/WEB-INF/include/Header.jsp" %>
+<section class="img-container"></section>
+		<div class = "main-wrap inner"></div>
+<h2>게시물 목록</h2>
+<table>
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>조회수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="boardPagingVo" items="${boardPagingList}">
+        <tr>
+            <td>${boardPagingVo.board_bno}</td>
+            <td>
+                <a href="/BoardPaging/View?board_bno=${boardPagingVo.board_bno}&nowpage=1&user_id=${boardPagingVo.user_id}">
+                    ${boardPagingVo.board_title}
+                </a>
+            </td>
+            <td>${boardPagingVo.user_id}</td>
+            <td>${boardPagingVo.board_indate}</td>
+            <td>${boardPagingVo.board_hit}</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+<input type="button" id="goWrite" value="새 글 추가">
+<script>
+    const goWriteEl = document.getElementById('goWrite');
+    goWriteEl.addEventListener('click', function (e) {
+        location.href = '/BoardPaging/WriteForm?user_id=${user_id}';
+    })
+</script>
+<%@include file="/WEB-INF/include/Footer.jsp" %>
 </body>
 </html>
-
-
-
-
-
-
-
-
