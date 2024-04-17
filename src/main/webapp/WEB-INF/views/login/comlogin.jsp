@@ -105,11 +105,11 @@
 	<table>
 	 <tr>
 	   <td>아이디</td>
-	   <td><input type="text" name="com_id"  /></td>
+	   <td><input type="text" name="com_id" id="com_id" /></td>
 	 </tr>
 	 <tr>
 	   <td>비밀번호</td>
-	   <td><input type="password" name="com_passwd"  /></td>
+	   <td><input type="password" name="com_passwd" id="com_passwd" /></td>
 	 </tr>	
 	 <tr>
 	   <td colspan="2">
@@ -128,8 +128,11 @@
   	goListEl.addEventListener('click', function(e) {
   		location.href = '/';
   	})
+  	
   
   </script>
+
+  
   
 </body>
 </html>

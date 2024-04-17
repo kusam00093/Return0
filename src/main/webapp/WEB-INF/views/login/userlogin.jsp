@@ -129,6 +129,9 @@
   	goListEl.addEventListener('click', function(e) {
   		location.href = '/';
   	})
+  	
+  	
+ 
   	</script>
   
   

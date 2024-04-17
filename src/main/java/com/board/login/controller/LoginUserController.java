@@ -48,7 +48,7 @@ public class LoginUserController {
 			session.setMaxInactiveInterval(30 * 60); // 30분 동안 유지
 			loc    =  "redirect:/";  
 		} else {  // 아이디 비번 틀림
-			loc    =  "/login/loginform"; 
+			loc    =  "/login/userlogin"; 
 		}
 		
 		ModelAndView  mv  = new ModelAndView();
@@ -122,8 +122,14 @@ public class LoginUserController {
 			} 
 		
 		}
-		return "<h2 style='color:red'>사용할 수 없는 아이디입니다</h2>";}}
+		return "<h2 style='color:red'>사용할 수 없는 아이디입니다</h2>";}
 	
+
+
+
+}
+	
+
 
 
    

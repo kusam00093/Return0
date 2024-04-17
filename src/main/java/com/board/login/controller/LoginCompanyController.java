@@ -17,7 +17,9 @@ import jakarta.servlet.http.HttpSession;
 
 	@Controller
 	public class LoginCompanyController {
-
+		
+		
+		
 	
 		@Autowired
 		private LoginCompanyMapper companyMapper;
@@ -59,7 +61,8 @@ import jakarta.servlet.http.HttpSession;
 					session.setMaxInactiveInterval(30 * 60); // 30분 동안 유지
 				    loc    =  "redirect:/";  
 				} else {  // 아이디 비번 틀림
-					loc    =  "/login/loginform"; 
+					loc    =  "/login/comlogin"; 
+					
 				}
 				
 				ModelAndView  mv  = new ModelAndView();
