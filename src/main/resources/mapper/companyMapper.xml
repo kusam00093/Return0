@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.board.company.mapper.CompanyMapper">
+
+	<insert id="insertPosting">
+	INSERT INTO POSTING(
+			COM_ID
+			,POSTING_PNO
+			,POSTING_CAREER
+			,POSTING_GRADE
+			,POSTING_HOPE_DEPARTMENT
+			,POSTING_CONTENT
+			,POSTING_TITLE
+			,POSTING_ENDDATE
+			,POSTING_COM_PROFILE
+			)
+	VALUES (
+			#{com_id}
+			,(select nvl(max(posting_pno),0)+1 from posting)
+			,#{posting_career}
+			,#{posting_grade}
+			,#{posting_hope_department}
+			,#{posting_content}
+			,#{posting_title}
+			,#{posting_enddate}
+			,'searchbg03'
+	)		
+	</insert>
+	
+	<insert id="insertComuser">
+	INSERT INTO COMPANY(
+			COM_ID
+			,COM_PASSWD
+			,COM_TYPE
+			,COM_NUM
+			,COM_NAME
+			,COM_ADDRESS
+			,COM_CEO
+			,COM_PHONE
+			,COM_EMAIL
+	)
+	
+	
+	VALUES (
+			 #{com_id}
+			 ,#{com_passwd}
+			 ,#{com_type}
+			 ,#{com_num}
+			 ,#{com_name}
+			 ,#{com_address}
+			 ,#{com_ceo}
+			 ,#{com_phone}
+			 ,#{com_email}
+	)
+	
+	</insert>
+	
+	<insert id="insertPostingStack">
+      <foreach collection="list" item="postingStack"
+           index      = "i"  
+           open       = "INSERT ALL"    
+           close      = "SELECT * FROM DUAL"
+           separator  = " " >
+           INTO  POSTING_STACK VALUES (
+                (SELECT NVL(MAX(POSTING_PNO),0) FROM POSTING)
+              , #{ postingStack.posting_stack  }
+           )
+      </foreach>
+   
+   </insert>   
+	
+	<insert id="insertPostingStack1" parameterType="java.util.List">
+   		 INSERT ALL
+    <foreach collection="postingStackList" item="postingStack" separator=" ">
+        INTO POSTING_STACK (posting_pno, posting_stack)
+        VALUES ((SELECT NVL(MAX(POSTING_PNO),0) FROM POSTING), #{postingStack.posting_stack})
+    </foreach>
+    SELECT * FROM DUAL
+    </insert>
+		
+	
+	
+
+	<update id="getUpdate">
+	
+	  UPDATE POSTING
+	  SET    POSTING_CAREER           = #{posting_career}
+	         ,POSTING_GRADE           = #{posting_grade}
+	         ,POSTING_HOPE_DEPARTMENT = #{posting_hope_department}
+	         ,POSTING_CONTENT         = #{posting_content}
+	         ,POSTING_TITLE           = #{posting_title}
+	         ,POSTING_COM_PROFILE     = #{posting_com_profile}  	
+	   WHERE POSTING_PNO = #{posting_pno}     
+	
+	
+	
+	</update>
+	
+	<update id="updateCompany">
+	 UPDATE COMPANY 
+	 SET	
+	 	
+			COM_PASSWD= #{com_passwd},
+			COM_TYPE= #{com_type},
+			COM_NUM= #{com_num},
+			COM_NAME= #{com_name},
+			COM_ADDRESS= #{com_address},
+			COM_CEO= #{com_ceo},
+			COM_PHONE= #{com_phone},
+			COM_EMAIL= #{com_email}
+	 WHERE  COM_ID = #{com_id}	
+	 		
+	
+	
+	</update>
+	
+	<select id="getBookmarkList">
+ SELECT 
+ 		ROWNUM AS ROW_NUMBER
+ 		,R.RESUME_RNO
+        ,CB.CB_BOOLEAN
+        ,U.USER_NAME
+        ,U.USER_PHONE
+        ,U.USER_EMAIL
+        ,P.POSTING_PNO
+        ,P.POSTING_TITLE
+        ,C.COM_ID
+   FROM RESUME R JOIN COMPANY_BOOKMARK CB
+   ON   R.RESUME_RNO = CB.RESUME_RNO
+   JOIN USERS U  
+   ON   R.USER_ID = U.USER_ID
+   JOIN POSTING P
+   ON   CB.POSTING_PNO = P.POSTING_PNO
+   JOIN COMPANY C
+   ON   P.COM_ID = C.COM_ID
+   WHERE C.COM_ID = #{com_id}
+	
+	</select>
+	<select id="getRecommendList">
+		SELECT  
+				ROWNUM AS ROW_NUMBER
+		        ,R.RESUME_RNO
+                ,S.USER_STACK_NAME
+                ,P.POSTING_TITLE
+                ,P.POSTING_PNO
+                ,K.POSTING_STACK
+		        ,U.USER_ID
+		        ,U.USER_NAME
+		        ,U.USER_EMAIL
+		        ,U.USER_PHONE
+		        ,B.POSTING_PNO
+		        ,B.COM_ID
+		        ,B.CB_CBNO
+		        ,B.CB_BOOLEAN
+		FROM    RESUME R 
+		JOIN    USER_STACK S          ON R.RESUME_RNO = S.RESUME_RNO
+		JOIN    USERS U               ON U.USER_ID = R.USER_ID
+        JOIN    APPLICANT_RECODE A    ON R.RESUME_RNO = A.RESUME_RNO
+        JOIN    POSTING P             ON P.POSTING_PNO = A.POSTING_PNO
+        JOIN    POSTING_STACK K       ON P.POSTING_PNO = K.POSTING_PNO
+        JOIN    COMPANY C             ON P.COM_ID = C.COM_ID
+        LEFT JOIN    COMPANY_BOOKMARK B    ON B.POSTING_PNO = P.POSTING_PNO
+        WHERE   S.USER_STACK_NAME = K.POSTING_STACK
+        AND     C.COM_ID = #{com_id}
+	
+	
+	</select>
+	
+	<select id="existBookmark">
+		SELECT
+				 COUNT(*)
+	    FROM     COMPANY_BOOKMARK
+	    WHERE    RESUME_RNO=#{resume_rno}
+		
+	</select>
+	
+	<insert id="insertBookmark">
+	INSERT INTO COMPANY_BOOKMARK(
+				POSTING_PNO
+				,COM_ID
+				,CB_CBNO
+				,CB_BOOLEAN
+				,RESUME_RNO
+				)
+	VALUES      (
+				#{posting_pno}
+				,#{com_id}
+				,(select nvl(max(cb_cbno),0)+1 from company_bookmark)
+				,1
+				,#{resume_rno}
+				)			
+				
+	</insert>
+	<delete id="deleteBookmark">
+	DELETE FROM COMPANY_BOOKMARK
+	WHERE  RESUME_RNO = #{resume_rno}
+	</delete>
+	
+	<select id="getResumeList">
+		SELECT  
+		        R.RESUME_RNO
+		        ,ROW_NUMBER() OVER (ORDER BY r.resume_rno DESC) AS ROW_NUMBER
+		        ,R.RESUME_PROFILE
+		        ,R.RESUME_CONTENT_SELF
+		        ,R.RESUME_CONTENT_MOTIVATION
+		        ,A.APPLICANT_RECODE_RESULT
+		        ,A.APPLICANT_RECODE_ID
+		        ,U.USER_ID
+		        ,U.USER_NAME
+		        ,U.USER_EMAIL
+		        ,U.USER_PHONE
+		        ,U.USER_ADDRESS
+		        ,C.COM_ID
+		        
+		FROM    RESUME R 
+		JOIN    APPLICANT_RECODE A ON R.RESUME_RNO = A.RESUME_RNO
+		JOIN    POSTING P            ON A.POSTING_PNO = P.POSTING_PNO
+		JOIN    USERS U               ON U.USER_ID = R.USER_ID
+		JOIN    COMPANY C       ON P.COM_ID = C.COM_ID
+		WHERE   P.POSTING_PNO = #{posting_pno}	
+	
+	
+	</select>
+	
+	
+	
+	
+	<select id="getPostingList">
+SELECT 
+    ROW_NUMBER() OVER (ORDER BY POSTING_PNO DESC) AS ROW_NUMBER,
+    POSTING_PNO,
+    POSTING_TITLE,
+    POSTING_COM_PROFILE,
+    TO_CHAR(POSTING_ENDDATE, 'YYYY"년"MM"월"DD"일"') AS POSTING_ENDDATE,
+    POSTING_HOPE_DEPARTMENT
+FROM 
+    POSTING
+				
+	
+	</select>
+	<select id="getMyPostingList">
+	 SELECT ROWNUM AS ROW_NUMBER
+	 		,COM_ID
+	 		,POSTING_PNO
+	 		,POSTING_TITLE
+	 		,POSTING_COM_PROFILE
+	 		,TO_CHAR(POSTING_ENDDATE, 'YYYY"년"MM"월"DD"일"') AS POSTING_ENDDATE
+	 		,POSTING_HOPE_DEPARTMENT
+	 FROM   POSTING
+	 WHERE  COM_ID=#{com_id}
+	
+			
+	
+	</select>
+	
+	    <select   id="getUserPagingList"                 
+              resultType="com.board.company.domain.UserVo" >
+    	SELECT  
+		
+			USER_ID
+			,USER_PASSWD
+			,USER_NAME
+			,USER_EMAIL
+			,USER_ADDRESS
+			,USER_PHONE
+			,USER_SOCIAL_NUM
+    	 FROM  
+           USERS
+
+         ORDER BY  USER_PHONE DESC 
+	    OFFSET #{arg0} ROWS FETCH NEXT #{arg1} ROWS ONLY 
+         
+    </select>
+	    <select id="count" 
+        parameterType="com.board.company.domain.UserVo" 
+        resultType="int">
+		SELECT COUNT(*) AS CNT
+		  FROM USERS
+		  
+	</select>
+	
+	<select id="getCompany">
+	 SELECT 
+			COM_ID,
+			COM_PASSWD,
+			COM_TYPE,
+			COM_NUM,
+			COM_NAME,
+			COM_ADDRESS,
+			COM_CEO,
+			COM_PHONE,
+			COM_EMAIL
+	FROM    COMPANY
+	WHERE   COM_ID =#{com_id}		
+	
+	</select>
+	<select id="getUserList">
+	SELECT  
+			ROWNUM AS ROW_NUMBER
+			,USER_ID
+			,USER_PASSWD
+			,USER_NAME
+			,USER_EMAIL
+			,USER_ADDRESS
+			,USER_PHONE
+			,USER_SOCIAL_NUM
+			INDATE
+	FROM    USERS		
+	</select>
+	
+	<select id="getUserStackList">
+	
+	SELECT  
+			ROWNUM  AS ROW_NUMBER
+			,U.USER_ID
+			,U.USER_PASSWD
+			,U.USER_NAME
+			,U.USER_EMAIL
+			,U.USER_ADDRESS
+			,U.USER_PHONE
+			,U.USER_SOCIAL_NUM
+            ,S.USER_STACK_NAME
+	FROM    USERS U JOIN USER_STACK S
+    ON      U.USER_ID = S.USER_ID
+	</select>
+	
+	<select id="getPosting">
+	 SELECT 
+	       POSTING_PNO,
+	       POSTING_CAREER,
+	       POSTING_GRADE,
+	       POSTING_HOPE_DEPARTMENT,
+	       POSTING_CONTENT,
+	       POSTING_TITLE,
+	       POSTING_STARTDATE
+	  FROM POSTING     
+	  WHERE POSTING_PNO = #{posting_pno}
+	       
+	
+	
+	</select>
+	<resultMap type="java.util.HashMap" id="getPostingMap1">
+	<result property="posting_pno"                   column="posting_pno"/>
+	<result property="com_name"                      column="com_name"/>
+	<result property="com_type"                      column="com_type"/>
+	<result property="com_address"                   column="com_address"/>
+	<result property="com_ceo"                       column="com_ceo"/>
+	<result property="com_phone"                     column="com_phone"/>
+	<result property="com_email"                     column="com_email"/>
+	<result property="posting_career"                column="posting_career"/>
+	<result property="posting_grade"                 column="posting_grade"/>
+	<result property="posting_content"               column="posting_content"/>
+	<result property="posting_hope_department"       column="posting_hope_department"/>
+	<result property="posting_title"                 column="posting_title"/>
+	<result property="posting_startdate"             column="posting_startdate"/>
+	<result property="posting_enddate"               column="posting_enddate"/>
+	<result property="posting_stack"                 column="posting_stack"/>
+	
+
+	</resultMap>
+	
+	<select id="getPostingMap" resultMap="getPostingMap1">
+	
+ 	SELECT C.COM_NAME,
+	       C.COM_TYPE,
+	       C.COM_ADDRESS,
+	       C.COM_CEO,
+	       C.COM_PHONE,
+	       C.COM_EMAIL,
+	       P.POSTING_PNO,
+	       P.POSTING_CAREER,
+	       P.POSTING_GRADE,
+	       P.POSTING_CONTENT,
+	       P.POSTING_HOPE_DEPARTMENT,
+	       P.POSTING_TITLE,
+	       P.POSTING_STARTDATE,
+	       P.POSTING_ENDDATE
+
+  FROM  COMPANY C 
+  JOIN  POSTING P         ON    C.COM_ID = P.COM_ID 
+
+  WHERE P.POSTING_PNO = #{param3}  
+	
+	</select>
+	<select id="getPostingStack">
+	SELECT LISTAGG(POSTING_STACK, ', ') WITHIN GROUP (ORDER BY POSTING_STACK) AS POSTING_STACK
+	FROM POSTING_STACK
+	WHERE POSTING_PNO = #{posting_pno}
+	</select>
+
+	
+	<delete id="postingDelete">
+		DELETE FROM POSTING
+		WHERE POSTING_PNO =#{posting_pno}
+	</delete>
+	
+	<delete id="deleteCompany">
+		DELETE FROM COMPANY
+		WHERE COM_ID =#{com_id}
+	
+	</delete>
+</mapper>

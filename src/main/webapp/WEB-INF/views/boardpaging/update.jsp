@@ -5,52 +5,117 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="icon" type="image/png" href="/img/favicon.png" />
-<link rel="stylesheet"	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" />
-<link rel="stylesheet"  href="/css/common.css" />
+<link rel="icon" type="image/png" href="/img/logo02.png" />
+<link rel="stylesheet"  href="/css/test.css" />
+<link rel="stylesheet" href="/css/common.css" />
+<script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
 <style>
-  
-   #table {
-     width: 800px;
-     margin-bottom : 200px;      
-     td {
-	      text-align :center;
-	      padding :10px;
-	      
-	      input[type=text]   { width : 100%;  }
-	      textarea           { width : 100%;  height:250px; }
-	      
-	      &:nth-of-type(1) { 
-	          width            : 150px; 
-	          background-color : black;
-	          color            : white; 
-	      }
-	      &:nth-of-type(2) { width : 250px;  }
-	      &:nth-of-type(3) { 
-	          width            : 150px; 
-	          background-color : black;
-	          color            : white;
-	      }
-	      &:nth-of-type(4) { width : 250px;  }    
-     }
-     
-     tr:nth-of-type(3) td:nth-of-type(2) {
-         text-align: left;
-     }      
-     
-	 tr:nth-of-type(4) td[colspan] {
-	        height : 250px;
-	        width  : 600px;   
-	        text-align: left;
-	        vertical-align: baseline;
-	 }
-	 tr:last-child td {
-	        background-color : white;
-	        color            : black;   
-	 }
-   }
-      
+.img-container{
+   height: 350px; 
+   background-image: url('/img/intro.jpg');
+   background-size: cover; 
+   background-position: center; 
+   display: flex;
+   justify-content: center; 
+   align-items: center; /
+}
+
+h2 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+table {
+   border-collapse: separate; /* 바깥 테두리를 제거하기 위해 separate로 변경 */
+    border-spacing: 0; /* 셀 사이의 간격을 없애기 위해 0으로 설정 */
+    width: 70%;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+table td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #fff; /* 흰색으로 안쪽 테두리 설정 */
+}
+
+table input[type=text] {
+    width: 100%;
+}
+
+table textarea {
+    width: 100%;
+    height: 250px;
+}
+
+table td:nth-of-type(1),
+table td:nth-of-type(3) {
+    width: 150px;
+    background-color: #3f98f7;
+    color: white;
+}
+
+table td:nth-of-type(2),
+table td:nth-of-type(4) {
+    width: 250px;
+}
+
+table tr:nth-of-type(3) td:nth-of-type(2) {
+    text-align: left;
+}
+
+table tr:nth-of-type(4) td[colspan] {
+    height: 250px;
+    width: 600px;
+    text-align: left;
+    vertical-align: baseline;
+}
+
+table tr:last-child td {
+    background-color: white;
+    color: black;
+}
+
+table {
+    border-left: 1px solid white; /* 왼쪽 테두리 설정 */
+    border-right: none; /* 오른쪽 테두리 제거 */
+    border-top: none; /* 위쪽 테두리 제거 */
+    border-bottom: none; /* 아래쪽 테두리 제거 */
+}
+
+footer {
+    text-align: center;
+    margin-top: 400px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #ddd;
+}
+
+				.btn-detail {
+	    display: inline-block;
+	    padding: 8px 16px;
+	    background-color: #007bff;
+	    color: #fff;
+	    border-radius: 3px;
+	    text-decoration: none;
+	    transition: background-color 0.3s ease;
+		}
+
+.btn-detail:hover {
+    background-color: #0056b3;
+    color: white;
+}
 </style>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/browser-scss@1.0.3/dist/browser-scss.min.js"></script>
@@ -59,42 +124,43 @@
 <body>
   <main>
     
-    <%@include file="/WEB-INF/include/menus.jsp" %>
-  
+    <%@include file="/WEB-INF/include/Header.jsp" %>
+  <section class="img-container"></section>
+		<div class = "main-wrap inner"></div>
 	<h2>게시글 내용  수정</h2>
 	<form  action="/BoardPaging/Update"  method = "POST">
-	<input type="hidden"  name="bno"     value="${ vo.bno }" />  
-	<input type="hidden"  name="menu_id" value="${ vo.menu_id }" />  
-	<input type="hidden"  name="nowpage" value="${ nowpage }" />  
+	<input type="hidden"  name="board_bno"     value="${ vo.board_bno}" />  
+	<input type="hidden"  name="user_id" value="${ vo.user_id }" />  
+<%-- 	<input type="hidden"  name="nowpage" value="${ nowpage }" />   --%>
 	<table id="table">
 	 <tr>
 	   <td>글번호</td>
-	   <td>${ vo.bno }</td>
+	   <td>${ vo.board_bno}</td>
 	   <td>조회수</td>
-	   <td>${ vo.hit }</td>	   
+	   <td>${ vo.board_hit }</td>	   
 	 </tr>
 	 <tr>
 	   <td>작성자</td>
-	   <td>${ vo.writer }</td>
+	   <td>${ vo.user_id }</td>
 	   <td>작성일</td>
-	   <td>${ vo.regdate }</td>
+	   <td>${ vo.board_indate }</td>
 	 </tr>
 	 <tr>
 	   <td>제목</td>
 	   <td colspan="3">
-	   <input type="text" name="title" value="${ vo.title }" />	   
+	   <input type="text" name="board_title" value="${ vo.board_title }" />	   
 	   </td>	
 	 </tr>
 	 <tr>
 	   <td>내용</td>
 	   <td colspan="3">
-	   <textarea name="content">${ vo.content }</textarea>
+	   <textarea name="board_conent">${vo.board_conent}</textarea>
 	   </td>
 	 </tr>	
 	 <tr>
 	   <td colspan="4">
-	    <input class="btn btn-primary btn-sm"  type="submit" value="수정" />
-	    <a     class="btn btn-primary btn-sm"  href="/BoardPaging/List?menu_id=${menu_id}&nowpage=${nowpage}">목록</a>
+	    <input class="btn-detail"  type="submit" value="수정" />
+	    <a     class="btn-detail"  href="/BoardPaging/List?user_id=${user_id}&nowpage=${nowpage}">목록</a>
 	   </td>
 	 </tr>
 	
@@ -102,15 +168,15 @@
    </form>   
 	
   </main>
-  
+ 
   <script>
   	const  goListEl  = document.getElementById('goList');
   	goListEl.addEventListener('click', function(e) {
-  		location.href = '/Board/List';
+  		location.href = '/BoardPaging/List';
   	})
   
   </script>
-  
+  <%@include file="/WEB-INF/include/Footer.jsp" %>
 </body>
 </html>
 

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.resume.mapper.ResumeMapper">
+	
+	<resultMap type="java.util.HashMap" id="getResumeMap">
+		<result property="user_id"   column="user_id"/>
+		<result property="resume_rno"   column="resume_rno"/>
+		<result property="resume_profile"   column="resume_profile"/>
+		<result property="resume_content_self"   column="resume_content_self"/>
+		<result property="resume_content_motivation"   column="resume_content_motivation"/>
+	</resultMap>
+
+	<resultMap type="java.util.HashMap" id="getResumeCareerMap">
+		<result property="resume_rno"   column="resume_rno"/>
+		<result property="resume_career_company"   column="resume_career_company"/>
+		<result property="resume_career_startdate"   column="resume_career_startdate"/>
+		<result property="resume_career_enddate"   column="resume_career_enddate"/>
+		<result property="resume_career_department"   column="resume_career_department"/>
+	</resultMap>
+
+	<resultMap type="java.util.HashMap" id="getResumeGradeMap">
+		<result property="resume_rno"   column="resume_rno"/>
+		<result property="resume_grade_universe"   column="resume_grade_universe"/>
+		<result property="resume_grade_state"   column="resume_grade_state"/>
+		<result property="resume_grade_content"   column="resume_grade_content"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="getResumeLicenseMap">
+		<result property="resume_rno"   column="resume_rno"/>
+		<result property="resume_license_content"   column="resume_license_content"/>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="getUserStackMap">
+		<result property="resume_rno"   column="resume_rno"/>
+		<result property="user_id"   column="user_id"/>
+		<result property="user_stack_name"   column="user_stack_name"/>
+	</resultMap>
+	
+
+	
+	<insert id="insertResume">
+			INSERT INTO RESUME (
+			     USER_ID
+			    ,RESUME_RNO
+			   
+					,RESUME_PROFILE
+					,RESUME_CONTENT_SELF
+					,RESUME_CONTENT_MOTIVATION
+			) VALUES (
+			     #{user_id}
+			    ,(SELECT NVL(MAX(RESUME_RNO), 0) + 1 FROM RESUME)
+					,#{resume_profile}
+					,#{resume_content_self}
+					,#{resume_content_motivation}
+			) 
+	</insert>
+	<insert id="insertResumeCareer">
+			INSERT INTO RESUME_CAREER (
+			     RESUME_RNO
+					,RESUME_CAREER_COMPANY
+					,RESUME_CAREER_STARTDATE
+					,RESUME_CAREER_ENDDATE
+					,RESUME_CAREER_DEPARTMENT
+			) VALUES (
+			     (SELECT NVL(MAX(RESUME_RNO),0) FROM RESUME )
+					,#{resume_career_company}
+					,#{resume_career_startdate}
+					,#{resume_career_enddate}
+					,#{resume_career_department}
+			) 
+	</insert>
+	<insert id="insertResumeGrade">
+			INSERT INTO RESUME_GRADE (
+			   RESUME_RNO
+					,RESUME_GRADE_UNIVERSE
+					,RESUME_GRADE_STATE
+					,RESUME_GRADE_CONTENT
+			) VALUES (
+			       (SELECT NVL(MAX(RESUME_RNO),0) FROM RESUME )
+					,#{resume_grade_universe}
+					,#{resume_grade_state}
+					,#{resume_grade_content}
+			) 
+	</insert>
+	<insert id="insertResumeLicense">
+			INSERT INTO RESUME_License (
+			   RESUME_RNO
+					,RESUME_LICENSE_CONTENT
+			) VALUES (
+			     (SELECT NVL(MAX(RESUME_RNO),0) FROM RESUME )
+					,#{resume_license_content}
+			) 
+	</insert>
+	
+
+	<insert id="insertUserStack">
+			INSERT INTO USER_STACK (
+					USER_ID
+					,USER_STACK_NAME
+					,RESUME_RNO
+			) VALUES (
+				 #{user_id}
+				,#{user_stack_name}
+				,(SELECT NVL(MAX(RESUME_RNO),0) FROM RESUME )
+			)
+	</insert>
+	<insert id="insertResumeApply">
+  	    INSERT INTO APPLICANT_RECODE (
+	  	    POSTING_PNO
+					,APPLICANT_RECODE_RESULT
+					,APPLICANT_RECODE_ID
+					,RESUME_RNO
+				) VALUES (
+					   #{posting_pno}
+						,1
+						,(SELECT NVL(MAX(APPLICANT_RECODE_ID), 0) + 1 FROM APPLICANT_RECODE)
+						,#{resume_rno}
+				)
+  </insert>
+ 
+	
+	<select id="getResumeList"  
+      resultType="com.board.resume.domain.ResumeVo">
+  	 SELECT 
+  	 		 USER_ID
+  	        ,RESUME_RNO
+			,RESUME_PROFILE
+			,RESUME_CONTENT_SELF
+			,RESUME_CONTENT_MOTIVATION
+			,ROWNUM
+  	 FROM
+  	  RESUME
+  	  where USER_ID =  #{user_id}
+  	 ORDER BY ROWNUM ASC
+  </select>
+  <select id="getResume"
+  				resultMap="getResumeMap">
+  	SELECT  USER_ID
+						,RESUME_RNO
+						,RESUME_PROFILE
+						,RESUME_CONTENT_SELF
+						,RESUME_CONTENT_MOTIVATION
+		FROM    RESUME
+		WHERE   RESUME_RNO = #{resume_rno}
+  </select>
+  <select id="getResumeCareer"
+           resultMap="getResumeCareerMap">
+  	SELECT 
+  	       RESUME_RNO
+					 ,RESUME_CAREER_COMPANY
+					 ,RESUME_CAREER_STARTDATE
+					 ,RESUME_CAREER_ENDDATE
+					 ,RESUME_CAREER_DEPARTMENT
+		FROM   RESUME_CAREER			 
+		WHERE  RESUME_RNO = #{resume_rno}
+  </select>
+  <select id="getResumeGrade"
+          resultMap="getResumeGradeMap">
+  	SELECT 
+  	        RESUME_RNO
+						,RESUME_GRADE_UNIVERSE
+						,RESUME_GRADE_STATE
+						,RESUME_GRADE_CONTENT
+		FROM    RESUME_GRADE
+  	WHERE   RESUME_RNO = #{resume_rno} 		
+  </select>
+  <select id="getResumeLicense"
+          resultMap="getResumeLicenseMap">
+  	SELECT  
+  		      RESUME_RNO
+			 ,RESUME_LICENSE_CONTENT  
+  	FROM    RESUME_LICENSE
+  	WHERE   RESUME_RNO = #{resume_rno} 		
+  </select>
+
+  <select id="getUserStack"
+               resultMap="getUserStackMap">
+  SELECT LISTAGG(USER_STACK_NAME, ', ') WITHIN GROUP (ORDER BY USER_STACK_NAME) AS USER_STACK_NAME
+   FROM USER_STACK US
+   JOIN RESUME R ON US.RESUME_RNO = R.RESUME_RNO
+   JOIN USERS U ON R.USER_ID = U.USER_ID
+   WHERE US.RESUME_RNO=#{resume_rno}   
+  </select>
+  
+  
+  <delete  id="cancelResumeApply">
+	   DELETE  FROM  APPLICANT_RECODE
+	   WHERE  RESUME_RNO = #{resume_rno}
+     AND   POSTING_PNO = #{posting_pno}
+	</delete>
+	<delete id="deleteResume">
+		DELETE  FROM  RESUME
+	   WHERE  RESUME_RNO = #{resume_rno}
+	</delete>
+	
+	<update id="updateResume">
+      UPDATE   RESUME
+       SET     
+               
+								RESUME_RNO = #{resume_rno},
+								RESUME_PROFILE = #{resume_profile},
+								RESUME_CONTENT_SELF = #{resume_content_self},
+								RESUME_CONTENT_MOTIVATION = #{resume_content_motivation}
+       WHERE    RESUME_RNO   = #{ resume_rno   }  
+  </update>
+  <update id="updateResumeCareer">
+      UPDATE   RESUME_CAREER
+      SET     
+                RESUME_RNO  = #{resume_rno},
+								RESUME_CAREER_COMPANY = #{resume_career_company},
+								RESUME_CAREER_STARTDATE = #{resume_career_startdate},
+								RESUME_CAREER_ENDDATE = #{resume_career_enddate},
+								RESUME_CAREER_DEPARTMENT = #{resume_career_department}
+       WHERE    RESUME_RNO   = #{ resume_rno   }  
+  </update>
+  <update id="updateResumeGrade">
+      UPDATE   RESUME_GRADE
+       SET     
+                RESUME_RNO  = #{resume_rno},
+								RESUME_GRADE_UNIVERSE = #{resume_grade_universe},
+								RESUME_GRADE_STATE = #{resume_grade_state},
+								RESUME_GRADE_CONTENT = #{resume_grade_content}
+							
+       WHERE    RESUME_RNO   = #{ resume_rno }   
+  </update>
+  <update id="updateResumeLicense">
+      UPDATE   RESUME_LICENSE
+       SET     
+                RESUME_RNO  = #{resume_rno},
+								RESUME_LICENSE_CONTENT = #{resume_license_content}
+       WHERE    RESUME_RNO   = #{ resume_rno   }   
+  </update>
+
+
+</mapper>

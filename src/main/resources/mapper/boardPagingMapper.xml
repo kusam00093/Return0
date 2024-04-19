@@ -1,9 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.board.mapper.BoardPagingMapper">  
-  
+<mapper namespace="com.board.boardpaging.mapper.BoardPagingMapper">  
+  	
+  	<select id="getBoardPagingList">
+	  	SELECT 
+				USER_ID
+				,BOARD_TITLE 
+				,BOARD_CONENT 
+				,BOARD_HIT
+				,TO_CHAR(BOARD_INDATE, 'YYYY-MM-DD') BOARD_INDATE
+				,BOARD_BNO
+	    FROM 
+	     		BOARD
+	    order by BOARD_BNO DESC
+	    
+   </select>
+   	<select id ="incHit">
+   		UPDATE BOARD
+		SET
+		BOARD_HIT = NVL((SELECT MAX(BOARD_HIT) FROM BOARD WHERE BOARD_BNO = ${board_bno}), 0) + 1
+		WHERE
+		BOARD_BNO = ${board_bno}
 
+   	</select>
+   	
+   	<select id ="getBoardPaging">
+   		SELECT
+	    user_id,
+	    board_title,
+	    board_conent, 
+	    board_hit,
+	    TO_CHAR(BOARD_INDATE, 'YYYY-MM-DD') BOARD_INDATE,
+	    board_bno
+	FROM
+	    board
+	where board_bno=#{board_bno}
+   	</select>
+   	<update  id = "updateBoardpaging">
     
+      UPDATE  BOARD
+       SET    BOARD_TITLE    =  #{ board_title },
+              BOARD_CONENT   =  #{ board_conent }
+       WHERE  BOARD_BNO      =  #{ board_bno }      
+    
+    </update> 
+     <delete  id="deleteBoardPaging">
+    
+      DELETE  
+       FROM   BOARD
+       WHERE  BOARD_BNO = #{ board_bno }  
+    
+    </delete>
+    
+    <insert id="insertBoardPaging">
+	  INSERT INTO  BOARD (
+	  			BOARD_BNO,
+	  			BOARD_TITLE,
+	  			BOARD_CONENT,
+	  			USER_ID,
+	  			BOARD_INDATE,
+	  			BOARD_HIT)
+	   VALUES ( 
+	       (SELECT NVL(MAX(BOARD_BNO),0)+1 FROM BOARD),
+	       #{board_title},
+	       #{board_conent},
+	       #{user_id},
+	       sysdate,
+	       0
+	     )
+	
+	</insert>
 </mapper>
 
 
