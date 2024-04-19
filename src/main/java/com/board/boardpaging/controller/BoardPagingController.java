@@ -33,7 +33,7 @@ public class BoardPagingController {
 		
 		ModelAndView mv = new ModelAndView() ; 
 		mv.addObject("boardPagingList", boardPagingList);
-		mv.setViewName("boardpaging/list");
+		mv.setViewName("boardpaging/list"); 
 		
 		return mv;
 	}
