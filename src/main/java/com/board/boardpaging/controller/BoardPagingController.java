@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/BoardPaging")
 public class BoardPagingController {
-
+ 
 	@Autowired
 	private BoardPagingMapper boardPagingMapper;
 	
