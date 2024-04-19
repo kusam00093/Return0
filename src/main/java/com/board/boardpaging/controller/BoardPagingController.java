@@ -31,7 +31,7 @@ public class BoardPagingController {
 	public ModelAndView list (BoardPagingVo boardPagingVo) {
 		List<BoardPagingVo> boardPagingList = boardPagingMapper.getBoardPagingList(boardPagingVo);
 		
-		ModelAndView mv = new ModelAndView() ;
+		ModelAndView mv = new ModelAndView() ; 
 		mv.addObject("boardPagingList", boardPagingList);
 		mv.setViewName("boardpaging/list");
 		
