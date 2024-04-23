@@ -5,7 +5,7 @@
 ●Oracle Database<br>
 ●HTML<br>
 ●CSS<br>
-●JAVAScript<br>
+●JAVAScript<br> 
 ●Bootstrap<br>
 ●JSP<br>
 <h2>모델링</h2>
