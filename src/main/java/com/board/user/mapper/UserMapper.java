@@ -20,7 +20,7 @@ public interface UserMapper {
 
    
 
-   List<HashMap<String, Object>> getRecommend(UserVo userVo);
+   List<RserviceVo> getRecommend(UserVo userVo);
 
    List<HashMap<String, Object>> getBookList(UserVo userVo);
 

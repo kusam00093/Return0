@@ -17,7 +17,7 @@
     <result property="matching_stack_count"    column="matching_stack_count"   />
     <result property="posting_title"  column="posting_title" />
     <result property="posting_hope_department"     column="posting_hope_department"   />
-    <result property="posting_startdate"       column="posting_startdate"     />
+    <result property="posting_startdate"       column="posting_startdate"  jdbcType="DATE" javaType="java.time.LocalDate"    />
     <result property="com_name"       column="com_name"     />
     <result property="ub_ubno"       column="ub_ubno"     />
     <result property="ub_boolean"       column="ub_boolean"     />
@@ -97,7 +97,7 @@
     COUNT(*) AS matching_stack_count,
     p.posting_title,
     p.posting_hope_department,
-    p.posting_startdate,
+    TO_CHAR(posting_startdate + INTERVAL '4' DAY, 'YYYY-MM-DD') AS posting_startdate,
     c.com_name,
     ub.ub_ubno,
     ub.ub_boolean

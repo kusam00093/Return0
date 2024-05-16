@@ -67,7 +67,7 @@ public class UserController {
                map = userMapper.getSupport(userVo);
                RserviceVo rserviceVo = new RserviceVo();
                // 유저와 공고의 매칭 서비스
-               List<HashMap<String, Object>> rec  = userMapper.getRecommend(userVo);
+               List<RserviceVo> rec  = userMapper.getRecommend(userVo);
                
                // 유저가 체크한 북마크 목록가져오기
                List<HashMap<String, Object>> book = userMapper.getBookList(userVo);

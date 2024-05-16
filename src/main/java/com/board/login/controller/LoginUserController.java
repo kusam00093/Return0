@@ -81,7 +81,7 @@ public class LoginUserController {
 	public ModelAndView write(LoginUserVo userVo) {
 		// 저장
 		userMapper.insertUser(userVo);
-
+		
 		// 데이터를 가지고 이동한다
 		ModelAndView mv = new ModelAndView();
 

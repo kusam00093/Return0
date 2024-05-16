@@ -2,9 +2,14 @@ header {
   width: 100%;
   height: 100px;
   position: relative;
-  border-bottom: 1px solid black;
+  
+  
+  margin-bottom: 20px;
 }
 header .headerWrapper {
+	
+	position: relative;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
 }
 .inner {
   width: 1200px;
@@ -22,6 +27,7 @@ header .headerWrapper {
   display: inline-block;
   width: 100%;
   height: auto;
+  padding-left: 30px;
 }
 #logo a img {
   width: 100%;
@@ -33,7 +39,7 @@ header .headerWrapper {
   margin-left: 30px;
 }
 #gnb .navbar li {
-  padding: 0 4px;
+  padding: 0 20px;
   line-height: 100px;
 }
 #gnb .navbar li a {
@@ -41,8 +47,19 @@ header .headerWrapper {
 }
 .login-link{
 	position: absolute;
-	top: 0;
-	right: 20px;
+	top: 27px;
+	right: 30px;
+	width: 200px;
+	height: 50px;
+	display: flex;
+	    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    
+}
+.login-link a:first-child{
+	color: #3dc35d;
+	font-weight: bold;
 }
 .login-link a:nth-child(2):before{
 	content: "";

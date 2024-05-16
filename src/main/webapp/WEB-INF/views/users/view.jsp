@@ -31,6 +31,7 @@ main {
 .content .left {
 	flex: 1;
 	padding: 20px;
+	margin-top: 75px;
 }
 
 .content .left h2 {
@@ -38,7 +39,7 @@ main {
 }
 
 .content .left .person_date {
-	border: 1px solid black;
+	border: 1px solid #d9d9d9;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -58,9 +59,11 @@ main {
 .content .left .profile_pic {
 	width: 50%
 }
-.content .left .person_date a{
-width: 150px
+
+.content .left .person_date a {
+	width: 150px
 }
+
 .content .right {
 	flex: 3;
 	padding: 20px;
@@ -111,10 +114,20 @@ td {
 }
 
 .f-col {
-	background-color: #f7faf9;
+	
+}
+.pagination{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	
 }
 
-main h4 {
+.pagination .page-link{
+ color: black;
+}
+
+main h4 {	
 	margin: 20px 0
 }
 
@@ -163,10 +176,9 @@ main button.bookmarkOn {
 					<p>${ userVo.user_name }</p>
 					<p>${ userVo.user_email}</p>
 					<p>${ userVo.user_phone}</p>
-					<p>지원 횟수 :${totalSup} </p>
-					<a href ="/Company/List?nowpage=1">채용공고보러가기</a>
-					<a href=" /Resume/List?user_id=${ userVo.user_id }">이력서수정하기</a> 
-					<a>개인정보수정하기</a>
+					<p>지원 횟수 :${totalSup}</p>
+					<a href="/Company/List?nowpage=1">채용공고보러가기</a> <a
+						href=" /Resume/List?user_id=${ userVo.user_id }">이력서수정하기</a> <a>개인정보수정하기</a>
 				</div>
 			</div>
 			<div class="right">
@@ -184,7 +196,7 @@ main button.bookmarkOn {
 									<thead>
 										<tr>
 											<th>기업명</th>
-						
+
 											<th>제목</th>
 											<th>분야</th>
 											<th>이력서</th>
@@ -198,24 +210,22 @@ main button.bookmarkOn {
 										<c:forEach var="item" items="${map }">
 											<tr>
 												<td>${item.com_name }</td>
-												
+
 												<td>${item.posting_title }</td>
 												<td>${item.posting_career }</td>
 												<td><a href="#">이력서 보기</a></td>
 												<td>${item.posting_startdate }</td>
 												<td><button type="button" class="btn btn-warning">수정</button></td>
-												<td>
-											    	 <c:choose>
-										                <c:when test="${item.applicant_recode_result == 1}">
-										                    <button type="button" class="btn btn-info">대기</button>
-										                </c:when>
-										                <c:when test="${item.applicant_recode_result == 0}">
-										                    <button type="button" class="btn btn-danger">불합격</button> 
-										                </c:when>
-										            </c:choose>
-												</td>
+												<td><c:choose>
+														<c:when test="${item.applicant_recode_result == 1}">
+															<button type="button" class="btn btn-info">대기</button>
+														</c:when>
+														<c:when test="${item.applicant_recode_result == 0}">
+															<button type="button" class="btn btn-danger">불합격</button>
+														</c:when>
+													</c:choose></td>
 											</tr>
-										</c:forEach>							
+										</c:forEach>
 									</tbody>
 								</table>
 							</li>
@@ -325,6 +335,8 @@ main button.bookmarkOn {
      
        const tabs = document.querySelectorAll('.tab');
        const tabPanels = document.querySelectorAll('.tab-panel');
+       console.log("dsd");
+       console.log("dsd");
 
        tabs.forEach((tab, index) => {
            tab.addEventListener('click', () => {
