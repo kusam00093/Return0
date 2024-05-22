@@ -867,7 +867,7 @@ button, lable {
 						<div class="box_top dev_wrap-department">
 							<p class="recruitTit dev-title">직무 전체</p>
 							<button class="btn_filter fiex_layout">
-								<span>직무를 선택해주세요~</span>
+								<span>직무를 선택해주세요~~</span>
 								<span class ="filter_text dev-select-text"></span>
 								<i class ="arrow"></i>
 							</button>
