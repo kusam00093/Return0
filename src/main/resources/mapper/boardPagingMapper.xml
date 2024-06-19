@@ -10,7 +10,7 @@
 				,BOARD_HIT
 				,TO_CHAR(BOARD_INDATE, 'YYYY-MM-DD') BOARD_INDATE
 				,BOARD_BNO
-	    FROM 
+	    FROM  
 	     		BOARD
 	    order by BOARD_BNO DESC
 	    
