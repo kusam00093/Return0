@@ -36,7 +36,7 @@ public class BoardPagingController {
 		mv.setViewName("boardpaging/list"); 
 		
 		return mv;
-	}
+	} 
 	
 	@RequestMapping("/WriteForm")
 	public  ModelAndView   writeForm(HttpServletRequest request,UserVo userVo ) {
