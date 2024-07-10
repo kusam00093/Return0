@@ -46,6 +46,9 @@
 ●이력서 홈 만들기<br>
 ●이력서 등록,삭제, 수정<br>
 <h2>데이터베이스 설계</h2>
+[return0.pdf](https://github.com/user-attachments/files/16156215/return0.pdf)
+
+
 ![image](https://github.com/kusam00093/Return0/assets/160395424/930f8139-6e9f-4acd-b432-50eaf3483227)
 
 <h2>테스트</h2>
