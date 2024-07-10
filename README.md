@@ -1,3 +1,4 @@
+![1](https://github.com/kusam00093/Return0/assets/164135307/f828c670-3a42-4899-961d-6feaf431c601)
 <h2>기술스택</h2>
 ●JDK 17<br>
 ●Springboot<br>
@@ -45,7 +46,7 @@
 <br>
 ●이력서 홈 만들기<br>
 ●이력서 등록,삭제, 수정<br>
-![1](https://github.com/kusam00093/Return0/assets/164135307/f828c670-3a42-4899-961d-6feaf431c601)
+
 ![2](https://github.com/kusam00093/Return0/assets/164135307/14a976c4-0131-4f9f-b6af-be8ee256c4a1)
 ![3](https://github.com/kusam00093/Return0/assets/164135307/ca36b618-d2f2-4af1-bc4c-7e7d597b5863)
 ![KakaoTalk_20240710_152712186](https://github.com/kusam00093/Return0/assets/164135307/489bf4ed-70ca-48d9-8304-23b0b2fb2d8e)
